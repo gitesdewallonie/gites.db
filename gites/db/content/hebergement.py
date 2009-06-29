@@ -17,12 +17,8 @@ from Globals import InitializeClass
 class Hebergement(Implicit, MappedClassBase):
     implements(IHebergement)
 
-    c = None
-
     def Title(self):
-        language = self.REQUEST.get('LANGUAGE', 'en')
-        typeHeb = self.type.getTitle(language)
-        return u"%s - %s - %s" % (typeHeb, self.heb_nom, self.heb_localite)
+        return self.heb_nom
 
     def getVignette(self):
         return "%s00.jpg" % (self.heb_code_gdw)

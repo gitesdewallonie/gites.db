@@ -17,6 +17,4 @@ from Globals import InitializeClass
 class Commune(Implicit, MappedClassBase):
     implements(ICommune)
 
-    c = None
-
 InitializeClass(Commune)

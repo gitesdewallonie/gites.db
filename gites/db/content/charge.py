@@ -17,8 +17,6 @@ class Charge(Implicit, MappedClassBase):
     Les charge d'un hebergement
     """
 
-    c = None
-
     def getTitle(self, languageCode):
         if 'fr' in languageCode:
             return self.cha_type_fr

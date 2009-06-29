@@ -24,6 +24,8 @@ setup(name='gites.db',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'affinitic.pwmanager',
+          'z3c.sqlalchemy'
           # -*- Extra requirements: -*-
       ],
       entry_points="""

@@ -17,8 +17,6 @@ from gites.db.interfaces import ITypeHebergement
 class TypeHebergement(Implicit, MappedClassBase):
     implements(ITypeHebergement)
 
-    c = None
-
     def getTitle(self, languageCode='fr'):
         """
         Get the id following the language (handle fr_BE, nl_BE ...)

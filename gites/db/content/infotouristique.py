@@ -15,8 +15,6 @@ from gites.db.interfaces import IInfoTouristique
 class InfoTouristique(MappedClassBase):
     implements(IInfoTouristique)
 
-    c = None
-
     def getInfoTourisqueName(self):
         """
         get the name of ze info touristique

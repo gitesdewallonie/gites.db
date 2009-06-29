@@ -38,20 +38,3 @@ class IMaisonTourisme(Interface):
     """
     Describe a maison du tourisme
     """
-
-
-class IProprioMaj(Interface):
-    """
-    mise à jour des infos proprio by the prorpio
-    """
-
-
-class IHebergementMaj(Interface):
-    """
-    mise à jour des infos hebergement by the prorpio
-    """
-class ITypeTableHoteOfHebergementMaj(Interface):
-    """
-    mise à jour par le proprio des infos des types 
-    de table d'hôtes liées à un hebergement
-    """

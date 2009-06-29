@@ -15,48 +15,27 @@ from hebergement import Hebergement
 from infotouristique import InfoTouristique
 from maisontourisme import MaisonTourisme
 from typehebergement import TypeHebergement
-from proprio_maj import ProprioMaj
-from hebergement_maj import HebergementMaj
-from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
-from blockinghistory import HebergementBlockingHistory, BlockingHistory
-from logitem import LogItem
 
 
 class Proprio(MappedClassBase):
-    c = None
-
-
-class ProprioMaj(MappedClassBase):
-    c = None
-
-
-class hebergementMaj(MappedClassBase):
-    c = None
+    pass
 
 
 class Civilite(MappedClassBase):
-    c = None
+    pass
 
 
 class Province(MappedClassBase):
-    c = None
+    pass
 
 
 class TableHote(MappedClassBase):
-    c = None
+    pass
 
 
 class TypeTableHoteOfHebergement(MappedClassBase):
-    c = None
-
-
-class TypeTableHoteOfHebergementMaj(MappedClassBase):
-    c = None
+    pass
 
 
 class LinkHebergementEpis(object):
     pass
-
-
-class ReservationProprio(object):
-    c = None
