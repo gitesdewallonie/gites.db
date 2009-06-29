@@ -1,25 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
-----------------
-
-- Nothing changed yet.
-
-
-0.3 (2010-12-15)
-----------------
-
-- add visits table
-
-
-0.2 (2010-11-17)
-----------------
-
-- add grok pg connection
-
-
-0.1 (2010-11-17)
+0.1 - Unreleased
 ----------------
 
 * Initial release

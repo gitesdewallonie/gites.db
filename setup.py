@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.4dev'
+version = '0.1'
 
 setup(name='gites.db',
       version=version,
@@ -24,12 +24,9 @@ setup(name='gites.db',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'affinitic.pwmanager',
-          'z3c.sqlalchemy'
           # -*- Extra requirements: -*-
       ],
-      entry_points={
-            'console_scripts': [
-                'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main',
-                'xml_heb_gr_proprio = gites.db.scripts.xml_heb_gr_proprio:main']}
+      entry_points="""
+      # -*- Entry points: -*-
+      """,
       )
