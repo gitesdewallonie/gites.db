@@ -108,7 +108,6 @@ class GitesModel(object):
 
         mapper(Charge, ChargeTable)
 
-
         mapper(Hebergement, HebergementTable,
                properties={'type': relation(TypeHebergement, lazy=True),
                            'proprio': relation(Proprio, lazy=True),
