@@ -80,7 +80,8 @@ def getHebergementTable(metadata):
              Column('heb_typeheb_fk', Integer,
                     ForeignKey('type_heb.type_heb_pk')),
              Column('heb_pro_fk', Integer,
-                    ForeignKey('proprio.pro_pk')), autoload=autoload)
+                    ForeignKey('proprio.pro_pk')), autoload=autoload,
+                 useexisting=True)
 
 
 def getTypeHebergementTable(metadata):

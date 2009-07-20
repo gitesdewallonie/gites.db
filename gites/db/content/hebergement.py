@@ -17,6 +17,8 @@ from Globals import InitializeClass
 class Hebergement(Implicit, MappedClassBase):
     implements(IHebergement)
 
+    c = None
+
     def Title(self):
         return self.heb_nom
 
