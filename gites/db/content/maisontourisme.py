@@ -15,6 +15,8 @@ from gites.db.interfaces import IMaisonTourisme
 class MaisonTourisme(MappedClassBase):
     implements(IMaisonTourisme)
 
+    c = None
+
     def getCommunesName(self):
         return [commune.com_nom for commune in self.commune]
 
