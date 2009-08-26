@@ -9,7 +9,8 @@ def initialize(context):
                         pwManager.getLoginPassWithSeparator(':')
     wr = createSAWrapper(connString,
                         forZope=True,
-                        convert_unicode=True,
+                        engine_options = {'convert_unicode': True,
+                                          'encoding': 'utf-8'},
                         encoding='utf-8',
                         name='gites_wallons',
                         model='GitesMappings')
