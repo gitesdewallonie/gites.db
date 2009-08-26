@@ -18,23 +18,23 @@ from typehebergement import TypeHebergement
 
 
 class Proprio(MappedClassBase):
-    pass
+    c = None
 
 
 class Civilite(MappedClassBase):
-    pass
+    c = None
 
 
 class Province(MappedClassBase):
-    pass
+    c = None
 
 
 class TableHote(MappedClassBase):
-    pass
+    c = None
 
 
 class TypeTableHoteOfHebergement(MappedClassBase):
-    pass
+    c = None
 
 
 class LinkHebergementEpis(object):
