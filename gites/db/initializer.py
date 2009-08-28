@@ -19,6 +19,9 @@ from gites.db.tables import (getHebergementTable,
                              getTableHote,
                              getTypeTableHoteOfHebergement,
                              getLinkHebergementEpisTable,
+                             getInfoPratique,
+                             getTypeInfoPratique,
+                             getTypeInfoTouristique,
                              getCharge)
 from gites.db.content import (Civilite, Province, TableHote,
                               Charge, MaisonTourisme,
@@ -72,6 +75,15 @@ class GitesModel(object):
 
         InfoTouristiqueTable = getInfoTouristique(metadata)
         InfoTouristiqueTable.create(checkfirst=True)
+
+        InfoPratiqueTable = getInfoPratique(metadata)
+        InfoPratiqueTable.create(checkfirst=True)
+
+        TypeInfoPratiqueTable = getTypeInfoPratique(metadata)
+        TypeInfoPratiqueTable.create(checkfirst=True)
+
+        TypeInfoTouristiqueTable = getTypeInfoTouristique(metadata)
+        TypeInfoTouristiqueTable.create(checkfirst=True)
 
         TableHoteTable = getTableHote(metadata)
         TableHoteTable.create(checkfirst=True)
