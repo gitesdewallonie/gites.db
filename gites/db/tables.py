@@ -10,6 +10,18 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 from sqlalchemy import Table, Column, String, Integer, ForeignKey
 
 
+def getTypeInfoPratique(metadata):
+    return Table('type_info_pratique', metadata, autoload=True)
+
+
+def getTypeInfoTouristique(metadata):
+    return Table('type_info_touristique', metadata, autoload=True)
+
+
+def getInfoPratique(metadata):
+    return Table('info_pratique', metadata, autoload=True)
+
+
 def getCivilite(metadata):
     return Table('civilite', metadata,
                  Column('civ_pk', Integer, primary_key=True),
@@ -105,8 +117,7 @@ def getMaisonTourisme(metadata):
     return Table('maison_tourisme', metadata,
                  Column('mais_pk', Integer, primary_key=True),
                  Column('mais_nom', String()),
-                 Column('mais_url', String()),
-                 )
+                 Column('mais_url', String()), autoload=True)
 
 
 def getProvinces(metadata):
