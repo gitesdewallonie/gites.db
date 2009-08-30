@@ -122,7 +122,8 @@ class GitesModel(object):
 
         mapper(Hebergement, HebergementTable,
                properties={'type': relation(TypeHebergement, lazy=True),
-                           'proprio': relation(Proprio, lazy=True),
+                           'proprio': relation(Proprio, lazy=True,
+                                               backref='hebergements'),
                            'charge': relation(Charge, lazy=True),
                            'commune': relation(Commune, lazy=True),
                            'epis': relation(LinkHebergementEpis, lazy=True),
@@ -159,6 +160,8 @@ class GitesModel(object):
         model = Model()
         model.add('commune', table=CommuneTable,
                   mapper_class=Commune)
+        model.add('proprio', table=ProprioTable,
+                  mapper_class=Proprio)
         model.add('province', table=ProvincesTable,
                   mapper_class=Province)
         model.add('charge', table=ChargeTable,
