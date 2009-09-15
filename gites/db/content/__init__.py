@@ -39,3 +39,7 @@ class TypeTableHoteOfHebergement(MappedClassBase):
 
 class LinkHebergementEpis(object):
     pass
+
+
+class ReservationProprio(object):
+    c = None
