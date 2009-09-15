@@ -22,6 +22,10 @@ def getInfoPratique(metadata):
     return Table('info_pratique', metadata, autoload=True)
 
 
+def getReservationProprio(metadata):
+    return Table('reservation_proprio', metadata, autoload=True)
+
+
 def getCivilite(metadata):
     return Table('civilite', metadata,
                  Column('civ_pk', Integer, primary_key=True),
