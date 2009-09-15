@@ -22,13 +22,14 @@ from gites.db.tables import (getHebergementTable,
                              getInfoPratique,
                              getTypeInfoPratique,
                              getTypeInfoTouristique,
-                             getCharge)
+                             getCharge,
+                             getReservationProprio)
 from gites.db.content import (Civilite, Province, TableHote,
                               Charge, MaisonTourisme,
                               Hebergement, Commune,
                               TypeHebergement, InfoTouristique,
                               TypeTableHoteOfHebergement, LinkHebergementEpis,
-                              Proprio)
+                              Proprio, ReservationProprio)
 
 
 class GitesModel(object):
@@ -93,6 +94,8 @@ class GitesModel(object):
 
         LinkHebergementEpisTable = getLinkHebergementEpisTable(metadata)
 
+        ReservationProprioTable = getReservationProprio(metadata)
+        mapper(ReservationProprio, ReservationProprioTable)
         mapper(LinkHebergementEpis, LinkHebergementEpisTable)
 
         mapper(InfoTouristique, InfoTouristiqueTable)
@@ -158,6 +161,9 @@ class GitesModel(object):
                                                        lazy=True)})
 
         model = Model()
+        model.add('reservation_proprio',
+                  table=ReservationProprioTable,
+                  mapper_class=ReservationProprio)
         model.add('commune', table=CommuneTable,
                   mapper_class=Commune)
         model.add('proprio', table=ProprioTable,
