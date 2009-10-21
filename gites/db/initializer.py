@@ -127,6 +127,8 @@ class GitesModel(object):
                properties={'type': relation(TypeHebergement, lazy=True),
                            'proprio': relation(Proprio, lazy=True,
                                                backref='hebergements'),
+                           'reservations': relation(ReservationProprio, lazy=True,
+                                                    backref='hebergement'),
                            'charge': relation(Charge, lazy=True),
                            'commune': relation(Commune, lazy=True),
                            'epis': relation(LinkHebergementEpis, lazy=True),
