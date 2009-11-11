@@ -38,3 +38,9 @@ class IMaisonTourisme(Interface):
     """
     Describe a maison du tourisme
     """
+
+
+class IProprioMaj(Interface):
+    """
+    mise à jour des infos proprio by the prorpio
+    """

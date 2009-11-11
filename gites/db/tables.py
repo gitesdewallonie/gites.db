@@ -65,10 +65,30 @@ def getProprio(metadata):
           Column('pro_gsm1', String()),
           Column('pro_email', String()),
           Column('pro_url', String()),
+          Column('pro_maj_data', String()),
           Column('pro_civ_fk', Integer,
                  ForeignKey('civilite.civ_pk')),
           Column('pro_com_fk', Integer,
                  ForeignKey('commune.com_pk')), autoload=True)
+
+def getProprioMaj(metadata):
+    return Table('proprio_maj', metadata,
+          Column('pro_maj_pk', Integer, primary_key=True),
+          Column('pro_maj_propk', Integer()),
+          Column('pro_maj_nom1', String()),
+          Column('pro_maj_nom2', String()),
+          Column('pro_maj_prenom1', String()),
+          Column('pro_maj_langue', String()),
+          Column('pro_maj_tel_priv', String()),
+          Column('pro_maj_fax_priv', String()),
+          Column('pro_maj_gsm1', String()),
+          Column('pro_maj_email', String()),
+          Column('pro_maj_url', String()),
+          Column('pro_maj_data', String()),
+          Column('pro_maj_civ_fk', Integer,
+              ForeignKey('civilite.civ_pk')),
+          Column('pro_maj_com_fk', Integer,
+              ForeignKey('commune.com_pk')), autoload=True)
 
 
 def getCharge(metadata):
