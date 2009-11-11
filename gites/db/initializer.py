@@ -13,9 +13,13 @@ from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
 from gites.db.tables import (getHebergementTable,
                              getTypeHebergementTable,
-                             getMaisonTourisme, getCommune,
-                             getProprio, getCivilite,
-                             getProvinces, getInfoTouristique,
+                             getMaisonTourisme, 
+                             getCommune,
+                             getProprio,
+                             getProprioMaj, 
+                             getCivilite,
+                             getProvinces, 
+                             getInfoTouristique,
                              getTableHote,
                              getTypeTableHoteOfHebergement,
                              getLinkHebergementEpisTable,
@@ -24,12 +28,20 @@ from gites.db.tables import (getHebergementTable,
                              getTypeInfoTouristique,
                              getCharge,
                              getReservationProprio)
-from gites.db.content import (Civilite, Province, TableHote,
-                              Charge, MaisonTourisme,
-                              Hebergement, Commune,
-                              TypeHebergement, InfoTouristique,
-                              TypeTableHoteOfHebergement, LinkHebergementEpis,
-                              Proprio, ReservationProprio)
+from gites.db.content import (Civilite,
+                              Province,
+                              TableHote,
+                              Charge,
+                              MaisonTourisme,
+                              Hebergement,
+                              Commune,
+                              TypeHebergement,
+                              InfoTouristique,
+                              TypeTableHoteOfHebergement,
+                              LinkHebergementEpis,
+                              Proprio,
+                              ProprioMaj,
+                              ReservationProprio)
 
 
 class GitesModel(object):
@@ -64,6 +76,9 @@ class GitesModel(object):
 
         ProprioTable = getProprio(metadata)
         ProprioTable.create(checkfirst=True)
+
+        ProprioMajTable = getProprioMaj(metadata)
+        ProprioMajTable.create(checkfirst=True)
 
         TypeHebergementTable = getTypeHebergementTable(metadata)
         TypeHebergementTable.create(checkfirst=True)
@@ -114,6 +129,10 @@ class GitesModel(object):
         mapper(Civilite, CiviliteTable)
 
         mapper(Proprio, ProprioTable,
+               properties={'civilite': relation(Civilite),
+                           'commune': relation(Commune)})
+
+        mapper(ProprioMaj, ProprioMajTable,
                properties={'civilite': relation(Civilite),
                            'commune': relation(Commune)})
 
@@ -170,6 +189,8 @@ class GitesModel(object):
                   mapper_class=Commune)
         model.add('proprio', table=ProprioTable,
                   mapper_class=Proprio)
+        model.add('proprioMaj', table=ProprioMajTable,
+                  mapper_class=ProprioMaj)
         model.add('province', table=ProvincesTable,
                   mapper_class=Province)
         model.add('charge', table=ChargeTable,
