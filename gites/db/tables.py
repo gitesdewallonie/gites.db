@@ -7,7 +7,7 @@ Copyright by Affinitic sprl
 
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
-from sqlalchemy import Table, Column, String, Integer, ForeignKey
+from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, func
 
 
 def getTypeInfoPratique(metadata):
@@ -78,13 +78,16 @@ def getProprioMaj(metadata):
           Column('pro_maj_nom1', String()),
           Column('pro_maj_nom2', String()),
           Column('pro_maj_prenom1', String()),
+          Column('pro_maj_prenom2', String()),
+          Column('pro_maj_societe', String()),
+          Column('pro_maj_adresse', String()),
           Column('pro_maj_langue', String()),
           Column('pro_maj_tel_priv', String()),
           Column('pro_maj_fax_priv', String()),
           Column('pro_maj_gsm1', String()),
           Column('pro_maj_email', String()),
           Column('pro_maj_url', String()),
-          Column('pro_maj_data', String()),
+          Column('pro_maj_date_crea', Date(), default = func.current_timestamp()),
           Column('pro_maj_civ_fk', Integer,
               ForeignKey('civilite.civ_pk')),
           Column('pro_maj_com_fk', Integer,
