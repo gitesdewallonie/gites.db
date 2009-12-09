@@ -12,6 +12,7 @@ from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
 from gites.db.tables import (getHebergementTable,
+                             getHebergementMajTable,
                              getTypeHebergementTable,
                              getMaisonTourisme, 
                              getCommune,
@@ -34,6 +35,7 @@ from gites.db.content import (Civilite,
                               Charge,
                               MaisonTourisme,
                               Hebergement,
+                              HebergementMaj,
                               Commune,
                               TypeHebergement,
                               InfoTouristique,
@@ -89,6 +91,9 @@ class GitesModel(object):
         HebergementTable = getHebergementTable(metadata)
         HebergementTable.create(checkfirst=True)
 
+        HebergementMajTable = getHebergementMajTable(metadata)
+        HebergementMajTable.create(checkfirst=True)
+
         InfoTouristiqueTable = getInfoTouristique(metadata)
         InfoTouristiqueTable.create(checkfirst=True)
 
@@ -135,6 +140,8 @@ class GitesModel(object):
         mapper(ProprioMaj, ProprioMajTable,
                properties={'civilite': relation(Civilite),
                            'commune': relation(Commune)})
+
+        mapper(HebergementMaj, HebergementMajTable)
 
         mapper(TableHote, TableHoteTable)
 
@@ -197,6 +204,8 @@ class GitesModel(object):
                   mapper_class=Charge)
         model.add('hebergement', table=HebergementTable,
                   mapper_class=Hebergement)
+        model.add('hebergementMaj', table=HebergementMajTable,
+                  mapper_class=HebergementMaj)
         model.add('maison_tourisme', table=MaisonTourismeTable,
                   mapper_class=MaisonTourisme)
         model.add('type_heb', TypeHebergementTable,
