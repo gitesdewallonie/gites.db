@@ -16,13 +16,17 @@ from infotouristique import InfoTouristique
 from maisontourisme import MaisonTourisme
 from typehebergement import TypeHebergement
 from proprio_maj import ProprioMaj
-
+from hebergement_maj import HebergementMaj
 
 class Proprio(MappedClassBase):
     c = None
 
 
 class ProprioMaj(MappedClassBase):
+    c = None
+
+
+class hebergementMaj(MappedClassBase):
     c = None
 
 

@@ -44,3 +44,9 @@ class IProprioMaj(Interface):
     """
     mise à jour des infos proprio by the prorpio
     """
+
+
+class IHebergementMaj(Interface):
+    """
+    mise à jour des infos hebergement by the prorpio
+    """
