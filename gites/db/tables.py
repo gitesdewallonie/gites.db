@@ -257,3 +257,8 @@ def getTypeTableHoteOfHebergement(metadata):
     return Table('heb_tab_hote', metadata,
                   Column('hebhot_heb_fk', Integer),
                   Column('hebhot_tabho_fk', Integer))
+
+def getTypeTableHoteOfHebergementMaj(metadata):
+    return Table('heb_tab_hote_maj', metadata,
+                  Column('hebhot_maj_heb_fk', Integer),
+                  Column('hebhot_maj_tabho_fk', Integer))
