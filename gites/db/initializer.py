@@ -23,6 +23,7 @@ from gites.db.tables import (getHebergementTable,
                              getInfoTouristique,
                              getTableHote,
                              getTypeTableHoteOfHebergement,
+                             getTypeTableHoteOfHebergementMaj,
                              getLinkHebergementEpisTable,
                              getInfoPratique,
                              getTypeInfoPratique,
@@ -40,6 +41,7 @@ from gites.db.content import (Civilite,
                               TypeHebergement,
                               InfoTouristique,
                               TypeTableHoteOfHebergement,
+                              TypeTableHoteOfHebergementMaj,
                               LinkHebergementEpis,
                               Proprio,
                               ProprioMaj,
@@ -112,6 +114,9 @@ class GitesModel(object):
         TypeTableHoteOfHebergementTable = getTypeTableHoteOfHebergement(metadata)
         TypeTableHoteOfHebergementTable.create(checkfirst=True)
 
+        TypeTableHoteOfHebergementMajTable = getTypeTableHoteOfHebergementMaj(metadata)
+        TypeTableHoteOfHebergementMajTable.create(checkfirst=True)
+
         LinkHebergementEpisTable = getLinkHebergementEpisTable(metadata)
 
         ReservationProprioTable = getReservationProprio(metadata)
@@ -146,6 +151,8 @@ class GitesModel(object):
         mapper(TableHote, TableHoteTable)
 
         mapper(TypeTableHoteOfHebergement, TypeTableHoteOfHebergementTable, primary_key=[TypeTableHoteOfHebergementTable.c.hebhot_heb_fk, TypeTableHoteOfHebergementTable.c.hebhot_tabho_fk])
+
+        mapper(TypeTableHoteOfHebergementMaj, TypeTableHoteOfHebergementMajTable, primary_key=[TypeTableHoteOfHebergementMajTable.c.hebhot_maj_heb_fk, TypeTableHoteOfHebergementMajTable.c.hebhot_maj_tabho_fk])
 
         mapper(Charge, ChargeTable)
 
@@ -214,6 +221,7 @@ class GitesModel(object):
                   mapper_class=InfoTouristique)
         model.add('table_hote', table=TableHoteTable,
                   mapper_class=TableHote)
-
+        model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMajTable,
+                  mapper_class=TypeTableHoteOfHebergementMaj)
 
         return model
