@@ -17,6 +17,7 @@ from maisontourisme import MaisonTourisme
 from typehebergement import TypeHebergement
 from proprio_maj import ProprioMaj
 from hebergement_maj import HebergementMaj
+from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 
 class Proprio(MappedClassBase):
     c = None
@@ -43,6 +44,10 @@ class TableHote(MappedClassBase):
 
 
 class TypeTableHoteOfHebergement(MappedClassBase):
+    c = None
+
+
+class TypeTableHoteOfHebergementMaj(MappedClassBase):
     c = None
 
 
