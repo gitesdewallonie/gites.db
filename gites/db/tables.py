@@ -11,35 +11,74 @@ from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, func
 
 
 def getTypeInfoPratique(metadata):
-    return Table('type_info_pratique', metadata, autoload=True)
+    autoload = False
+    if metadata.bind.has_table('type_info_pratique'):
+        autoload = True
+    return Table('type_info_pratique', metadata,
+                 Column('typinfoprat_pk', Integer, primary_key=True),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getTypeInfoTouristique(metadata):
-    return Table('type_info_touristique', metadata, autoload=True)
+    autoload = False
+    if metadata.bind.has_table('type_info_touristique'):
+        autoload = True
+    return Table('type_info_touristique', metadata,
+                 Column('typinfotour_pk', Integer, primary_key=True),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getInfoPratique(metadata):
-    return Table('info_pratique', metadata, autoload=True)
+    autoload = False
+    if metadata.bind.has_table('info_pratique'):
+        autoload = True
+    return Table('info_pratique', metadata,
+                 Column('infoprat_pk', Integer, primary_key=True),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getReservationProprio(metadata):
-    return Table('reservation_proprio', metadata, autoload=True)
+    autoload = False
+    if metadata.bind.has_table('reservation_proprio'):
+        autoload = True
+    return Table('reservation_proprio', metadata,
+                 Column('res_id', Integer, primary_key=True),
+                 Column('heb_fk', Integer, ForeignKey('hebergement.heb_pk')),
+                 Column('pro_fk', Integer, ForeignKey('proprio.pro_pk')),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getCivilite(metadata):
+    autoload = False
+    if metadata.bind.has_table('civilite'):
+        autoload = True
     return Table('civilite', metadata,
                  Column('civ_pk', Integer, primary_key=True),
-                 Column('civ_titre', String()), autoload=True)
+                 Column('civ_titre', String()),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getLinkHebergementEpisTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_hebergement_epis'):
+        autoload = True
     return Table('link_hebergement_epis', metadata,
                  Column('heb_pk', Integer, ForeignKey('hebergement.heb_pk'),
                  primary_key=True),
-                 Column('heb_nombre_epis', Integer, primary_key=True))
+                 Column('heb_nombre_epis', Integer, primary_key=True),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getCommune(metadata):
+    autoload = False
+    if metadata.bind.has_table('commune'):
+        autoload = True
     return Table('commune', metadata,
           Column('com_pk', Integer, primary_key=True),
           Column('com_nom', String()),
@@ -50,10 +89,15 @@ def getCommune(metadata):
                  ForeignKey('provinces.prov_pk')),
           Column('com_id', String()),
           Column('com_mais_fk', Integer,
-                 ForeignKey('maison_tourisme.mais_pk')), autoload=True)
+                 ForeignKey('maison_tourisme.mais_pk')),
+          useexisting=True,
+          autoload=autoload)
 
 
 def getProprio(metadata):
+    autoload = False
+    if metadata.bind.has_table('proprio'):
+        autoload = True
     return Table('proprio', metadata,
           Column('pro_pk', Integer, primary_key=True),
           Column('pro_nom1', String()),
@@ -69,10 +113,15 @@ def getProprio(metadata):
           Column('pro_civ_fk', Integer,
                  ForeignKey('civilite.civ_pk')),
           Column('pro_com_fk', Integer,
-                 ForeignKey('commune.com_pk')), autoload=True)
+                 ForeignKey('commune.com_pk')),
+          useexisting=True,
+          autoload=autoload)
 
 
 def getProprioMaj(metadata):
+    autoload = False
+    if metadata.bind.has_table('proprio_maj'):
+        autoload = True
     return Table('proprio_maj', metadata,
           Column('pro_maj_pk', Integer, primary_key=True),
           Column('pro_maj_propk', Integer()),
@@ -92,17 +141,24 @@ def getProprioMaj(metadata):
           Column('pro_maj_civ_fk', Integer,
               ForeignKey('civilite.civ_pk')),
           Column('pro_maj_com_fk', Integer,
-              ForeignKey('commune.com_pk')), autoload=True)
+              ForeignKey('commune.com_pk')),
+          useexisting=True,
+          autoload=autoload)
 
 
 def getCharge(metadata):
+    autoload = False
+    if metadata.bind.has_table('charge'):
+        autoload = True
     return Table('charge', metadata,
           Column('cha_pk', Integer, primary_key=True),
           Column('cha_type_fr', String()),
           Column('cha_type_en', String()),
           Column('cha_type_nl', String()),
           Column('cha_type_de', String()),
-          Column('cha_type_it', String()), autoload=True)
+          Column('cha_type_it', String()),
+          useexisting=True,
+          autoload=autoload)
 
 
 def getHebergementTable(metadata):
@@ -120,11 +176,15 @@ def getHebergementTable(metadata):
              Column('heb_typeheb_fk', Integer,
                     ForeignKey('type_heb.type_heb_pk')),
              Column('heb_pro_fk', Integer,
-                    ForeignKey('proprio.pro_pk')), autoload=autoload,
-                 useexisting=True)
+                    ForeignKey('proprio.pro_pk')),
+             useexisting=True,
+             autoload=autoload)
 
 
 def getTypeHebergementTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('type_heb'):
+        autoload = True
     return Table('type_heb', metadata,
                  Column('type_heb_pk', Integer, primary_key=True),
                  Column('type_heb_code', String()),
@@ -138,10 +198,14 @@ def getTypeHebergementTable(metadata):
                  Column('type_heb_nom_de', String()),
                  Column('type_heb_nom_it', String()),
                  Column('type_heb_nom_uk', String()),
-                 )
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getHebergementMajTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('hebergement_maj'):
+        autoload = True
     return Table('hebergement_maj', metadata,
                     Column('heb_maj_pk', Integer, primary_key=True),
                     Column('heb_maj_hebpk', Integer()),
@@ -218,24 +282,38 @@ def getHebergementMajTable(metadata):
                     Column('heb_maj_tarif_chmbr_autre_2p', String()),
                     Column('heb_maj_tarif_chmbr_autre_3p', String()),
                     Column('heb_maj_date_crea', Date(), default = func.current_timestamp()),
-                    Column('heb_maj_charge_fk', Integer()))
+                    Column('heb_maj_charge_fk', Integer()),
+                    useexisting=True,
+                    autoload=autoload)
 
 
 def getMaisonTourisme(metadata):
+    autoload = False
+    if metadata.bind.has_table('maison_tourisme'):
+        autoload = True
     return Table('maison_tourisme', metadata,
                  Column('mais_pk', Integer, primary_key=True),
                  Column('mais_nom', String()),
-                 Column('mais_url', String()), autoload=True)
+                 Column('mais_url', String()),
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getProvinces(metadata):
+    autoload = False
+    if metadata.bind.has_table('provinces'):
+        autoload = True
     return Table('provinces', metadata,
                  Column('prov_pk', Integer, primary_key=True),
                  Column('prov_nom', String()),
-                 )
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getInfoTouristique(metadata):
+    autoload = False
+    if metadata.bind.has_table('info_touristique'):
+        autoload = True
     return Table('info_touristique', metadata,
                   Column('infotour_pk', Integer, primary_key=True),
                   Column('infotour_nom', String()),
@@ -243,20 +321,31 @@ def getInfoTouristique(metadata):
                   Column('infotour_localite', String()),
                   Column('infotour_commune_fk', Integer,
                           ForeignKey('commune.com_pk')),
-                 autoload=True)
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getTableHote(metadata):
+    autoload = False
+    if metadata.bind.has_table('table_hote'):
+        autoload = True
     return Table('table_hote', metadata,
                  Column('tabho_pk', Integer, primary_key=True),
                  Column('tabho_type_fr', String()),
-                )
+                 useexisting=True,
+                 autoload=autoload)
 
 
 def getTypeTableHoteOfHebergement(metadata):
+    autoload = False
+    if metadata.bind.has_table('heb_tab_hote'):
+        autoload = True
     return Table('heb_tab_hote', metadata,
                   Column('hebhot_heb_fk', Integer),
-                  Column('hebhot_tabho_fk', Integer))
+                  Column('hebhot_tabho_fk', Integer),
+                  useexisting=True,
+                  autoload=autoload)
+
 
 def getTypeTableHoteOfHebergementMaj(metadata):
     return Table('heb_tab_hote_maj', metadata,
