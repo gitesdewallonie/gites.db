@@ -221,6 +221,8 @@ class GitesModel(object):
                   mapper_class=InfoTouristique)
         model.add('table_hote', table=TableHoteTable,
                   mapper_class=TableHote)
+        model.add('heb_tab_hote', table=TypeTableHoteOfHebergementTable,
+                  mapper_class=TypeTableHoteOfHebergement)
         model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMajTable,
                   mapper_class=TypeTableHoteOfHebergementMaj)
 
