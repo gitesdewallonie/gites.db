@@ -7,7 +7,8 @@ Copyright by AFFINITIC sprl
 
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
-from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, func
+from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, \
+                       DateTime, Boolean, func
 
 
 def getTypeInfoPratique(metadata):
@@ -46,6 +47,7 @@ def getReservationProprio(metadata):
         autoload = True
     return Table('reservation_proprio', metadata,
                  Column('res_id', Integer, primary_key=True),
+                 Column('res_date_cre', DateTime),
                  Column('heb_fk', Integer, ForeignKey('hebergement.heb_pk')),
                  Column('pro_fk', Integer, ForeignKey('proprio.pro_pk')),
                  useexisting=True,
@@ -109,6 +111,7 @@ def getProprio(metadata):
           Column('pro_gsm1', String()),
           Column('pro_email', String()),
           Column('pro_url', String()),
+          Column('pro_etat', Boolean()),
           Column('pro_maj_info_etat', String()),
           Column('pro_civ_fk', Integer,
                  ForeignKey('civilite.civ_pk')),
@@ -169,6 +172,9 @@ def getHebergementTable(metadata):
              Column('heb_pk', Integer, primary_key=True),
              Column('heb_nom', String()),
              Column('heb_code_gdw', String()),
+             Column('heb_code_gdw', String()),
+             Column('heb_site_public', String()),
+             Column('heb_calendrier_proprio', String()),
              Column('heb_charge_fk', Integer,
                     ForeignKey('charge.cha_pk')),
              Column('heb_com_fk', Integer,

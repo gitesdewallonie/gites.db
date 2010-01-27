@@ -14,12 +14,12 @@ from sqlalchemy.orm import mapper, relation, clear_mappers
 from gites.db.tables import (getHebergementTable,
                              getHebergementMajTable,
                              getTypeHebergementTable,
-                             getMaisonTourisme, 
+                             getMaisonTourisme,
                              getCommune,
                              getProprio,
-                             getProprioMaj, 
+                             getProprioMaj,
                              getCivilite,
-                             getProvinces, 
+                             getProvinces,
                              getInfoTouristique,
                              getTableHote,
                              getTypeTableHoteOfHebergement,
@@ -118,9 +118,13 @@ class GitesModel(object):
         TypeTableHoteOfHebergementMajTable.create(checkfirst=True)
 
         LinkHebergementEpisTable = getLinkHebergementEpisTable(metadata)
+        LinkHebergementEpisTable.create(checkfirst=True)
 
         ReservationProprioTable = getReservationProprio(metadata)
+        ReservationProprioTable.create(checkfirst=True)
+
         mapper(ReservationProprio, ReservationProprioTable)
+
         mapper(LinkHebergementEpis, LinkHebergementEpisTable)
 
         mapper(InfoTouristique, InfoTouristiqueTable)
