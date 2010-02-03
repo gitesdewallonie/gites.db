@@ -183,6 +183,7 @@ def getHebergementTable(metadata):
                     ForeignKey('type_heb.type_heb_pk')),
              Column('heb_pro_fk', Integer,
                     ForeignKey('proprio.pro_pk')),
+             Column('heb_calendrier_proprio_date_maj', Date),
              useexisting=True,
              autoload=autoload)
 
