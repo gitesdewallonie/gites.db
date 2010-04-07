@@ -364,7 +364,8 @@ def getHebBlockedHistory(metadata):
     return Table('heb_blocking_history', metadata,
                  Column('heb_blockhistory_id', Integer,
                         Sequence('heb_blockhistory_id_seq'), primary_key=True),
-                 Column('heb_blockhistory_blocked_dte', Date, nullable=True),
-                 Column('heb_blockhistory_activated_dte', Date, nullable=False),
-                 Column('heb_blockhistory_heb_pk', Integer, nullable=True),
-                 Column('heb_blockhistory_days', Integer, nullable=False))
+                 Column('heb_blockhistory_blocked_dte', Date, nullable=False),
+                 Column('heb_blockhistory_activated_dte', Date, nullable=True),
+                 Column('heb_blockhistory_heb_pk', Integer,
+                        ForeignKey('hebergement.heb_pk'), nullable=False),
+                 Column('heb_blockhistory_days', Integer, nullable=True))
