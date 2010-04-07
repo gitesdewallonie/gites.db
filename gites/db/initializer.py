@@ -29,7 +29,8 @@ from gites.db.tables import (getHebergementTable,
                              getTypeInfoPratique,
                              getTypeInfoTouristique,
                              getCharge,
-                             getReservationProprio)
+                             getReservationProprio,
+                             getHebBlockedHistory)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -45,7 +46,8 @@ from gites.db.content import (Civilite,
                               LinkHebergementEpis,
                               Proprio,
                               ProprioMaj,
-                              ReservationProprio)
+                              ReservationProprio,
+                              HebergementBlockingHistory)
 
 
 class GitesModel(object):
@@ -198,6 +200,9 @@ class GitesModel(object):
                                                        primaryjoin=CommuneTable.c.com_mais_fk==MaisonTourismeTable.c.mais_pk,
                                                        secondaryjoin=CommuneTable.c.com_pk==InfoTouristiqueTable.c.infotour_commune_fk,
                                                        lazy=True)})
+        hebBlockedHistory = getHebBlockedHistory(metadata)
+        mapper(HebergementBlockingHistory, hebBlockedHistory,
+               properties={'hebergement': relation(Hebergement, backref='blockinghistory')})
 
         model = Model()
         model.add('reservation_proprio',
@@ -229,5 +234,5 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergement)
         model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMajTable,
                   mapper_class=TypeTableHoteOfHebergementMaj)
-
+        metadata.create_all()
         return model
