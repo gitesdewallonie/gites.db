@@ -13,8 +13,3 @@ from z3c.sqlalchemy.mapper import MappedClassBase
 class HebergementBlockingHistory(MappedClassBase):
 
     c = None
-
-
-class BlockingHistory(MappedClassBase):
-
-    c = None
