@@ -8,7 +8,7 @@ Copyright by AFFINITIC sprl
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
 from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, \
-                       DateTime, Boolean, func
+                       DateTime, Boolean, func, Sequence
 
 
 def getTypeInfoPratique(metadata):
@@ -140,7 +140,7 @@ def getProprioMaj(metadata):
           Column('pro_maj_gsm1', String()),
           Column('pro_maj_email', String()),
           Column('pro_maj_url', String()),
-          Column('pro_maj_date_crea', Date(), default = func.current_timestamp()),
+          Column('pro_maj_date_crea', Date(), default=func.current_timestamp()),
           Column('pro_maj_civ_fk', Integer,
               ForeignKey('civilite.civ_pk')),
           Column('pro_maj_com_fk', Integer,
@@ -288,7 +288,7 @@ def getHebergementMajTable(metadata):
                     Column('heb_maj_tarif_chmbr_autre_1p', String()),
                     Column('heb_maj_tarif_chmbr_autre_2p', String()),
                     Column('heb_maj_tarif_chmbr_autre_3p', String()),
-                    Column('heb_maj_date_crea', Date(), default = func.current_timestamp()),
+                    Column('heb_maj_date_crea', Date(), default=func.current_timestamp()),
                     Column('heb_maj_charge_fk', Integer()),
                     useexisting=True,
                     autoload=autoload)
@@ -358,3 +358,13 @@ def getTypeTableHoteOfHebergementMaj(metadata):
     return Table('heb_tab_hote_maj', metadata,
                   Column('hebhot_maj_heb_fk', Integer),
                   Column('hebhot_maj_tabho_fk', Integer))
+
+
+def getHebBlockedHistory(metadata):
+    return Table('heb_blocking_history', metadata,
+                 Column('heb_blockhistory_id', Integer,
+                        Sequence('heb_blockhistory_id_seq'), primary_key=True),
+                 Column('heb_blockhistory_blocked_dte', Date, nullable=True),
+                 Column('heb_blockhistory_activated_dte', Date, nullable=False),
+                 Column('heb_blockhistory_heb_pk', Integer, nullable=True),
+                 Column('heb_blockhistory_days', Integer, nullable=False))
