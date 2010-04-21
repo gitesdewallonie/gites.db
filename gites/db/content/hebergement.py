@@ -20,7 +20,9 @@ class Hebergement(Implicit, MappedClassBase):
     c = None
 
     def Title(self):
-        return self.heb_nom
+        language = self.REQUEST.get('LANGUAGE', 'en')
+        typeHeb = self.type.getTitle(language)
+        return u"%s - %s - %s" % (typeHeb, self.heb_nom, self.heb_localite)
 
     def getVignette(self):
         return "%s00.jpg" % (self.heb_code_gdw)
