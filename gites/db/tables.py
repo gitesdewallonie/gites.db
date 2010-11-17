@@ -48,7 +48,9 @@ def getReservationProprio(metadata):
     return Table('reservation_proprio', metadata,
                  Column('res_id', Integer, primary_key=True),
                  Column('res_date_cre', DateTime),
-                 Column('heb_fk', Integer, ForeignKey('hebergement.heb_pk')),
+                 Column('res_date', DateTime, nullable=False),
+                 Column('res_type', String(20), nullable=False),
+                 Column('heb_fk', Integer, ForeignKey('hebergement.heb_pk'), nullable=False),
                  Column('pro_fk', Integer, ForeignKey('proprio.pro_pk')),
                  useexisting=True,
                  autoload=autoload)
@@ -369,3 +371,10 @@ def getHebBlockedHistory(metadata):
                  Column('heb_blockhistory_heb_pk', Integer,
                         ForeignKey('hebergement.heb_pk'), nullable=False),
                  Column('heb_blockhistory_days', Integer, nullable=True))
+
+
+def getBlockingHistory(metadata):
+    return Table('blockinghistory', metadata,
+                 Column('heb_pk', Integer, ForeignKey('hebergement.heb_pk'), primary_key=True),
+                 Column('block_start', DateTime, primary_key=True),
+                 Column('block_end', DateTime, primary_key=True))

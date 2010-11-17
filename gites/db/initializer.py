@@ -30,7 +30,8 @@ from gites.db.tables import (getHebergementTable,
                              getTypeInfoTouristique,
                              getCharge,
                              getReservationProprio,
-                             getHebBlockedHistory)
+                             getHebBlockedHistory,
+                             getBlockingHistory)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -47,7 +48,8 @@ from gites.db.content import (Civilite,
                               Proprio,
                               ProprioMaj,
                               ReservationProprio,
-                              HebergementBlockingHistory)
+                              HebergementBlockingHistory,
+                              BlockingHistory)
 
 
 class GitesModel(object):
@@ -134,14 +136,14 @@ class GitesModel(object):
         mapper(Province, ProvincesTable,
                properties={'relatedHebergement': relation(Hebergement, lazy=True,
                                                           secondary=CommuneTable,
-                                                          primaryjoin=ProvincesTable.c.prov_pk==CommuneTable.c.com_prov_fk,
-                                                          secondaryjoin=CommuneTable.c.com_pk==HebergementTable.c.heb_com_fk)})
+                                                          primaryjoin=ProvincesTable.c.prov_pk == CommuneTable.c.com_prov_fk,
+                                                          secondaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk)})
 
         mapper(Commune, CommuneTable,
                properties={'relatedHebergement': relation(Hebergement, lazy=True,
-                            primaryjoin=CommuneTable.c.com_pk==HebergementTable.c.heb_com_fk),
+                            primaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk),
                            'province': relation(Province, lazy=True,
-                                                primaryjoin=ProvincesTable.c.prov_pk==CommuneTable.c.com_prov_fk)})
+                                                primaryjoin=ProvincesTable.c.prov_pk == CommuneTable.c.com_prov_fk)})
         mapper(Civilite, CiviliteTable)
 
         mapper(Proprio, ProprioTable,
@@ -174,20 +176,20 @@ class GitesModel(object):
                            'province': relation(Province,
                                                 secondary=CommuneTable,
                                                 foreign_keys=[CommuneTable.c.com_pk, CommuneTable.c.com_prov_fk],
-                                                primaryjoin=HebergementTable.c.heb_com_fk==CommuneTable.c.com_pk,
-                                                secondaryjoin=CommuneTable.c.com_prov_fk==ProvincesTable.c.prov_pk,
+                                                primaryjoin=HebergementTable.c.heb_com_fk == CommuneTable.c.com_pk,
+                                                secondaryjoin=CommuneTable.c.com_prov_fk == ProvincesTable.c.prov_pk,
                                                 lazy=True),
                            'maisonTourisme': relation(MaisonTourisme,
                                                       secondary=CommuneTable,
                                                       foreign_keys=[CommuneTable.c.com_pk, CommuneTable.c.com_mais_fk],
-                                                      primaryjoin=CommuneTable.c.com_pk==HebergementTable.c.heb_com_fk,
-                                                      secondaryjoin=MaisonTourismeTable.c.mais_pk==CommuneTable.c.com_mais_fk,
+                                                      primaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk,
+                                                      secondaryjoin=MaisonTourismeTable.c.mais_pk == CommuneTable.c.com_mais_fk,
                                                       lazy=True),
                            'tableHote': relation(TableHote,
                                                  secondary=TypeTableHoteOfHebergementTable,
                                                  foreign_keys=[TypeTableHoteOfHebergementTable.c.hebhot_heb_fk, TypeTableHoteOfHebergementTable.c.hebhot_tabho_fk],
-                                                 primaryjoin=HebergementTable.c.heb_pk==TypeTableHoteOfHebergementTable.c.hebhot_heb_fk,
-                                                 secondaryjoin=TypeTableHoteOfHebergementTable.c.hebhot_tabho_fk==TableHoteTable.c.tabho_pk,
+                                                 primaryjoin=HebergementTable.c.heb_pk == TypeTableHoteOfHebergementTable.c.hebhot_heb_fk,
+                                                 secondaryjoin=TypeTableHoteOfHebergementTable.c.hebhot_tabho_fk == TableHoteTable.c.tabho_pk,
                                                  lazy=True),
                            })
         mapper(TypeHebergement, TypeHebergementTable)
@@ -197,11 +199,14 @@ class GitesModel(object):
                                                lazy=True),
                            'infosTouristique': relation(InfoTouristique,
                                                        secondary=CommuneTable,
-                                                       primaryjoin=CommuneTable.c.com_mais_fk==MaisonTourismeTable.c.mais_pk,
-                                                       secondaryjoin=CommuneTable.c.com_pk==InfoTouristiqueTable.c.infotour_commune_fk,
+                                                       primaryjoin=CommuneTable.c.com_mais_fk == MaisonTourismeTable.c.mais_pk,
+                                                       secondaryjoin=CommuneTable.c.com_pk == InfoTouristiqueTable.c.infotour_commune_fk,
                                                        lazy=True)})
         hebBlockedHistory = getHebBlockedHistory(metadata)
         mapper(HebergementBlockingHistory, hebBlockedHistory,
+               properties={'hebergement': relation(Hebergement, backref='hebblockinghistory')})
+        blockingHistory = getBlockingHistory(metadata)
+        mapper(BlockingHistory, blockingHistory,
                properties={'hebergement': relation(Hebergement, backref='blockinghistory')})
 
         model = Model()

@@ -18,7 +18,7 @@ from typehebergement import TypeHebergement
 from proprio_maj import ProprioMaj
 from hebergement_maj import HebergementMaj
 from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
-from blockinghistory import HebergementBlockingHistory
+from blockinghistory import HebergementBlockingHistory, BlockingHistory
 
 
 class Proprio(MappedClassBase):
