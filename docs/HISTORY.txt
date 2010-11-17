@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.2 (2010-11-17)
 ----------------
 
-- Nothing changed yet.
+- add grok pg connection
 
 
 0.1 (2010-11-17)
