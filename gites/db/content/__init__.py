@@ -19,6 +19,7 @@ from proprio_maj import ProprioMaj
 from hebergement_maj import HebergementMaj
 from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from blockinghistory import HebergementBlockingHistory, BlockingHistory
+from logitem import LogItem
 
 
 class Proprio(MappedClassBase):
