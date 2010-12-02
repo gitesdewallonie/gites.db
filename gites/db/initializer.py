@@ -31,7 +31,8 @@ from gites.db.tables import (getHebergementTable,
                              getCharge,
                              getReservationProprio,
                              getHebBlockedHistory,
-                             getBlockingHistory)
+                             getBlockingHistory,
+                             getLogTable)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -49,7 +50,8 @@ from gites.db.content import (Civilite,
                               ProprioMaj,
                               ReservationProprio,
                               HebergementBlockingHistory,
-                              BlockingHistory)
+                              BlockingHistory,
+                              LogItem)
 
 
 class GitesModel(object):
@@ -209,6 +211,9 @@ class GitesModel(object):
         mapper(BlockingHistory, blockingHistory,
                properties={'hebergement': relation(Hebergement, backref='blockinghistory')})
 
+        logItemTable = getLogTable(metadata)
+        mapper(LogItem, logItemTable)
+
         model = Model()
         model.add('reservation_proprio',
                   table=ReservationProprioTable,
@@ -239,5 +244,7 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergement)
         model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMajTable,
                   mapper_class=TypeTableHoteOfHebergementMaj)
+        model.add('log_item', table=logItemTable,
+                  mapper_class=LogItem)
         metadata.create_all()
         return model

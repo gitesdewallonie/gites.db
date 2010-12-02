@@ -378,3 +378,19 @@ def getBlockingHistory(metadata):
                  Column('heb_pk', Integer, ForeignKey('hebergement.heb_pk'), primary_key=True),
                  Column('block_start', DateTime, primary_key=True),
                  Column('block_end', DateTime, primary_key=True))
+
+
+def getLogTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('log'):
+        autoload = True
+    return Table('log', metadata,
+                 Column('log_pk', Integer(), Sequence('log_log_pk_seq'),
+                        primary_key=True),
+                 Column('log_date', DateTime(), nullable=False),
+                 Column('log_path', String(), nullable=False),
+                 Column('log_hebid', String()),
+                 Column('log_host', String()),
+                 Column('log_agent', String()),
+                 useexisting=True,
+                 autoload=autoload)
