@@ -389,8 +389,9 @@ def getLogTable(metadata):
                         primary_key=True),
                  Column('log_date', DateTime(), nullable=False),
                  Column('log_path', String(), nullable=False),
-                 Column('log_hebid', String()),
+                 Column('log_hebpk', Integer(), ForeignKey('hebergement.heb_pk')),
                  Column('log_host', String()),
                  Column('log_agent', String()),
+                 Column('log_website', String()),
                  useexisting=True,
                  autoload=autoload)
