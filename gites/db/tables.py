@@ -119,6 +119,7 @@ def getProprio(metadata):
                  ForeignKey('civilite.civ_pk')),
           Column('pro_com_fk', Integer,
                  ForeignKey('commune.com_pk')),
+          Column('pro_reactivation_hash', String()),
           useexisting=True,
           autoload=autoload)
 
