@@ -1,4 +1,4 @@
-#!usr/bin/env python
+# -*- coding: utf-8 -*-
 #
 # MEURANT ALain
 #
@@ -26,7 +26,9 @@ from sqlalchemy import create_engine
 def ouverture_connection(requete):
     """ouverture de la connection db"""
     #driver://username:password@host:port/database
-    pg_db = create_engine('postgresql://alain:nostromos@localhost:5432/gites_wallons')
+    pg_db = create_engine('postgresql://alain:nostromos@localhost:5432/gites_wallons',
+                          convert_unicode=True,
+                          encoding='utf-8')
     connection = pg_db.connect()
     data = connection.execute(requete)
     return data
@@ -146,18 +148,18 @@ def main():
         for elem in hebergement:
             #print '>>%s. %s - %s - %s'%(compteur, elem.heb_pk, elem.heb_code_gdw, elem.heb_nom)
             file.write('<hebergement>\n')
-            file.write('\t<localite>%s</localite>\n' % (elem.heb_localite))
-            file.write('\t<coordonnee>%s</coordonnee>\n' % (elem.heb_coordonnee))
-            file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % (elem.pro_prenom1))
-            file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % (elem.pro_prenom2))
-            file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % (elem.pro_nom1))
-            file.write('\t<proprio_tel>%s</proprio_tel>\n' % (elem.pro_tel_priv))
-            file.write('\t<proprio_gsm>%s</proprio_gsm>\n' % (elem.pro_gsm1))
-            file.write('\t<adresse>%s</adresse>\n' % (elem.heb_adresse))
-            file.write('\t<code_postal>%s</code_postal>\n' % (elem.com_cp))
-            file.write('\t<entite>%s</entite>\n' % (elem.com_nom))
-            file.write('\t<id>%s</id>\n' % (elem.heb_pk))
-            file.write('\t<nbre_chambre>%s</nbre_chambre>\n' % (elem.heb_cgt_nbre_chmbre))
+            file.write('\t<localite>%s</localite>\n' % elem.heb_localite)
+            file.write('\t<coordonnee>%s</coordonnee>\n' % elem.heb_coordonnee)
+            file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % elem.pro_prenom1)
+            file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % elem.pro_prenom2)
+            file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % elem.pro_nom1)
+            file.write('\t<proprio_tel>%s</proprio_tel>\n' % elem.pro_tel_priv)
+            file.write('\t<proprio_gsm>%s</proprio_gsm>\n' % elem.pro_gsm1)
+            file.write('\t<adresse>%s</adresse>\n' % elem.heb_adresse)
+            file.write('\t<code_postal>%s</code_postal>\n' % elem.com_cp)
+            file.write('\t<entite>%s</entite>\n' % elem.com_nom)
+            file.write('\t<id>%s</id>\n' % elem.heb_pk)
+            file.write('\t<nbre_chambre>%s</nbre_chambre>\n' % elem.heb_cgt_nbre_chmbre)
             file.write('\t<bloc_table_hote>\n')
             requete_table = table_hote(elem.heb_pk)
             table = ouverture_connection(requete_table)
@@ -168,16 +170,16 @@ def main():
                 file.write('\t\t<tarif_chambre_table_hote_%sp>%s</tarif_chambre_table_hote_%sp>\n' % (compt, tab[1], compt))
                 compt = compt + 1
             file.write('\t</bloc_table_hote>\n')
-            file.write('\t<proprio_email>%s</proprio_email>\n' % (elem.pro_email))
+            file.write('\t<proprio_email>%s</proprio_email>\n' % elem.pro_email)
             #recherche du & et remplacement par espace
-            c = elem.heb_nom
-            if c:
-                if '&' in c:
-                    c = c.replace('&', ' et ')
+            nom = elem.heb_nom
+            if nom:
+                if '&' in nom:
+                    nom = nom.replace('&', ' et ')
                     #print c
-            file.write('\t<nom>%s</nom>\n' % c)
-            file.write('\t<tarif_chambre_avec_dej_2p>%s</tarif_chambre_avec_dej_2p>\n' % (elem.heb_tarif_chmbr_avec_dej_2p))
-            file.write('\t<epis>%s</epis>\n' % (elem.heb_nombre_epis))
+            file.write('\t<nom>%s</nom>\n' % nom)
+            file.write('\t<tarif_chambre_avec_dej_2p>%s</tarif_chambre_avec_dej_2p>\n' % elem.heb_tarif_chmbr_avec_dej_2p)
+            file.write('\t<epis>%s</epis>\n' % elem.heb_nombre_epis)
             file.write('</hebergement>\n')
             compteur = compteur + 1
     file.write('</gites_wallons>\n')
