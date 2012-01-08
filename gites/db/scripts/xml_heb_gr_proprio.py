@@ -18,6 +18,7 @@
 
 from sqlalchemy import create_engine
 
+
 def ouverture_connection():
     """
     ouverture de la connection db
@@ -26,8 +27,8 @@ def ouverture_connection():
     pg_db = create_engine('postgresql://alain:nostromos@localhost:5432/gites_wallons',
                           convert_unicode=True,
                           encoding='utf-8')
-    connection=pg_db.connect()
-    hebergements=connection.execute(" \
+    connection = pg_db.connect()
+    hebergements = connection.execute(" \
         select \
             hebergement.heb_pk, \
             hebergement.heb_adresse, \
@@ -93,23 +94,26 @@ def ouverture_connection():
             hebergement.heb_nom")
     return hebergements
 
+
 def creer_fichier(nom_file):
-   """creation du fichier xml de destination
+    """creation du fichier xml de destination
       ecriture de la phrase d'entete xml
       fermeture fichier
-   """
-   fichier=open(nom_file, 'w')
-   fichier.write("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n")
-   fichier.close()
+    """
+    fichier = open(nom_file, 'w')
+    fichier.write("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n")
+    fichier.close()
+
 
 def ouvrir_fichier(nom_file):
-   """ouverture du fichier en mode ajout"""
-   fichier_xml=open(nom_file, 'a')
-   return fichier_xml
+    """ouverture du fichier en mode ajout"""
+    fichier_xml = open(nom_file, 'a')
+    return fichier_xml
+
 
 def fermer_fichier(nom_file):
-   """fermeture du fichier"""
-   nom_file.close()
+    """fermeture du fichier"""
+    nom_file.close()
 
 
 def main():
@@ -119,38 +123,33 @@ def main():
     print '*** DEBUT GENERATION DU FICHIER XML GR GF MH  ***'
     print '------------------------------------------------------'
 
-    nom_file='gdw_gr_gf_mt.xml'
+    nom_file = 'gdw_gr_gf_mt.xml'
     creer_fichier(nom_file)
-    file=ouvrir_fichier(nom_file)
+    file = ouvrir_fichier(nom_file)
     file.write('<gites_wallons>\n')
 
-
     #execution de la requete SQL
-    hebergement=ouverture_connection()
+    hebergement = ouverture_connection()
 
-    compteur=0
+    compteur = 0
 
-    if hebergement :
-        for elem in hebergement :
-            compteur=compteur+1
+    if hebergement:
+        for elem in hebergement:
+            compteur = compteur + 1
             #print compteur, '>>',elem.heb_code_gdw, elem.heb_nom
             file.write('<hebergement>\n')
-            
-            localite= elem.heb_localite
+            localite = elem.heb_localite
             print elem
             file.write('\t<localite>%s</localite>\n' % (localite))
             file.write('\t<coordonnee>%s</coordonnee>\n' % (elem.heb_coordonnee))
             file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % (elem.pro_prenom1))
             file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % (elem.pro_prenom2))
             file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % (elem.pro_nom1))
-            
             print elem.pro_prenom1
             print elem.pro_prenom2
             print elem.pro_nom1
             print compteur
             print '---------------------------------------------------------------------------------'
-            
-            
             file.write('\t<proprio_email>%s</proprio_email>\n' % (elem.pro_email))
             file.write('\t<id>%s</id>\n' % (elem.heb_pk))
             file.write('\t<cap_min>%s</cap_min>\n' % (elem.heb_cgt_cap_min))
@@ -158,10 +157,10 @@ def main():
             file.write('\t<proprio_gsm>%s</proprio_gsm>\n' % (elem.pro_gsm1))
             file.write('\t<proprio_tel>%s</proprio_tel>\n' % (elem.pro_tel_priv))
             #recherche du & et remplacement par espace
-            c=elem.heb_nom
+            c = elem.heb_nom
             if c:
                 if '&' in c:
-                    c=c.replace('&', ' et ')
+                    c = c.replace('&', ' et ')
                     #print c
             #file.write('\t<nom>%s</nom>\n'%c)
             file.write('\t<tarif_we_bs>%s</tarif_we_bs>\n' % (elem.heb_tarif_we_bs))
@@ -170,7 +169,7 @@ def main():
             file.write('\t<tarif_sem_bs>%s</tarif_sem_bs>\n' % (elem.heb_tarif_sem_bs))
             file.write('\t<tarif_sem_ms>%s</tarif_sem_ms>\n' % (elem.heb_tarif_sem_ms))
             file.write('\t<tarif_sem_hs>%s</tarif_sem_hs>\n' % (elem.heb_tarif_sem_hs))
-            file.write('\t<epis>%s</epis>\n'%(elem.heb_nombre_epis))
+            file.write('\t<epis>%s</epis>\n' % (elem.heb_nombre_epis))
             #file.write('\t<type>%s</type>\n'%(elem.type_heb_nom))
             file.write('</hebergement>\n')
     file.write('</gites_wallons>\n')
@@ -179,7 +178,7 @@ def main():
 
     #nombre de record de la selection
     print
-    print "**** Nombre d'hebergements extraits : %i ***"%(compteur)
+    print "**** Nombre d'hebergements extraits : %i ***" % (compteur)
 
     print '------------------------------------------------------'
     print "*** GENERATION DU FICHIER XML TERMINEE GR GF MH ***"
