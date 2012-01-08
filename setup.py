@@ -28,7 +28,7 @@ setup(name='gites.db',
           'z3c.sqlalchemy'
           # -*- Extra requirements: -*-
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      entry_points={
+            'console_scripts': [
+                'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main']}
       )
