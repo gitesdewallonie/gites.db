@@ -30,5 +30,6 @@ setup(name='gites.db',
       ],
       entry_points={
             'console_scripts': [
-                'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main']}
+                'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main',
+                'xml_heb_gr_proprio = gites.db.scripts.xml_heb_gr_proprio:main']}
       )
