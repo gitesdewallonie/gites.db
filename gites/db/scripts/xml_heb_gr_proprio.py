@@ -140,37 +140,37 @@ def main():
             file.write('<hebergement>\n')
             localite = elem.heb_localite
             print elem
-            file.write('\t<localite>%s</localite>\n' % (localite))
-            file.write('\t<coordonnee>%s</coordonnee>\n' % (elem.heb_coordonnee))
-            file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % (elem.pro_prenom1))
-            file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % (elem.pro_prenom2))
-            file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % (elem.pro_nom1))
+            file.write('\t<localite>%s</localite>\n' % localite)
+            file.write('\t<coordonnee>%s</coordonnee>\n' % elem.heb_coordonnee)
+            file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % elem.pro_prenom1)
+            file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % elem.pro_prenom2)
+            file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % elem.pro_nom1)
             print elem.pro_prenom1
             print elem.pro_prenom2
             print elem.pro_nom1
             print compteur
             print '---------------------------------------------------------------------------------'
-            file.write('\t<proprio_email>%s</proprio_email>\n' % (elem.pro_email))
-            file.write('\t<id>%s</id>\n' % (elem.heb_pk))
-            file.write('\t<cap_min>%s</cap_min>\n' % (elem.heb_cgt_cap_min))
-            file.write('\t<cap_max>%s</cap_max>\n' % (elem.heb_cgt_cap_max))
-            file.write('\t<proprio_gsm>%s</proprio_gsm>\n' % (elem.pro_gsm1))
-            file.write('\t<proprio_tel>%s</proprio_tel>\n' % (elem.pro_tel_priv))
+            file.write('\t<proprio_email>%s</proprio_email>\n' % elem.pro_email)
+            file.write('\t<id>%s</id>\n' % elem.heb_pk)
+            file.write('\t<cap_min>%s</cap_min>\n' % elem.heb_cgt_cap_min)
+            file.write('\t<cap_max>%s</cap_max>\n' % elem.heb_cgt_cap_max)
+            file.write('\t<proprio_gsm>%s</proprio_gsm>\n' % elem.pro_gsm1)
+            file.write('\t<proprio_tel>%s</proprio_tel>\n' % elem.pro_tel_priv)
             #recherche du & et remplacement par espace
-            c = elem.heb_nom
-            if c:
-                if '&' in c:
-                    c = c.replace('&', ' et ')
-                    #print c
-            #file.write('\t<nom>%s</nom>\n'%c)
-            file.write('\t<tarif_we_bs>%s</tarif_we_bs>\n' % (elem.heb_tarif_we_bs))
-            file.write('\t<tarif_we_ms>%s</tarif_we_ms>\n' % (elem.heb_tarif_we_ms))
-            file.write('\t<tarif_we_hs>%s</tarif_we_hs>\n' % (elem.heb_tarif_we_hs))
-            file.write('\t<tarif_sem_bs>%s</tarif_sem_bs>\n' % (elem.heb_tarif_sem_bs))
-            file.write('\t<tarif_sem_ms>%s</tarif_sem_ms>\n' % (elem.heb_tarif_sem_ms))
-            file.write('\t<tarif_sem_hs>%s</tarif_sem_hs>\n' % (elem.heb_tarif_sem_hs))
-            file.write('\t<epis>%s</epis>\n' % (elem.heb_nombre_epis))
-            #file.write('\t<type>%s</type>\n'%(elem.type_heb_nom))
+            nom = elem.heb_nom
+            if nom:
+                if '&' in nom:
+                    nom = nom.replace('&', ' et ')
+                    #print nom
+            #file.write('\t<nom>%s</nom>\n' % nom)
+            file.write('\t<tarif_we_bs>%s</tarif_we_bs>\n' % elem.heb_tarif_we_bs)
+            file.write('\t<tarif_we_ms>%s</tarif_we_ms>\n' % elem.heb_tarif_we_ms)
+            file.write('\t<tarif_we_hs>%s</tarif_we_hs>\n' % elem.heb_tarif_we_hs)
+            file.write('\t<tarif_sem_bs>%s</tarif_sem_bs>\n' % elem.heb_tarif_sem_bs)
+            file.write('\t<tarif_sem_ms>%s</tarif_sem_ms>\n' % elem.heb_tarif_sem_ms)
+            file.write('\t<tarif_sem_hs>%s</tarif_sem_hs>\n' % elem.heb_tarif_sem_hs)
+            file.write('\t<epis>%s</epis>\n' % elem.heb_nombre_epis)
+            #file.write('\t<type>%s</type>\n' % elem.type_heb_nom)
             file.write('</hebergement>\n')
     file.write('</gites_wallons>\n')
     #fermer_fichier(nom_file)
@@ -178,7 +178,7 @@ def main():
 
     #nombre de record de la selection
     print
-    print "**** Nombre d'hebergements extraits : %i ***" % (compteur)
+    print "**** Nombre d'hebergements extraits : %i ***" % compteur
 
     print '------------------------------------------------------'
     print "*** GENERATION DU FICHIER XML TERMINEE GR GF MH ***"
