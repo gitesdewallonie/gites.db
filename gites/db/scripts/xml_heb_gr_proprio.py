@@ -136,13 +136,13 @@ def main():
             #print compteur, '>>',elem.heb_code_gdw, elem.heb_nom
             file.write('<hebergement>\n')
             
-            localite=(u'%s')%(elem.heb_localite)
+            localite= elem.heb_localite
             print elem
             file.write('\t<localite>%s</localite>\n' % (localite))
             file.write('\t<coordonnee>%s</coordonnee>\n' % (elem.heb_coordonnee))
-            file.write(u'\t<proprio_prenom1>%s</proprio_prenom1>\n' % (elem.pro_prenom1))
-            file.write(u'\t<proprio_prenom2>%s</proprio_prenom2>\n' % (elem.pro_prenom2))
-            file.write(u'\t<proprio_nom1>%s</proprio_nom1>\n' % (elem.pro_nom1))
+            file.write('\t<proprio_prenom1>%s</proprio_prenom1>\n' % (elem.pro_prenom1))
+            file.write('\t<proprio_prenom2>%s</proprio_prenom2>\n' % (elem.pro_prenom2))
+            file.write('\t<proprio_nom1>%s</proprio_nom1>\n' % (elem.pro_nom1))
             
             print elem.pro_prenom1
             print elem.pro_prenom2
