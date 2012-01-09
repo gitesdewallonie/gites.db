@@ -162,7 +162,7 @@ def main():
                 if '&' in nom:
                     nom = nom.replace('&', ' et ')
                     #print nom
-            #file.write('\t<nom>%s</nom>\n' % nom)
+            file.write('\t<nom>%s</nom>\n' % nom)
             file.write('\t<tarif_we_bs>%s</tarif_we_bs>\n' % elem.heb_tarif_we_bs)
             file.write('\t<tarif_we_ms>%s</tarif_we_ms>\n' % elem.heb_tarif_we_ms)
             file.write('\t<tarif_we_hs>%s</tarif_we_hs>\n' % elem.heb_tarif_we_hs)
@@ -170,7 +170,7 @@ def main():
             file.write('\t<tarif_sem_ms>%s</tarif_sem_ms>\n' % elem.heb_tarif_sem_ms)
             file.write('\t<tarif_sem_hs>%s</tarif_sem_hs>\n' % elem.heb_tarif_sem_hs)
             file.write('\t<epis>%s</epis>\n' % elem.heb_nombre_epis)
-            #file.write('\t<type>%s</type>\n' % elem.type_heb_nom)
+            file.write('\t<type>%s</type>\n' % elem.type_heb_nom)
             file.write('</hebergement>\n')
     file.write('</gites_wallons>\n')
     #fermer_fichier(nom_file)
