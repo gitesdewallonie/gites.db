@@ -395,7 +395,6 @@ def getDerniereMinuteDetail(metadata):
                  Column('dermindet_derniere_minute_fk', Integer(),
                         ForeignKey('derniere_minute.dermin_pk'),
                         nullable=False),
-                 Column('dermindet_date_fin_event', Date(), nullable=False),
                  useexisting=True,
                  autoload=autoload)
 
@@ -407,10 +406,10 @@ def getLinkDerniereMinuteHebergement(metadata):
     return Table('link_derniereminute_hebergement', metadata,
                   Column('hebergement_fk', Integer(),
                          ForeignKey('hebergement.heb_pk'),
-                         primary_key = True),
+                         primary_key=True),
                   Column('derniere_minute_fk', Integer(),
                          ForeignKey('derniere_minute.dermin_pk'),
-                         primary_key = True),
+                         primary_key=True),
                   useexisting=True,
                   autoload=autoload)
 
