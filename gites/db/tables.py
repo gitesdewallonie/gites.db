@@ -368,9 +368,8 @@ def getPackage(metadata):
     if metadata.bind.has_table('package'):
         autoload = True
     return Table('package', metadata,
-                 Column('pack_pk', Integer,
-                        Sequence('package_pack_pk_seq'),
-                        primary_key=True),
+                 Column('pack_pk', Integer, nullable=False, primary_key=True,
+                        unique=True),
                  Column('pack_categorie', String(), nullable=False),
                  Column('pack_date_debut', Date(), nullable=False),
                  Column('pack_date_fin', Date(), nullable=False),
@@ -385,9 +384,8 @@ def getPackageDetail(metadata):
     if metadata.bind.has_table('package_detail'):
         autoload = True
     return Table('package_detail', metadata,
-                 Column('packdet_pk', Integer,
-                        Sequence('package_detail_packdet_pk_seq'),
-                        primary_key=True),
+                 Column('packdet_pk', Integer, nullable=False,
+                        primary_key=True, unique=True),
                  Column('packdet_langue', String(), nullable=False),
                  Column('packdet_url', String(), nullable=False),
                  Column('packdet_description', String(), nullable=False),
