@@ -368,7 +368,9 @@ def getDerniereMinute(metadata):
     if metadata.bind.has_table('derniere_minute'):
         autoload = True
     return Table('derniere_minute', metadata,
-                 Column('dermin_pk', Integer, Sequence('derniere_minute_dermin_pk_seq'), primary_key=True),
+                 Column('dermin_pk', Integer,
+                        Sequence('derniere_minute_dermin_pk_seq'),
+                        primary_key=True),
                  Column('dermin_categorie', String(), nullable=False),
                  Column('dermin_date_debut', Date(), nullable=False),
                  Column('dermin_date_fin', Date(), nullable=False),
@@ -377,19 +379,26 @@ def getDerniereMinute(metadata):
                  useexisting=True,
                  autoload=autoload)
 
+
 def getDerniereMinuteDetail(metadata):
     autoload = False
     if metadata.bind.has_table('derniere_minute_detail'):
         autoload = True
     return Table('derniere_minute_detail', metadata,
+                 Column('dermindet_pk', Integer,
+                        Sequence('derniere_minute_detail_dermindet_pk_seq'),
+                        primary_key=True),
                  Column('dermindet_langue', String(), nullable=False),
                  Column('dermindet_url', String(), nullable=False),
                  Column('dermindet_description', String(), nullable=False),
                  Column('dermindet_texte', String(), nullable=False),
-                 Column('dermindet_derniere_minute_fk', Integer(), ForeignKey('derniere_minute.dermin_pk')),
+                 Column('dermindet_derniere_minute_fk', Integer(),
+                        ForeignKey('derniere_minute.dermin_pk'),
+                        nullable=False),
                  Column('dermindet_date_fin_event', Date(), nullable=False),
                  useexisting=True,
                  autoload=autoload)
+
 
 def getLinkDerniereMinuteHebergement(metadata):
     autoload = False

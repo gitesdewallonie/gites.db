@@ -20,6 +20,7 @@ from hebergement_maj import HebergementMaj
 from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from blockinghistory import HebergementBlockingHistory, BlockingHistory
 from logitem import LogItem
+from derniereminute import DerniereMinute
 
 
 class Proprio(MappedClassBase):
@@ -55,8 +56,16 @@ class TypeTableHoteOfHebergementMaj(MappedClassBase):
 
 
 class LinkHebergementEpis(object):
-    pass
+    c = None
 
 
 class ReservationProprio(object):
+    c = None
+
+
+class DerniereMinuteDetail(object):
+    c = None
+
+
+class LinkDerniereMinuteHebergement(object):
     c = None

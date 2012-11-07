@@ -32,7 +32,10 @@ from gites.db.tables import (getHebergementTable,
                              getReservationProprio,
                              getHebBlockedHistory,
                              getBlockingHistory,
-                             getLogTable)
+                             getLogTable,
+                             getDerniereMinute,
+                             getDerniereMinuteDetail,
+                             getLinkDerniereMinuteHebergement)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -51,7 +54,10 @@ from gites.db.content import (Civilite,
                               ReservationProprio,
                               HebergementBlockingHistory,
                               BlockingHistory,
-                              LogItem)
+                              LogItem,
+                              DerniereMinute,
+                              DerniereMinuteDetail,
+                              LinkDerniereMinuteHebergement)
 
 
 class GitesModel(object):
@@ -214,6 +220,33 @@ class GitesModel(object):
         logItemTable = getLogTable(metadata)
         mapper(LogItem, logItemTable)
 
+        # Nouveaux contenus (ideesejour, dernieres minutes, ...)
+
+        DerniereMinuteTable = getDerniereMinute(metadata)
+        DerniereMinuteTable.create(checkfirst=True)
+
+        DerniereMinuteDetailTable = getDerniereMinuteDetail(metadata)
+        DerniereMinuteDetailTable.create(checkfirst=True)
+
+        LinkDerniereMinuteHebergementTable = getLinkDerniereMinuteHebergement(metadata)
+        LinkDerniereMinuteHebergementTable.create(checkfirst=True)
+
+        mapper(DerniereMinute, DerniereMinuteTable,
+               properties={'hebergements': relation(Hebergement,
+                                                    secondary=CommuneTable,
+                                                    foreign_keys=[LinkDerniereMinuteHebergementTable.c.hebergement_fk, LinkDerniereMinuteHebergementTable.c.derniere_minute_fk],
+                                                    primaryjoin=DerniereMinuteTable.c.dermin_pk == LinkDerniereMinuteHebergementTable.c.derniere_minute_fk,
+                                                    secondaryjoin=LinkDerniereMinuteHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
+                                                    lazy=True,
+                                                    backref='dernieresminutes')})
+
+        mapper(DerniereMinuteDetail, DerniereMinuteDetailTable,
+               properties={'derniereminute': relation(DerniereMinute,
+                                                      lazy=True,
+                                                      backref='details')})
+
+        mapper(LinkDerniereMinuteHebergement, LinkDerniereMinuteHebergementTable)
+
         model = Model()
         model.add('reservation_proprio',
                   table=ReservationProprioTable,
@@ -246,5 +279,11 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=logItemTable,
                   mapper_class=LogItem)
+        model.add('derniere_minute',
+                  table=DerniereMinuteTable,
+                  mapper_class=DerniereMinute)
+        model.add('derniere_minute_detail',
+                  table=DerniereMinuteDetailTable,
+                  mapper_class=DerniereMinuteDetail)
         metadata.create_all()
         return model
