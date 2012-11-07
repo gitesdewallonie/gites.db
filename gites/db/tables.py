@@ -363,52 +363,52 @@ def getTypeTableHoteOfHebergementMaj(metadata):
                   Column('hebhot_maj_tabho_fk', Integer))
 
 
-def getDerniereMinute(metadata):
+def getPackage(metadata):
     autoload = False
-    if metadata.bind.has_table('derniere_minute'):
+    if metadata.bind.has_table('package'):
         autoload = True
-    return Table('derniere_minute', metadata,
-                 Column('dermin_pk', Integer,
-                        Sequence('derniere_minute_dermin_pk_seq'),
+    return Table('package', metadata,
+                 Column('pack_pk', Integer,
+                        Sequence('package_pack_pk_seq'),
                         primary_key=True),
-                 Column('dermin_categorie', String(), nullable=False),
-                 Column('dermin_date_debut', Date(), nullable=False),
-                 Column('dermin_date_fin', Date(), nullable=False),
-                 Column('dermin_date_debut_event', Date(), nullable=False),
-                 Column('dermin_date_fin_event', Date(), nullable=False),
+                 Column('pack_categorie', String(), nullable=False),
+                 Column('pack_date_debut', Date(), nullable=False),
+                 Column('pack_date_fin', Date(), nullable=False),
+                 Column('pack_date_debut_event', Date(), nullable=False),
+                 Column('pack_date_fin_event', Date(), nullable=False),
                  useexisting=True,
                  autoload=autoload)
 
 
-def getDerniereMinuteDetail(metadata):
+def getPackageDetail(metadata):
     autoload = False
-    if metadata.bind.has_table('derniere_minute_detail'):
+    if metadata.bind.has_table('package_detail'):
         autoload = True
-    return Table('derniere_minute_detail', metadata,
-                 Column('dermindet_pk', Integer,
-                        Sequence('derniere_minute_detail_dermindet_pk_seq'),
+    return Table('package_detail', metadata,
+                 Column('packdet_pk', Integer,
+                        Sequence('package_detail_packdet_pk_seq'),
                         primary_key=True),
-                 Column('dermindet_langue', String(), nullable=False),
-                 Column('dermindet_url', String(), nullable=False),
-                 Column('dermindet_description', String(), nullable=False),
-                 Column('dermindet_texte', String(), nullable=False),
-                 Column('dermindet_derniere_minute_fk', Integer(),
-                        ForeignKey('derniere_minute.dermin_pk'),
+                 Column('packdet_langue', String(), nullable=False),
+                 Column('packdet_url', String(), nullable=False),
+                 Column('packdet_description', String(), nullable=False),
+                 Column('packdet_texte', String(), nullable=False),
+                 Column('packdet_package_fk', Integer(),
+                        ForeignKey('package.pack_pk'),
                         nullable=False),
                  useexisting=True,
                  autoload=autoload)
 
 
-def getLinkDerniereMinuteHebergement(metadata):
+def getLinkPackageHebergement(metadata):
     autoload = False
-    if metadata.bind.has_table('link_derniereminute_hebergement'):
+    if metadata.bind.has_table('link_package_hebergement'):
         autoload = True
-    return Table('link_derniereminute_hebergement', metadata,
+    return Table('link_package_hebergement', metadata,
                   Column('hebergement_fk', Integer(),
                          ForeignKey('hebergement.heb_pk'),
                          primary_key=True),
-                  Column('derniere_minute_fk', Integer(),
-                         ForeignKey('derniere_minute.dermin_pk'),
+                  Column('package_fk', Integer(),
+                         ForeignKey('package.pack_pk'),
                          primary_key=True),
                   useexisting=True,
                   autoload=autoload)
