@@ -8,7 +8,6 @@ setup(name='gites.db',
       description="Db connexion for Gites de Wallonie",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
@@ -25,9 +24,16 @@ setup(name='gites.db',
       install_requires=[
           'setuptools',
           'affinitic.pwmanager',
-          'z3c.sqlalchemy'
-          # -*- Extra requirements: -*-
+          'z3c.sqlalchemy',
+          'SQLAlchemy',
+          'psycopg2',
+          'zope.component',
+          'zope.interface',
+          'affinitic.caching'
       ],
+      extras_require=dict(
+            test=['zope.testing', 'plone.testing'],
+            ),
       entry_points={
             'console_scripts': [
                 'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main',
