@@ -231,9 +231,10 @@ class GitesModel(object):
         LinkDerniereMinuteHebergementTable = getLinkDerniereMinuteHebergement(metadata)
         LinkDerniereMinuteHebergementTable.create(checkfirst=True)
 
+        mapper(LinkDerniereMinuteHebergement, LinkDerniereMinuteHebergementTable)
         mapper(DerniereMinute, DerniereMinuteTable,
                properties={'hebergements': relation(Hebergement,
-                                                    secondary=CommuneTable,
+                                                    secondary=LinkDerniereMinuteHebergementTable,
                                                     foreign_keys=[LinkDerniereMinuteHebergementTable.c.hebergement_fk, LinkDerniereMinuteHebergementTable.c.derniere_minute_fk],
                                                     primaryjoin=DerniereMinuteTable.c.dermin_pk == LinkDerniereMinuteHebergementTable.c.derniere_minute_fk,
                                                     secondaryjoin=LinkDerniereMinuteHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
@@ -245,7 +246,6 @@ class GitesModel(object):
                                                       lazy=True,
                                                       backref='details')})
 
-        mapper(LinkDerniereMinuteHebergement, LinkDerniereMinuteHebergementTable)
 
         model = Model()
         model.add('reservation_proprio',
