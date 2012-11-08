@@ -14,6 +14,7 @@ from commune import Commune
 from hebergement import Hebergement
 from infotouristique import InfoTouristique
 from maisontourisme import MaisonTourisme
+from proprio import Proprio
 from typehebergement import TypeHebergement
 from proprio_maj import ProprioMaj
 from hebergement_maj import HebergementMaj
@@ -21,14 +22,6 @@ from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from blockinghistory import HebergementBlockingHistory, BlockingHistory
 from logitem import LogItem
 from derniereminute import DerniereMinute
-
-
-class Proprio(MappedClassBase):
-    c = None
-
-
-class ProprioMaj(MappedClassBase):
-    c = None
 
 
 class hebergementMaj(MappedClassBase):
@@ -48,10 +41,6 @@ class TableHote(MappedClassBase):
 
 
 class TypeTableHoteOfHebergement(MappedClassBase):
-    c = None
-
-
-class TypeTableHoteOfHebergementMaj(MappedClassBase):
     c = None
 
 
