@@ -233,7 +233,7 @@ class GitesModel(object):
 
         mapper(Package, PackageTable,
                properties={'hebergements': relation(Hebergement,
-                                                    secondary=CommuneTable,
+                                                    secondary=LinkPackageHebergementTable,
                                                     foreign_keys=[LinkPackageHebergementTable.c.hebergement_fk, LinkPackageHebergementTable.c.package_fk],
                                                     primaryjoin=PackageTable.c.pack_pk == LinkPackageHebergementTable.c.package_fk,
                                                     secondaryjoin=LinkPackageHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
