@@ -5,6 +5,9 @@
            xmlns:plone="http://namespaces.plone.org/plone"
            i18n_domain="gites">
 
+  <include package="Products.Five"/>
+  <include package="affinitic.pwmanager"/>
+  <include package="affinitic.caching"/>
   <five:registerPackage package="." initialize=".initialize" />
 
   <utility
@@ -14,4 +17,3 @@
       />
 
 </configure>
-
