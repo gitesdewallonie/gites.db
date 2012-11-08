@@ -12,12 +12,20 @@ from gites.db.interfaces import IHebergement
 from zope.interface import implements
 from Acquisition import Implicit
 from Globals import InitializeClass
+from affinitic.caching import cache
+from gites.db import session
 
 
 class Hebergement(Implicit, MappedClassBase):
     implements(IHebergement)
 
     c = None
+
+    @classmethod
+    @cache(lambda x, y, z: z, dependencies=['pgsql'])
+    def get(cls, heb_pk):
+        sess = session()
+        return sess.query(cls).get(heb_pk)
 
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
