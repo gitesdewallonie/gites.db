@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+import unittest2
+from gites.db.testing import PGRDB
+from gites.db import Hebergement, session, Proprio
+
+
+class HebergementMapperTest(unittest2.TestCase):
+    layer = PGRDB
+
+    def test_simple_get(self):
+        PK = 1
+        heb = Hebergement(heb_pk=PK)
+        sess = session()
+        sess.add(heb)
+        sess.flush()
+        self.assertEqual(heb, Hebergement.get(PK))
+
+    def test_proprio_link(self):
+        PK = 1
+        heb = Hebergement(heb_pk=PK, heb_pro_fk=PK)
+        pro = Proprio(pro_pk=PK)
+        sess = session()
+        sess.add(heb)
+        sess.add(pro)
+        sess.flush()
+        self.assertEqual(heb.proprio, Proprio.get(PK))
