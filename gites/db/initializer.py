@@ -33,9 +33,9 @@ from gites.db.tables import (getHebergementTable,
                              getHebBlockedHistory,
                              getBlockingHistory,
                              getLogTable,
-                             getDerniereMinute,
-                             getDerniereMinuteDetail,
-                             getLinkDerniereMinuteHebergement)
+                             getPackage,
+                             getPackageDetail,
+                             getLinkPackageHebergement)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -55,9 +55,9 @@ from gites.db.content import (Civilite,
                               HebergementBlockingHistory,
                               BlockingHistory,
                               LogItem,
-                              DerniereMinute,
-                              DerniereMinuteDetail,
-                              LinkDerniereMinuteHebergement)
+                              Package,
+                              PackageDetail,
+                              LinkPackageHebergement)
 
 
 class GitesModel(object):
@@ -220,32 +220,31 @@ class GitesModel(object):
         logItemTable = getLogTable(metadata)
         mapper(LogItem, logItemTable)
 
-        # Nouveaux contenus (ideesejour, dernieres minutes, ...)
+        # Nouveau contenu package (denières minutes, sejours, etc.)
 
-        DerniereMinuteTable = getDerniereMinute(metadata)
-        DerniereMinuteTable.create(checkfirst=True)
+        PackageTable = getPackage(metadata)
+        PackageTable.create(checkfirst=True)
 
-        DerniereMinuteDetailTable = getDerniereMinuteDetail(metadata)
-        DerniereMinuteDetailTable.create(checkfirst=True)
+        PackageDetailTable = getPackageDetail(metadata)
+        PackageDetailTable.create(checkfirst=True)
 
-        LinkDerniereMinuteHebergementTable = getLinkDerniereMinuteHebergement(metadata)
-        LinkDerniereMinuteHebergementTable.create(checkfirst=True)
+        LinkPackageHebergementTable = getLinkPackageHebergement(metadata)
+        LinkPackageHebergementTable.create(checkfirst=True)
 
-        mapper(LinkDerniereMinuteHebergement, LinkDerniereMinuteHebergementTable)
-        mapper(DerniereMinute, DerniereMinuteTable,
+        mapper(Package, PackageTable,
                properties={'hebergements': relation(Hebergement,
-                                                    secondary=LinkDerniereMinuteHebergementTable,
-                                                    foreign_keys=[LinkDerniereMinuteHebergementTable.c.hebergement_fk, LinkDerniereMinuteHebergementTable.c.derniere_minute_fk],
-                                                    primaryjoin=DerniereMinuteTable.c.dermin_pk == LinkDerniereMinuteHebergementTable.c.derniere_minute_fk,
-                                                    secondaryjoin=LinkDerniereMinuteHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
+                                                    secondary=CommuneTable,
+                                                    foreign_keys=[LinkPackageHebergementTable.c.hebergement_fk, LinkPackageHebergementTable.c.package_fk],
+                                                    primaryjoin=PackageTable.c.pack_pk == LinkPackageHebergementTable.c.package_fk,
+                                                    secondaryjoin=LinkPackageHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
                                                     lazy=True,
-                                                    backref='dernieresminutes')})
+                                                    backref='packages')})
+        mapper(PackageDetail, PackageDetailTable,
+               properties={'package': relation(Package,
+                                               lazy=True,
+                                               backref='details')})
 
-        mapper(DerniereMinuteDetail, DerniereMinuteDetailTable,
-               properties={'derniereminute': relation(DerniereMinute,
-                                                      lazy=True,
-                                                      backref='details')})
-
+        mapper(LinkPackageHebergement, LinkPackageHebergementTable)
 
         model = Model()
         model.add('reservation_proprio',
@@ -279,11 +278,11 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=logItemTable,
                   mapper_class=LogItem)
-        model.add('derniere_minute',
-                  table=DerniereMinuteTable,
-                  mapper_class=DerniereMinute)
-        model.add('derniere_minute_detail',
-                  table=DerniereMinuteDetailTable,
-                  mapper_class=DerniereMinuteDetail)
+        model.add('package',
+                  table=PackageTable,
+                  mapper_class=Package)
+        model.add('package_detail',
+                  table=PackageDetailTable,
+                  mapper_class=PackageDetail)
         metadata.create_all()
         return model

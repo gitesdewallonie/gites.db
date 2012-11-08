@@ -21,7 +21,7 @@ from hebergement_maj import HebergementMaj
 from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from blockinghistory import HebergementBlockingHistory, BlockingHistory
 from logitem import LogItem
-from derniereminute import DerniereMinute
+from package import Package
 
 
 class hebergementMaj(MappedClassBase):
@@ -52,9 +52,9 @@ class ReservationProprio(object):
     c = None
 
 
-class DerniereMinuteDetail(object):
+class PackageDetail(object):
     c = None
 
 
-class LinkDerniereMinuteHebergement(object):
+class LinkPackageHebergement(object):
     c = None
