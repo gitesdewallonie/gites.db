@@ -11,6 +11,7 @@ from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
+from sqlalchemy import and_
 from gites.db.tables import (getHebergementTable,
                              getHebergementMajTable,
                              getTypeHebergementTable,
@@ -234,14 +235,38 @@ class GitesModel(object):
         mapper(Package, PackageTable,
                properties={'hebergements': relation(Hebergement,
                                                     secondary=LinkPackageHebergementTable,
-                                                    foreign_keys=[LinkPackageHebergementTable.c.hebergement_fk, LinkPackageHebergementTable.c.package_fk],
-                                                    primaryjoin=PackageTable.c.pack_pk == LinkPackageHebergementTable.c.package_fk,
-                                                    secondaryjoin=LinkPackageHebergementTable.c.hebergement_fk == HebergementTable.c.heb_pk,
                                                     lazy=True,
-                                                    backref='packages')})
+                                                    backref='packages'),
+                           'detail_fr': relation(PackageDetail,
+                                                 uselist=False,
+                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
+                                                                  PackageDetailTable.c.packdet_langue == 'fr'),
+                                                 lazy=True),
+                           'detail_en': relation(PackageDetail,
+                                                 uselist=False,
+                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
+                                                                  PackageDetailTable.c.packdet_langue == 'en'),
+                                                 lazy=True),
+                           'detail_nl': relation(PackageDetail,
+                                                 uselist=False,
+                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
+                                                                  PackageDetailTable.c.packdet_langue == 'nl'),
+                                                 lazy=True),
+                           'detail_it': relation(PackageDetail,
+                                                 uselist=False,
+                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
+                                                                  PackageDetailTable.c.packdet_langue == 'it'),
+                                                 lazy=True),
+                           'detail_de': relation(PackageDetail,
+                                                 uselist=False,
+                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
+                                                                  PackageDetailTable.c.packdet_langue == 'de'),
+                                                 lazy=True)})
+
         mapper(PackageDetail, PackageDetailTable,
                properties={'package': relation(Package,
                                                lazy=True,
+                                               uselist=False,
                                                backref='details')})
 
         mapper(LinkPackageHebergement, LinkPackageHebergementTable)

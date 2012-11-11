@@ -12,9 +12,6 @@ class Package(MappedClassBase):
 
     c = None
 
-    def Title(self):
-        language = self.request.get('LANGUAGE', 'en')
-        # typeHeb = self.type.getTitle(language)
-        # return u"%s - %s - %s" % (typeHeb, self.heb_nom, self.heb_localite)
-
-    # proprioName = property(getProprioName)
+    def getDetail(self, languageCode):
+        detailProperty = 'detail_%s' % languageCode.lower()
+        return getattr(self, detailProperty, None)
