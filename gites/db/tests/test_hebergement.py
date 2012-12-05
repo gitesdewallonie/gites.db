@@ -13,7 +13,7 @@ class HebergementMapperTest(unittest2.TestCase):
         sess = session()
         sess.add(heb)
         sess.flush()
-        self.assertEqual(heb, Hebergement.get(PK))
+        self.assertEqual(heb.heb_pk, Hebergement.get(PK).heb_pk)
 
     def test_proprio_link(self):
         PK = 1
@@ -23,4 +23,4 @@ class HebergementMapperTest(unittest2.TestCase):
         sess.add(heb)
         sess.add(pro)
         sess.flush()
-        self.assertEqual(heb.proprio, Proprio.get(PK))
+        self.assertEqual(heb.proprio.pro_pk, Proprio.get(PK).pro_pk)
