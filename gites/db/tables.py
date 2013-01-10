@@ -7,8 +7,10 @@ Copyright by AFFINITIC sprl
 
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
-from sqlalchemy import Table, Column, String, Integer, ForeignKey, Date, \
-                       DateTime, Boolean, func, Sequence
+from sqlalchemy import (Table, Column, String, Integer, ForeignKey, Date,
+                        DateTime, Boolean, func, Sequence, PickleType)
+
+from gites.db.utils import makeDictionary, PickleDict
 
 
 def getTypeInfoPratique(metadata):
@@ -444,5 +446,31 @@ def getLogTable(metadata):
                  Column('log_host', String()),
                  Column('log_agent', String()),
                  Column('log_website', String()),
+                 useexisting=True,
+                 autoload=autoload)
+
+
+def getIdeeSejourTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('idee_sejour'):
+        autoload = True
+    return Table('idee_sejour', metadata,
+                 Column('ideesejour_id',
+                        Integer,
+                        Sequence('ideesejour_id_seq', optional=True),
+                        primary_key=True),
+                 Column('state', String(30),
+                        nullable=False,
+                        index=True),
+                 Column('__roles__',
+                        PickleType),
+                 Column('__ac_local_roles__',
+                        PickleType),
+                 Column('__zope_permissions__',
+                        PickleDict,
+                        default=makeDictionary),
+                 Column('workflow_history',
+                        PickleDict,
+                        default=makeDictionary),
                  useexisting=True,
                  autoload=autoload)

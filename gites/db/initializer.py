@@ -36,7 +36,8 @@ from gites.db.tables import (getHebergementTable,
                              getLogTable,
                              getPackage,
                              getPackageDetail,
-                             getLinkPackageHebergement)
+                             getLinkPackageHebergement,
+                             getIdeeSejourTable)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -59,6 +60,8 @@ from gites.db.content import (Civilite,
                               Package,
                               PackageDetail,
                               LinkPackageHebergement)
+
+from gites.core.content.ideesejour import IdeeSejour
 
 
 class GitesModel(object):
@@ -271,6 +274,9 @@ class GitesModel(object):
 
         mapper(LinkPackageHebergement, LinkPackageHebergementTable)
 
+        ideeSejourTable = getIdeeSejourTable(metadata)
+        mapper(IdeeSejour, PackageTable)
+
         model = Model()
         model.add('reservation_proprio',
                   table=ReservationProprioTable,
@@ -309,5 +315,8 @@ class GitesModel(object):
         model.add('package_detail',
                   table=PackageDetailTable,
                   mapper_class=PackageDetail)
+        model.add('idee_sejour',
+                  table=ideeSejourTable,
+                  mapper_class=IdeeSejour)
         metadata.create_all()
         return model

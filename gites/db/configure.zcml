@@ -18,4 +18,9 @@
       provides="z3c.sqlalchemy.interfaces.IModelProvider"
       />
 
+  <five:registerClass
+    class=".content.folder.GitesRDBFolder"
+    meta_type="Gites Rope Folder"
+    permission="zope2.View" />
+
 </configure>
