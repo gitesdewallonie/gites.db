@@ -40,7 +40,7 @@ GitesRDBFolderSchema = ATFolderSchema.copy()
 
 
 class GitesRDBFolder(BaseFolderMixin, ExtensibleMetadata):
-    meta_type = 'Gites Rope Folder'
+    portal_type = meta_type = 'Gites Rope Folder'
     security = ClassSecurityInfo()
     schema = GitesRDBFolderSchema
     type = []
