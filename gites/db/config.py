@@ -1,2 +1,2 @@
-PROJECTNAME = "GitesContent"
+PROJECTNAME = "GitesDB"
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
