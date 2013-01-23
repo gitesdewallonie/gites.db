@@ -50,8 +50,14 @@ class IHebergementMaj(Interface):
     """
     mise à jour des infos hebergement by the prorpio
     """
+
+
 class ITypeTableHoteOfHebergementMaj(Interface):
     """
     mise à jour par le proprio des infos des types 
     de table d'hôtes liées à un hebergement
+    """
+
+class IGitesRDBFolder(Interface):
+    """
     """

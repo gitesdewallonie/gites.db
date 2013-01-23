@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:db="http://namespaces.zope.org/db"
+           i18n_domain="gites">
+
+  <include package="z3c.saconfig" file="meta.zcml"/>
+
+  <db:engine
+      name="postgres.rdb"
+      url="postgresql://zope:zope@localhost:5432/gites_wallons"
+      echo="False"
+      setup=".initializer.setupRDB" />
+
+</configure>

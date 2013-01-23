@@ -11,7 +11,7 @@ from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
-from sqlalchemy import and_
+from sqlalchemy import MetaData, and_
 from gites.db.tables import (getHebergementTable,
                              getHebergementMajTable,
                              getTypeHebergementTable,
@@ -36,8 +36,7 @@ from gites.db.tables import (getHebergementTable,
                              getLogTable,
                              getPackage,
                              getPackageDetail,
-                             getLinkPackageHebergement,
-                             getIdeeSejourTable)
+                             getLinkPackageHebergement)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -57,11 +56,10 @@ from gites.db.content import (Civilite,
                               HebergementBlockingHistory,
                               BlockingHistory,
                               LogItem,
-                              Package,
                               PackageDetail,
                               LinkPackageHebergement)
 
-from gites.core.content.ideesejour import IdeeSejour
+from gites.core.content.package import Package
 
 
 class GitesModel(object):
@@ -236,7 +234,8 @@ class GitesModel(object):
         LinkPackageHebergementTable.create(checkfirst=True)
 
         mapper(Package, PackageTable,
-               properties={'hebergements': relation(Hebergement,
+               properties={'key': PackageTable.c.pack_id,
+                           'hebergements': relation(Hebergement,
                                                     secondary=LinkPackageHebergementTable,
                                                     lazy=True,
                                                     backref='packages'),
@@ -273,9 +272,6 @@ class GitesModel(object):
                                                backref='details')})
 
         mapper(LinkPackageHebergement, LinkPackageHebergementTable)
-
-        ideeSejourTable = getIdeeSejourTable(metadata)
-        mapper(IdeeSejour, PackageTable)
 
         model = Model()
         model.add('reservation_proprio',
@@ -315,8 +311,11 @@ class GitesModel(object):
         model.add('package_detail',
                   table=PackageDetailTable,
                   mapper_class=PackageDetail)
-        model.add('idee_sejour',
-                  table=ideeSejourTable,
-                  mapper_class=IdeeSejour)
         metadata.create_all()
         return model
+
+
+def setupRDB(engine):
+    metadata = MetaData(engine)
+    model = GitesModel()
+    model.getModel(metadata)

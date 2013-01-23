@@ -30,18 +30,19 @@ def initialize(context):
                             pwManager.getLoginPassWithSeparator(':')
         createSAWrapper(connString,
                         forZope=True,
-                        engine_options = {'convert_unicode': True,
+                        engine_options={'convert_unicode': True,
                                         'encoding': 'utf-8'},
                         encoding='utf-8',
                         name='gites_wallons',
                         model='GitesMappings')
 
     # imports packages and types for registration
-
     import gites.db.content.folder
+
     content_types, constructors, ftis = process_types(
         listTypes(PROJECTNAME),
         PROJECTNAME)
+
     cmfutils.ContentInit(
         PROJECTNAME + ' Content',
         content_types=content_types,
