@@ -21,7 +21,6 @@ from hebergement_maj import HebergementMaj
 from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from blockinghistory import HebergementBlockingHistory, BlockingHistory
 from logitem import LogItem
-from package import Package
 
 
 class hebergementMaj(MappedClassBase):
