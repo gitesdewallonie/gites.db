@@ -365,6 +365,40 @@ def getTypeTableHoteOfHebergementMaj(metadata):
                   Column('hebhot_maj_tabho_fk', Integer))
 
 
+def getMetadata(metadata):
+    autoload = False
+    if metadata.bind.has_table('metadata'):
+        autoload = True
+    return Table('metadata', metadata,
+                 Column('met_pk', Integer, nullable=False, primary_key=True,
+                        unique=True),
+                 Column('met_titre_fr', String(), nullable=False),
+                 Column('met_titre_en', String(), nullable=False),
+                 Column('met_titre_nl', String(), nullable=False),
+                 Column('met_titre_it', String(), nullable=False),
+                 Column('met_titre_de', String(), nullable=False),
+                 useexisting=True,
+                 autoload=autoload)
+
+
+def getLinkHebergementMetadata(metadata):
+    autoload = False
+    if metadata.bind.has_table('link_hebergement_metadata'):
+        autoload = True
+    return Table('link_hebergement_metadata', metadata,
+                 Column('link_met_pk', Integer, nullable=False,
+                        primary_key=True, unique=True),
+                 Column('heb_fk', Integer(),
+                        ForeignKey('hebergement.heb_pk'),
+                        nullable=False),
+                 Column('metadata_fk', Integer(),
+                        ForeignKey('metadata.met_pk'),
+                        nullable=False),
+                 Column('link_met_value', Boolean(), default=False),
+                 useexisting=True,
+                 autoload=autoload)
+
+
 def getPackage(metadata):
     autoload = False
     if metadata.bind.has_table('package'):

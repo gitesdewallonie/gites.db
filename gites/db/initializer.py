@@ -36,7 +36,9 @@ from gites.db.tables import (getHebergementTable,
                              getLogTable,
                              getPackage,
                              getPackageDetail,
-                             getLinkPackageHebergement)
+                             getLinkPackageHebergement,
+                             getMetadata,
+                             getLinkHebergementMetadata)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -57,7 +59,9 @@ from gites.db.content import (Civilite,
                               BlockingHistory,
                               LogItem,
                               PackageDetail,
-                              LinkPackageHebergement)
+                              LinkPackageHebergement,
+                              Metadata,
+                              LinkHebergementMetadata)
 
 from gites.core.content.package import Package
 
@@ -221,6 +225,17 @@ class GitesModel(object):
 
         logItemTable = getLogTable(metadata)
         mapper(LogItem, logItemTable)
+
+        # Gestion des métadonnées
+
+        metadataTable = getMetadata(metadata)
+        metadataTable.create(checkfirst=True)
+
+        linkHebergementMetadataTable = getLinkHebergementMetadata(metadata)
+        linkHebergementMetadataTable.create(checkfirst=True)
+
+        mapper(LinkHebergementMetadata, linkHebergementMetadataTable)
+        mapper(Metadata, metadataTable)
 
         # Nouveau contenu package (denières minutes, sejours, etc.)
 

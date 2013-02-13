@@ -57,3 +57,11 @@ class PackageDetail(object):
 
 class LinkPackageHebergement(object):
     c = None
+
+
+class Metadata(object):
+    c = None
+
+
+class LinkHebergementMetadata(object):
+    c = None
