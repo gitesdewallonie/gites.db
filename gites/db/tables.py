@@ -372,11 +372,13 @@ def getMetadata(metadata):
     return Table('metadata', metadata,
                  Column('met_pk', Integer, nullable=False, primary_key=True,
                         unique=True),
+                 Column('met_id', String(), nullable=False),
                  Column('met_titre_fr', String(), nullable=False),
                  Column('met_titre_en', String(), nullable=False),
                  Column('met_titre_nl', String(), nullable=False),
                  Column('met_titre_it', String(), nullable=False),
                  Column('met_titre_de', String(), nullable=False),
+                 Column('met_filterable', Boolean(), default=False),
                  useexisting=True,
                  autoload=autoload)
 

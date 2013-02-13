@@ -40,6 +40,9 @@ setup(
             'unittest2',
             'zope.testing',
             'plone.testing',
+        ],
+        scripts=[
+            'alembic',
     ]),
     entry_points={
         'console_scripts': [
