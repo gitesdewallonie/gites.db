@@ -6,7 +6,7 @@
 
   <db:engine
       name="postgres.rdb"
-      url="postgresql://gdw:test@localhost:5432/gites_wallons"
+      url="postgresql://zope:zope@localhost:5432/gites_wallons"
       echo="False"
       setup=".initializer.setupRDB" />
 
