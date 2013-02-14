@@ -493,3 +493,15 @@ def getLogTable(metadata):
                  Column('log_website', String()),
                  useexisting=True,
                  autoload=autoload)
+
+
+def getMapBlacklist(metadata):
+    autoload = False
+    if metadata.bind.has_table('map_blacklist'):
+        autoload = True
+    return Table('map_blacklist', metadata,
+                 Column('blacklist_pk', Integer(), primary_key=True, unique=True),
+                 Column('blacklist_id', String(), nullable=False),
+                 Column('blacklist_provider', String(), nullable=False),
+                 useexisting=True,
+                 autoload=autoload)
