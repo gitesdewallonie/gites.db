@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Migrate metadata
 
 Revision ID: 535e4fbc6bed
@@ -6,8 +8,14 @@ Create Date: 2013-02-13 16:51:40.867726
 
 """
 
+# revision identifiers, used by Alembic.
+revision = '535e4fbc6bed'
+down_revision = None
+
+from alembic import op
 from sqlalchemy import select, MetaData
-from gites.db.tables import getHebergementTable
+from gites.db.tables import getHebergementTable, getMetadata, \
+                            getLinkHebergementMetadata
 
 
 metadatas = [
@@ -308,44 +316,60 @@ metadatas = [
   ]
 
 
-# revision identifiers, used by Alembic.
-revision = '535e4fbc6bed'
-down_revision = None
-
-from alembic import op
-
-
-def fakeHasTable(param):
-    return False
-
-
 def upgrade():
-    print "... Create all metadata records"
-    for metadata in metadatas:
-        op.execute("""
-            INSERT INTO metadata (met_id, met_titre_fr, met_titre_en,
-                                  met_titre_nl, met_titre_it, met_titre_de,
-                                  met_filterable)
-                   VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %s);
-            """ % (metadata['id'], metadata['titre_fr'], metadata['titre_nl'],
-                   metadata['titre_en'], metadata['titre_it'],
-                   metadata['titre_de'], metadata['filterable']))
-
-    print "... Migrate existing metadata data"
     connection = op.get_bind()
     adHocMetadata = MetaData()
     adHocMetadata.bind = connection.engine
-    adHocMetadata.bind.has_table = fakeHasTable
 
     hebergementTable = getHebergementTable(adHocMetadata)
+    metadataTable = getMetadata(adHocMetadata)
+    linkHebergementMetadataTable = getLinkHebergementMetadata(adHocMetadata)
 
+    print "... Create new tables"
+    metadataTable.create(checkfirst=True)
+    linkHebergementMetadataTable.create(checkfirst=True)
+
+    print "... Create all metadata records"
+    op.bulk_insert(metadataTable,
+                     [{'met_id': m['id'],
+                       'met_titre_fr': m['titre_fr'],
+                       'met_titre_nl': m['titre_nl'],
+                       'met_titre_en': m['titre_en'],
+                       'met_titre_it': m['titre_it'],
+                       'met_titre_de': m['titre_de'],
+                       'met_filterable': m['filterable']
+                       } for m in metadatas])
+
+    print "... Migrate existing metadata data"
     query = select([hebergementTable.c.heb_pk],
                    order_by=hebergementTable.c.heb_pk)
     result = connection.execute(query).fetchall()
     hebsPks = [r.heb_pk for r in result]
 
+    index = 0
     for pk in hebsPks:
-        pass
+        index += 1
+        if (index % 100) == 0:
+            print "... Handling heb %s / %s" % (index, len(hebsPks))
+        for metadata in metadatas:
+            if metadata['id'] == 'heb_seminaire_vert':
+                # the one and only boolean field !  don't want to write
+                # beautiful code just for this one
+                op.execute(u"""
+                    INSERT INTO link_hebergement_metadata (heb_fk, metadata_fk, link_met_value)
+                           SELECT pk, met_pk, value FROM
+                                  (SELECT %s AS pk) s1,
+                                  (SELECT met_pk AS met_pk FROM metadata WHERE met_id = '%s') s2,
+                                  (SELECT CASE WHEN (%s = true) THEN true ELSE false END AS value FROM hebergement WHERE heb_pk = %s) s3
+                    """ % (pk, metadata['id'], metadata['id'], pk))
+            else:
+                op.execute(u"""
+                    INSERT INTO link_hebergement_metadata (heb_fk, metadata_fk, link_met_value)
+                           SELECT pk, met_pk, value FROM
+                                  (SELECT %s AS pk) s1,
+                                  (SELECT met_pk AS met_pk FROM metadata WHERE met_id = '%s') s2,
+                                  (SELECT CASE WHEN (%s = 'oui') THEN true ELSE false END AS value FROM hebergement WHERE heb_pk = %s) s3
+                    """ % (pk, metadata['id'], metadata['id'], pk))
 
 
 def downgrade():
