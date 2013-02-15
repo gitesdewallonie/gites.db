@@ -36,9 +36,6 @@ def initialize(context):
                         name='gites_wallons',
                         model='GitesMappings')
 
-    # imports packages and types for registration
-    import gites.db.content.folder
-
     content_types, constructors, ftis = process_types(
         listTypes(PROJECTNAME),
         PROJECTNAME)
