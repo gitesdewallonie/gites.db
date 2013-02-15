@@ -151,6 +151,12 @@ class GitesModel(object):
         MapBlacklistTable = getMapBlacklist(metadata)
         MapBlacklistTable.create(checkfirst=True)
 
+        MetadataTable = getMetadata(metadata)
+        MetadataTable.create(checkfirst=True)
+
+        LinkHebergementMetadataTable = getLinkHebergementMetadata(metadata)
+        LinkHebergementMetadataTable.create(checkfirst=True)
+
         mapper(ReservationProprio, ReservationProprioTable)
 
         mapper(LinkHebergementEpis, LinkHebergementEpisTable)
@@ -215,6 +221,12 @@ class GitesModel(object):
                                                  primaryjoin=HebergementTable.c.heb_pk == TypeTableHoteOfHebergementTable.c.hebhot_heb_fk,
                                                  secondaryjoin=TypeTableHoteOfHebergementTable.c.hebhot_tabho_fk == TableHoteTable.c.tabho_pk,
                                                  lazy=True),
+                           'activeMetadatas': relation(Metadata,
+                                                       secondary=LinkHebergementMetadataTable,
+                                                       foreign_keys=[LinkHebergementMetadataTable.c.heb_fk, LinkHebergementMetadataTable.c.metadata_fk],
+                                                       primaryjoin=HebergementTable.c.heb_pk == LinkHebergementMetadataTable.c.heb_fk,
+                                                       secondaryjoin=LinkHebergementMetadataTable.c.metadata_fk == MetadataTable.c.met_pk,
+                                                       lazy=True)
                            })
         mapper(TypeHebergement, TypeHebergementTable)
 
@@ -238,14 +250,11 @@ class GitesModel(object):
 
         # Gestion des métadonnées
 
-        metadataTable = getMetadata(metadata)
-        metadataTable.create(checkfirst=True)
+        mapper(LinkHebergementMetadata, LinkHebergementMetadataTable,
+               properties={'metadata': relation(Metadata, lazy=False),
+                           'hebergement': relation(Hebergement, lazy=True)})
 
-        linkHebergementMetadataTable = getLinkHebergementMetadata(metadata)
-        linkHebergementMetadataTable.create(checkfirst=True)
-
-        mapper(LinkHebergementMetadata, linkHebergementMetadataTable)
-        mapper(Metadata, metadataTable)
+        mapper(Metadata, MetadataTable)
 
         # Nouveau contenu package (denières minutes, sejours, etc.)
 
@@ -344,6 +353,12 @@ class GitesModel(object):
         model.add('map_blacklist',
                   table=MapBlacklistTable,
                   mapper_class=MapBlacklist)
+        model.add('link_hebergement_metadata',
+                  table=LinkHebergementMetadataTable,
+                  mapper_class=LinkHebergementMetadata)
+        model.add('metadata',
+                  table=MetadataTable,
+                  mapper_class=Metadata)
         metadata.create_all()
         return model
 
