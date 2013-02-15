@@ -8,10 +8,8 @@ Copyright by AFFINITIC sprl
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
 from sqlalchemy import (Table, Column, String, Integer, ForeignKey, Date,
-                        DateTime, Boolean, func, Sequence, PickleType)
+                        DateTime, Boolean, func, Sequence)
 from sqlalchemy.schema import UniqueConstraint
-
-from gites.db.utils import makeDictionary, PickleDict
 
 
 def getTypeInfoPratique(metadata):
@@ -415,64 +413,6 @@ def getLinkHebergementMetadata(metadata):
                  Column('link_met_value', Boolean(), default=False),
                  useexisting=True,
                  autoload=autoload)
-
-
-def getPackage(metadata):
-    autoload = False
-    if metadata.bind.has_table('package'):
-        autoload = True
-    return Table('package', metadata,
-                 Column('pack_pk', Integer, nullable=False, primary_key=True,
-                        unique=True),
-                 Column('pack_id', String(), Sequence('pack_id_seq'),
-                        primary_key=True),
-                 Column('pack_categorie', String(), nullable=False),
-                 Column('pack_date_debut', Date(), nullable=False),
-                 Column('pack_date_fin', Date(), nullable=False),
-                 Column('pack_date_debut_event', Date(), nullable=False),
-                 Column('pack_date_fin_event', Date(), nullable=False),
-                 Column('state', String(30), nullable=False, index=True),
-                 Column('__roles__', PickleType),
-                 Column('__ac_local_roles__', PickleType),
-                 Column('__zope_permissions__', PickleDict,
-                         default=makeDictionary),
-                 Column('workflow_history', PickleDict,
-                        default=makeDictionary),
-                 useexisting=True,
-                 autoload=autoload)
-
-
-def getPackageDetail(metadata):
-    autoload = False
-    if metadata.bind.has_table('package_detail'):
-        autoload = True
-    return Table('package_detail', metadata,
-                 Column('packdet_pk', Integer, nullable=False,
-                        primary_key=True, unique=True),
-                 Column('packdet_langue', String(), nullable=False),
-                 Column('packdet_url', String(), nullable=False),
-                 Column('packdet_description', String(), nullable=False),
-                 Column('packdet_texte', String(), nullable=False),
-                 Column('packdet_package_fk', Integer(),
-                        ForeignKey('package.pack_pk'),
-                        nullable=False),
-                 useexisting=True,
-                 autoload=autoload)
-
-
-def getLinkPackageHebergement(metadata):
-    autoload = False
-    if metadata.bind.has_table('link_package_hebergement'):
-        autoload = True
-    return Table('link_package_hebergement', metadata,
-                  Column('hebergement_fk', Integer(),
-                         ForeignKey('hebergement.heb_pk'),
-                         primary_key=True),
-                  Column('package_fk', Integer(),
-                         ForeignKey('package.pack_pk'),
-                         primary_key=True),
-                  useexisting=True,
-                  autoload=autoload)
 
 
 def getHebBlockedHistory(metadata):

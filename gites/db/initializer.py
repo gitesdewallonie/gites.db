@@ -258,7 +258,8 @@ class GitesModel(object):
         mapper(Metadata, MetadataTable,
                properties={'type': relation(MetadataType, lazy=False)})
 
-        # Nouveau contenu package (denières minutes, sejours, etc.)
+        # Gestion des exclusions
+
         mapper(MapProvider, MapProviderTable)
         mapper(MapBlacklist, MapBlacklistTable)
 

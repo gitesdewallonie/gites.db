@@ -51,14 +51,6 @@ class ReservationProprio(object):
     c = None
 
 
-class PackageDetail(object):
-    c = None
-
-
-class LinkPackageHebergement(object):
-    c = None
-
-
 class MetadataType(object):
     c = None
 
