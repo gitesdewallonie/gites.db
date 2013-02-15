@@ -59,6 +59,10 @@ class LinkPackageHebergement(object):
     c = None
 
 
+class MetadataType(object):
+    c = None
+
+
 class Metadata(object):
     c = None
 
@@ -66,8 +70,10 @@ class Metadata(object):
 class LinkHebergementMetadata(object):
     c = None
 
+
 class MapBlacklist(object):
     c = None
+
 
 class MapProvider(object):
     c = None

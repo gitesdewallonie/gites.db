@@ -37,6 +37,7 @@ from gites.db.tables import (getHebergementTable,
                              getPackage,
                              getPackageDetail,
                              getLinkPackageHebergement,
+                             getMetadataType,
                              getMetadata,
                              getLinkHebergementMetadata,
                              getMapBlacklist,
@@ -62,6 +63,7 @@ from gites.db.content import (Civilite,
                               LogItem,
                               PackageDetail,
                               LinkPackageHebergement,
+                              MetadataType,
                               Metadata,
                               LinkHebergementMetadata,
                               MapBlacklist,
@@ -150,6 +152,9 @@ class GitesModel(object):
 
         MapBlacklistTable = getMapBlacklist(metadata)
         MapBlacklistTable.create(checkfirst=True)
+
+        MetadataTypeTable = getMetadataType(metadata)
+        MetadataTypeTable.create(checkfirst=True)
 
         MetadataTable = getMetadata(metadata)
         MetadataTable.create(checkfirst=True)
@@ -254,7 +259,10 @@ class GitesModel(object):
                properties={'metadata': relation(Metadata, lazy=False),
                            'hebergement': relation(Hebergement, lazy=True)})
 
-        mapper(Metadata, MetadataTable)
+        mapper(MetadataType, MetadataTypeTable)
+
+        mapper(Metadata, MetadataTable,
+               properties={'type': relation(MetadataType, lazy=False)})
 
         # Nouveau contenu package (denières minutes, sejours, etc.)
 
@@ -356,6 +364,9 @@ class GitesModel(object):
         model.add('link_hebergement_metadata',
                   table=LinkHebergementMetadataTable,
                   mapper_class=LinkHebergementMetadata)
+        model.add('metadata_type',
+                  table=MetadataTypeTable,
+                  mapper_class=MetadataType)
         model.add('metadata',
                   table=MetadataTable,
                   mapper_class=Metadata)

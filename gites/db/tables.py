@@ -366,6 +366,18 @@ def getTypeTableHoteOfHebergementMaj(metadata):
                   Column('hebhot_maj_tabho_fk', Integer))
 
 
+def getMetadataType(metadata):
+    autoload = False
+    if metadata.bind.has_table('metadata_type'):
+        autoload = True
+    return Table('metadata_type', metadata,
+                 Column('met_typ_id', String(), nullable=False,
+                        primary_key=True, unique=True),
+                 Column('met_typ_titre', String(), nullable=False),
+                 useexisting=True,
+                 autoload=autoload)
+
+
 def getMetadata(metadata):
     autoload = False
     if metadata.bind.has_table('metadata'):
@@ -374,6 +386,9 @@ def getMetadata(metadata):
                  Column('met_pk', Integer, nullable=False, primary_key=True,
                         unique=True),
                  Column('met_id', String(), nullable=False),
+                 Column('metadata_type_id', String(),
+                        ForeignKey('metadata_type.met_typ_id'),
+                        nullable=False),
                  Column('met_titre_fr', String(), nullable=False),
                  Column('met_titre_en', String(), nullable=False),
                  Column('met_titre_nl', String(), nullable=False),
