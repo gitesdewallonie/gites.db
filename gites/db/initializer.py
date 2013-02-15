@@ -11,7 +11,7 @@ from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, and_
 from gites.db.tables import (getHebergementTable,
                              getHebergementMajTable,
                              getTypeHebergementTable,
@@ -223,7 +223,8 @@ class GitesModel(object):
                            'activeMetadatas': relation(Metadata,
                                                        secondary=LinkHebergementMetadataTable,
                                                        foreign_keys=[LinkHebergementMetadataTable.c.heb_fk, LinkHebergementMetadataTable.c.metadata_fk],
-                                                       primaryjoin=HebergementTable.c.heb_pk == LinkHebergementMetadataTable.c.heb_fk,
+                                                       primaryjoin=and_(HebergementTable.c.heb_pk == LinkHebergementMetadataTable.c.heb_fk,
+                                                                        LinkHebergementMetadataTable.c.link_met_value == True),
                                                        secondaryjoin=LinkHebergementMetadataTable.c.metadata_fk == MetadataTable.c.met_pk,
                                                        lazy=True)
                            })
