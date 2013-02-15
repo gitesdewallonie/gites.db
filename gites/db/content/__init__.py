@@ -68,3 +68,6 @@ class LinkHebergementMetadata(object):
 
 class MapBlacklist(object):
     c = None
+
+class MapProvider(object):
+    c = None

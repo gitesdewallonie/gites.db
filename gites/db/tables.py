@@ -9,6 +9,7 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
 from sqlalchemy import (Table, Column, String, Integer, ForeignKey, Date,
                         DateTime, Boolean, func, Sequence, PickleType)
+from sqlalchemy.schema import UniqueConstraint
 
 from gites.db.utils import makeDictionary, PickleDict
 
@@ -495,6 +496,16 @@ def getLogTable(metadata):
                  autoload=autoload)
 
 
+def getMapProvider(metadata):
+    autoload = False
+    if metadata.bind.has_table('map_provider'):
+        autoload = True
+    return Table('map_provider', metadata,
+                 Column('provider_pk', String(), primary_key=True, unique=True),
+                 useexisting=True,
+                 autoload=autoload)
+
+
 def getMapBlacklist(metadata):
     autoload = False
     if metadata.bind.has_table('map_blacklist'):
@@ -502,6 +513,9 @@ def getMapBlacklist(metadata):
     return Table('map_blacklist', metadata,
                  Column('blacklist_pk', Integer(), primary_key=True, unique=True),
                  Column('blacklist_id', String(), nullable=False),
-                 Column('blacklist_provider', String(), nullable=False),
+                 Column('blacklist_name', String(), nullable=False),
+                 Column('blacklist_description', String(), nullable=False),
+                 Column('blacklist_provider_pk', String(), ForeignKey('map_provider.provider_pk'), nullable=False),
+                 UniqueConstraint('blacklist_id', 'blacklist_provider_pk', name='unique_id_provider'),
                  useexisting=True,
                  autoload=autoload)

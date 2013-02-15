@@ -39,7 +39,8 @@ from gites.db.tables import (getHebergementTable,
                              getLinkPackageHebergement,
                              getMetadata,
                              getLinkHebergementMetadata,
-                             getMapBlacklist)
+                             getMapBlacklist,
+                             getMapProvider)
 from gites.db.content import (Civilite,
                               Province,
                               TableHote,
@@ -63,7 +64,8 @@ from gites.db.content import (Civilite,
                               LinkPackageHebergement,
                               Metadata,
                               LinkHebergementMetadata,
-                              MapBlacklist)
+                              MapBlacklist,
+                              MapProvider)
 
 from gites.core.content.package import Package
 
@@ -142,6 +144,9 @@ class GitesModel(object):
 
         ReservationProprioTable = getReservationProprio(metadata)
         ReservationProprioTable.create(checkfirst=True)
+
+        MapProviderTable = getMapProvider(metadata)
+        MapProviderTable.create(checkfirst=True)
 
         MapBlacklistTable = getMapBlacklist(metadata)
         MapBlacklistTable.create(checkfirst=True)
@@ -292,6 +297,7 @@ class GitesModel(object):
                                                backref='details')})
 
         mapper(LinkPackageHebergement, LinkPackageHebergementTable)
+        mapper(MapProvider, MapProviderTable)
         mapper(MapBlacklist, MapBlacklistTable)
 
         model = Model()
@@ -332,6 +338,9 @@ class GitesModel(object):
         model.add('package_detail',
                   table=PackageDetailTable,
                   mapper_class=PackageDetail)
+        model.add('map_provider',
+                  table=MapProviderTable,
+                  mapper_class=MapProvider)
         model.add('map_blacklist',
                   table=MapBlacklistTable,
                   mapper_class=MapBlacklist)
