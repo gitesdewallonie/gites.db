@@ -11,7 +11,7 @@ from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
 from sqlalchemy.orm import mapper, relation, clear_mappers
-from sqlalchemy import MetaData, and_
+from sqlalchemy import MetaData
 from gites.db.tables import (getHebergementTable,
                              getHebergementMajTable,
                              getTypeHebergementTable,
@@ -34,9 +34,6 @@ from gites.db.tables import (getHebergementTable,
                              getHebBlockedHistory,
                              getBlockingHistory,
                              getLogTable,
-                             getPackage,
-                             getPackageDetail,
-                             getLinkPackageHebergement,
                              getMetadataType,
                              getMetadata,
                              getLinkHebergementMetadata,
@@ -54,22 +51,18 @@ from gites.db.content import (Civilite,
                               InfoTouristique,
                               TypeTableHoteOfHebergement,
                               TypeTableHoteOfHebergementMaj,
-                              LinkHebergementEpis,
                               Proprio,
                               ProprioMaj,
                               ReservationProprio,
                               HebergementBlockingHistory,
                               BlockingHistory,
                               LogItem,
-                              PackageDetail,
-                              LinkPackageHebergement,
                               MetadataType,
                               Metadata,
+                              LinkHebergementEpis,
                               LinkHebergementMetadata,
                               MapBlacklist,
                               MapProvider)
-
-from gites.core.content.package import Package
 
 
 class GitesModel(object):
@@ -175,10 +168,11 @@ class GitesModel(object):
                                                           secondaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk)})
 
         mapper(Commune, CommuneTable,
-               properties={'relatedHebergement': relation(Hebergement, lazy=True,
-                            primaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk),
-                           'province': relation(Province, lazy=True,
-                                                primaryjoin=ProvincesTable.c.prov_pk == CommuneTable.c.com_prov_fk)})
+               properties={'relatedHebergement': relation(
+                   Hebergement, lazy=True,
+                   primaryjoin=CommuneTable.c.com_pk == HebergementTable.c.heb_com_fk),
+                    'province': relation(Province, lazy=True,
+                                     primaryjoin=ProvincesTable.c.prov_pk == CommuneTable.c.com_prov_fk)})
         mapper(Civilite, CiviliteTable)
 
         mapper(Proprio, ProprioTable,
@@ -265,55 +259,6 @@ class GitesModel(object):
                properties={'type': relation(MetadataType, lazy=False)})
 
         # Nouveau contenu package (denières minutes, sejours, etc.)
-
-        PackageTable = getPackage(metadata)
-        PackageTable.create(checkfirst=True)
-
-        PackageDetailTable = getPackageDetail(metadata)
-        PackageDetailTable.create(checkfirst=True)
-
-        LinkPackageHebergementTable = getLinkPackageHebergement(metadata)
-        LinkPackageHebergementTable.create(checkfirst=True)
-
-        mapper(Package, PackageTable,
-               properties={'key': PackageTable.c.pack_id,
-                           'hebergements': relation(Hebergement,
-                                                    secondary=LinkPackageHebergementTable,
-                                                    lazy=True,
-                                                    backref='packages'),
-                           'detail_fr': relation(PackageDetail,
-                                                 uselist=False,
-                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
-                                                                  PackageDetailTable.c.packdet_langue == 'fr'),
-                                                 lazy=True),
-                           'detail_en': relation(PackageDetail,
-                                                 uselist=False,
-                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
-                                                                  PackageDetailTable.c.packdet_langue == 'en'),
-                                                 lazy=True),
-                           'detail_nl': relation(PackageDetail,
-                                                 uselist=False,
-                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
-                                                                  PackageDetailTable.c.packdet_langue == 'nl'),
-                                                 lazy=True),
-                           'detail_it': relation(PackageDetail,
-                                                 uselist=False,
-                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
-                                                                  PackageDetailTable.c.packdet_langue == 'it'),
-                                                 lazy=True),
-                           'detail_de': relation(PackageDetail,
-                                                 uselist=False,
-                                                 primaryjoin=and_(PackageTable.c.pack_pk == PackageDetailTable.c.packdet_package_fk,
-                                                                  PackageDetailTable.c.packdet_langue == 'de'),
-                                                 lazy=True)})
-
-        mapper(PackageDetail, PackageDetailTable,
-               properties={'package': relation(Package,
-                                               lazy=True,
-                                               uselist=False,
-                                               backref='details')})
-
-        mapper(LinkPackageHebergement, LinkPackageHebergementTable)
         mapper(MapProvider, MapProviderTable)
         mapper(MapBlacklist, MapBlacklistTable)
 
@@ -349,12 +294,6 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=logItemTable,
                   mapper_class=LogItem)
-        model.add('package',
-                  table=PackageTable,
-                  mapper_class=Package)
-        model.add('package_detail',
-                  table=PackageDetailTable,
-                  mapper_class=PackageDetail)
         model.add('map_provider',
                   table=MapProviderTable,
                   mapper_class=MapProvider)
