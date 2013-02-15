@@ -18,16 +18,4 @@
       provides="z3c.sqlalchemy.interfaces.IModelProvider"
       />
 
-  <include file="rdb.zcml"/>
-
-  <five:registerClass
-    class=".content.folder.GitesRDBFolder"
-    meta_type="Gites Rope Folder"
-    permission="cmf.AddPortalContent" />
-
-  <utility
-      component=".content.folder.GitesRDBFolderFactory"
-      name="gites.core.folder"
-      />
-
 </configure>
