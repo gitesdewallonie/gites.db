@@ -34,6 +34,8 @@ setup(
         'affinitic.caching',
         'affinitic.db',
         'affinitic.pwmanager',
+        'Products.CMFCore',
+        'Products.Archetypes'
     ],
     extras_require=dict(
         test=[
