@@ -14,9 +14,8 @@ down_revision = None
 
 from alembic import op
 from sqlalchemy import select, MetaData
-from gites.db.tables import getHebergementTable, getMetadata, getMetadataType, \
-                            getLinkHebergementMetadata
-
+from gites.db import DeclarativeBase
+from gites.db.utils import initialize_declarative_mappers
 metadatasTypes = [
     {'id':'confort',
      'titre':'Confort'},
@@ -402,12 +401,13 @@ def upgrade():
     connection = op.get_bind()
     adHocMetadata = MetaData()
     adHocMetadata.bind = connection.engine
-
-    hebergementTable = getHebergementTable(adHocMetadata)
-    metadataTypeTable = getMetadataType(adHocMetadata)
-    metadataTable = getMetadata(adHocMetadata)
-    linkHebergementMetadataTable = getLinkHebergementMetadata(adHocMetadata)
-
+    from gites.db.content import (Hebergement, Metadata, MetadataType,
+                              LinkHebergementMetadata)
+    initialize_declarative_mappers(DeclarativeBase, adHocMetadata)
+    hebergementTable = Hebergement.__table__
+    metadataTypeTable = MetadataType.__table__
+    metadataTable = Metadata.__table__
+    linkHebergementMetadataTable = LinkHebergementMetadata.__table__
     print "... Create new tables"
     metadataTypeTable.create(checkfirst=True)
     metadataTable.create(checkfirst=True)
