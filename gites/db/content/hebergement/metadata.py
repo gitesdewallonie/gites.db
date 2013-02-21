@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
 from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.hebergement.metadatatype import MetadataType
 
 
 class Metadata(GitesMappedClassBase):
@@ -25,4 +26,8 @@ class Metadata(GitesMappedClassBase):
 
     metadata_type_id = sa.Column('metadata_type_id', sa.String(),
                                  sa.ForeignKey('metadata_type.met_typ_id'),
-                                 nullable=False),
+                                 nullable=False)
+
+    @classmethod
+    def __declare_last__(cls):
+        cls.type = sa.orm.relation(MetadataType)
