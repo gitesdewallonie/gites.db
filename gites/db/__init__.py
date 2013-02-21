@@ -1,4 +1,5 @@
 import os
+import sqlalchemy
 from zope.component import getUtility
 from affinitic.db.interfaces import IDatabase
 from affinitic.pwmanager.interfaces import IPasswordManager
@@ -20,8 +21,11 @@ def session():
     else:
         return wrapper.session
 
-from gites.db.content import *
+from sqlalchemy.ext.declarative import DeferredReflection
 
+DeclarativeBase = sqlalchemy.ext.declarative.declarative_base(cls=DeferredReflection)
+
+from gites.db.content import *
 
 def initialize(context):
     if os.environ.get('ZOPETESTCASE') is None:
@@ -30,6 +34,7 @@ def initialize(context):
                             pwManager.getLoginPassWithSeparator(':')
         createSAWrapper(connString,
                         forZope=True,
+                        echo=True,
                         engine_options={'convert_unicode': True,
                                         'encoding': 'utf-8'},
                         encoding='utf-8',

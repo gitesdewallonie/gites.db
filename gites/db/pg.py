@@ -10,3 +10,4 @@ from affinitic.db.pg import PGDB
 
 class GitesDB(PGDB):
     db = 'gites_wallons'
+    verbose = True

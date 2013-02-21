@@ -7,16 +7,44 @@ Copyright by Affinitic sprl
 
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
-from z3c.sqlalchemy.mapper import MappedClassBase
-from gites.db.interfaces import ICommune
+import sqlalchemy
+from sqlalchemy.orm import relation
 from zope.interface import implements
-from Acquisition import Implicit
 from Globals import InitializeClass
+from gites.db import DeclarativeBase
+from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.province import Province
+from gites.db.content.maisontourisme import MaisonTourisme
+from gites.db.interfaces import ICommune
 
 
-class Commune(Implicit, MappedClassBase):
+class Commune(GitesMappedClassBase):
     implements(ICommune)
+    __tablename__ = u'commune'
 
-    c = None
+    com_pk = sqlalchemy.Column('com_pk', sqlalchemy.Integer, primary_key=True)
+
+    com_nom = sqlalchemy.Column('com_nom', sqlalchemy.String())
+
+    com_cp = sqlalchemy.Column('com_cp', sqlalchemy.String())
+
+    com_ins = sqlalchemy.Column('com_ins', sqlalchemy.String())
+
+    com_reg_fk = sqlalchemy.Column('com_reg_fk', sqlalchemy.Integer)
+
+    com_prov_fk = sqlalchemy.Column('com_prov_fk', sqlalchemy.Integer,
+                                    sqlalchemy.ForeignKey('provinces.prov_pk'))
+
+    com_id = sqlalchemy.Column('com_id', sqlalchemy.String())
+
+    com_mais_fk = sqlalchemy.Column('com_mais_fk', sqlalchemy.Integer,
+                                    sqlalchemy.ForeignKey('maison_tourisme.mais_pk'))
+
+    @classmethod
+    def __declare_last__(cls):
+        from gites.db.content import Hebergement
+        cls.relatedHebergement = relation(Hebergement, lazy=True)
+        cls.province = relation(Province, lazy=True)
+        cls.maisonTourisme = relation(MaisonTourisme, lazy=True)
 
 InitializeClass(Commune)

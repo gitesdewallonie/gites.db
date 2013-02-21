@@ -1,73 +1,25 @@
 #NOCHECK
 # -*- coding: utf-8 -*-
-"""
-gites.db
-
-Licensed under the GPL license, see LICENCE.txt for more details.
-Copyright by Affinitic sprl
-
-$Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
-"""
-from z3c.sqlalchemy.mapper import MappedClassBase
+from .calendar.blockinghistory import BlockingHistory
+from .calendar.hebergementblockinghistory import HebergementBlockingHistory
+from .calendar.reservationproprio import ReservationProprio
 from charge import Charge
 from commune import Commune
-from hebergement import Hebergement
+from .hebergement.hebergement import Hebergement
+from .hebergement.hebergementmaj import HebergementMaj
 from infotouristique import InfoTouristique
-from maisontourisme import MaisonTourisme
-from proprio import Proprio
-from typehebergement import TypeHebergement
-from proprio_maj import ProprioMaj
-from hebergement_maj import HebergementMaj
-from typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
-from blockinghistory import HebergementBlockingHistory, BlockingHistory
 from logitem import LogItem
-
-
-class hebergementMaj(MappedClassBase):
-    c = None
-
-
-class Civilite(MappedClassBase):
-    c = None
-
-
-class Province(MappedClassBase):
-    c = None
-
-
-class TableHote(MappedClassBase):
-    c = None
-
-
-class TypeTableHoteOfHebergement(MappedClassBase):
-    c = None
-
-
-class LinkHebergementEpis(object):
-    c = None
-
-
-class ReservationProprio(object):
-    c = None
-
-
-class PackageDetail(object):
-    c = None
-
-
-class LinkPackageHebergement(object):
-    c = None
-
-
-class Metadata(object):
-    c = None
-
-
-class LinkHebergementMetadata(object):
-    c = None
-
-class MapBlacklist(object):
-    c = None
-
-class MapProvider(object):
-    c = None
+from maisontourisme import MaisonTourisme
+from .proprio.proprio import Proprio
+from .proprio.civilite import Civilite
+from .proprio.propriomaj import ProprioMaj
+from province import Province
+from .hebergement.metadata import Metadata
+from .hebergement.linkhebergementepis import LinkHebergementEpis
+from .hebergement.linkhebergementmetadata import LinkHebergementMetadata
+from .hebergement.typehebergement import TypeHebergement
+from .hebergement.typetablehoteofhebergement import TypeTableHoteOfHebergement
+from .hebergement.typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
+from .tablehote import TableHote
+from .map.mapblacklist import MapBlacklist
+from .map.mapprovider import MapProvider

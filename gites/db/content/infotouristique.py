@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
-"""
-gites.db
-
-Licensed under the GPL license, see LICENCE.txt for more details.
-Copyright by Affinitic sprl
-
-$Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
-"""
-from z3c.sqlalchemy.mapper import MappedClassBase
+import sqlalchemy as sa
+from gites.db.mapper import GitesMappedClassBase
 from zope.interface import implements
 from gites.db.interfaces import IInfoTouristique
 
 
-class InfoTouristique(MappedClassBase):
+class InfoTouristique(GitesMappedClassBase):
     implements(IInfoTouristique)
+    __tablename__ = u'info_touristique'
 
-    c = None
+    infotour_pk = sa.Column('infotour_pk', sa.Integer, primary_key=True)
+
+    infotour_nom = sa.Column('infotour_nom', sa.String())
+
+    infotour_url = sa.Column('infotour_url', sa.String())
+
+    infotour_localite = sa.Column('infotour_localite', sa.String())
+
+    infotour_commune_fk = sa.Column('infotour_commune_fk', sa.Integer,
+                                    sa.ForeignKey('commune.com_pk'))
 
     def getInfoTourisqueName(self):
         """
