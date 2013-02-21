@@ -25,7 +25,6 @@ from sqlalchemy.ext.declarative import DeferredReflection
 
 DeclarativeBase = sqlalchemy.ext.declarative.declarative_base(cls=DeferredReflection)
 
-from gites.db.content import *
 
 def initialize(context):
     if os.environ.get('ZOPETESTCASE') is None:
