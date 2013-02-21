@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Remove obsolete columns
+"""Remove obsolete hebergement columns and other tables
 
 Revision ID: 33ea541f63ed
 Revises: 535e4fbc6bed
@@ -63,15 +63,21 @@ unused_columns = ['heb_chmbre_divers',
                   'heb_animal_taxe',
                   'heb_tarif_charge']
 
+unused_tables = ['heb_tab_hote']
+
 
 def upgrade():
-    print "... Remove obsolete columns"
+    print "... Remove obsolete columns in hebergement"
     for column in columns:
         op.drop_column('hebergement', column)
 
-    print "... Remove unused columns"
+    print "... Remove unused columns in hebergement"
     for column in unused_columns:
         op.drop_column('hebergement', column)
+
+    print "... Remove unused tables"
+    for table in unused_tables:
+        op.drop_table(table)
 
 
 def downgrade():

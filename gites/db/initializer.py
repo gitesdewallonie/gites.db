@@ -1,41 +1,34 @@
 # -*- coding: utf-8 -*-
-"""
-gites.db
-
-Licensed under the GPL license, see LICENCE.txt for more details.
-Copyright by Affinitic sprl
-
-$Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
-"""
+from sqlalchemy import MetaData
+from sqlalchemy.orm import clear_mappers
 from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
-from sqlalchemy.orm import mapper, relation, clear_mappers
-from sqlalchemy import MetaData
 from gites.db import DeclarativeBase
-from gites.db.content import (Civilite,
-                              Province,
-                              TableHote,
+from gites.db.content import (BlockingHistory,
                               Charge,
-                              MaisonTourisme,
-                              Hebergement,
-                              HebergementMaj,
                               Commune,
-                              TypeHebergement,
-                              InfoTouristique,
-                              TypeTableHoteOfHebergement,
-                              TypeTableHoteOfHebergementMaj,
-                              Proprio,
-                              ProprioMaj,
-                              ReservationProprio,
+                              Hebergement,
                               HebergementBlockingHistory,
-                              BlockingHistory,
-                              LogItem,
-                              Metadata,
+                              HebergementMaj,
+                              InfoTouristique,
                               LinkHebergementEpis,
                               LinkHebergementMetadata,
+                              LogItem,
+                              MaisonTourisme,
                               MapBlacklist,
-                              MapProvider)
+                              MapProvider,
+                              Metadata,
+                              MetadataType,
+                              Proprio,
+                              ProprioMaj,
+                              Province,
+                              ReservationProprio,
+                              TableHote,
+                              TypeHebergement,
+                              TypeTableHoteOfHebergement,
+                              TypeTableHoteOfHebergementMaj,
+                              Civilite)
 from gites.db.utils import initialize_declarative_mappers
 
 
@@ -99,6 +92,9 @@ class GitesModel(object):
         model.add('link_hebergement_metadata',
                   table=LinkHebergementMetadata.__table__,
                   mapper_class=LinkHebergementMetadata)
+        model.add('metadata_type',
+                  table=MetadataType.__table__,
+                  mapper_class=MetadataType)
         model.add('metadata',
                   table=Metadata.__table__,
                   mapper_class=Metadata)

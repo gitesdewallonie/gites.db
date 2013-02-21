@@ -158,6 +158,8 @@ class Hebergement(GitesMappedClassBase):
 
         cls.activeMetadatas = relation(Metadata,
                                        secondary=LinkHebergementMetadata.__tablename__,
+                                       primaryjoin=sqlalchemy.and_(Hebergement.heb_pk == LinkHebergementMetadata.heb_fk,
+                                                                   LinkHebergementMetadata.link_met_value == True),
                                        lazy=True)
 
 InitializeClass(Hebergement)
