@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest2
 from gites.db.testing import PGRDB
-from gites.db import Hebergement, session, Proprio
+from gites.db import session
+from gites.db.content import Hebergement, Proprio
 
 
 class HebergementMapperTest(unittest2.TestCase):
