@@ -10,7 +10,6 @@ from .hebergement.linkhebergementmetadata import LinkHebergementMetadata
 from .hebergement.metadata import Metadata
 from .hebergement.metadatatype import MetadataType
 from .hebergement.typehebergement import TypeHebergement
-from .hebergement.typetablehoteofhebergement import TypeTableHoteOfHebergement
 from .hebergement.typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
 from .map.mapblacklist import MapBlacklist
 from .map.mapprovider import MapProvider
