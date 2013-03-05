@@ -1,0 +1,10 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:passmgr="http://affinitic.be/passmgr">
+
+  <include package="affinitic.pwmanager"/>
+
+  <passmgr:pwdfile
+      name="pg"
+      filename="pgpass"/>
+
+</configure>
