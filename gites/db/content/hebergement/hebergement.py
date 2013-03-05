@@ -130,7 +130,6 @@ class Hebergement(GitesMappedClassBase):
         from gites.db.content import Metadata
         from gites.db.content import LinkHebergementMetadata
         from gites.db.content import ReservationProprio
-        from gites.db.content import TypeTableHoteOfHebergement
 
         cls.type = relation(TypeHebergement, lazy=True)
 
@@ -152,14 +151,21 @@ class Hebergement(GitesMappedClassBase):
                                       secondary=Commune.__tablename__,
                                       lazy=True)
 
-        cls.tableHote = relation(TableHote,
-                                 secondary=TypeTableHoteOfHebergement.__tablename__,
-                                 lazy=True)
+#XXX FIXME
+#        cls.tableHote = relation(TableHote,
+#                                 secondary=TypeTableHoteOfHebergement.__tablename__,
+#                                 lazy=True)
 
         cls.activeMetadatas = relation(Metadata,
                                        secondary=LinkHebergementMetadata.__tablename__,
                                        primaryjoin=sqlalchemy.and_(Hebergement.heb_pk == LinkHebergementMetadata.heb_fk,
                                                                    LinkHebergementMetadata.link_met_value == True),
                                        lazy=True)
+
+    #def __getattr__(self, attr):
+    #    try:
+    #        return GitesMappedClassBase.__getattr__(self, attr)
+    #    except AttributeError:
+    #        return getattr(self.activeMetadatas, attr)
 
 InitializeClass(Hebergement)
