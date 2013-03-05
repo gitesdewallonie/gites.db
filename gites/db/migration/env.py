@@ -56,7 +56,7 @@ def run_migrations_online():
     """
 
     # Overriding sqlalchemy.url config from alembic.ini
-    import gites.db.zcml
+    import gites.db.migration.zcml
     parseZCML(gites.db.migration.zcml)
     pwManager = getUtility(IPasswordManager, 'pg')
     connectionString = 'postgres://%s@%s/%s' % (pwManager.getLoginPassWithSeparator(':'),
