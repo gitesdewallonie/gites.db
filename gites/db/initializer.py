@@ -4,7 +4,6 @@ from sqlalchemy.ext.declarative import DeferredReflection
 from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
-from gites.db import DeclarativeBase
 from gites.db.content import (BlockingHistory,
                               Charge,
                               Commune,
@@ -26,7 +25,6 @@ from gites.db.content import (BlockingHistory,
                               ReservationProprio,
                               TableHote,
                               TypeHebergement,
-                              TypeTableHoteOfHebergement,
                               TypeTableHoteOfHebergementMaj,
                               Civilite)
 
@@ -76,8 +74,6 @@ class GitesModel(object):
                   mapper_class=InfoTouristique)
         model.add('table_hote', table=TableHote.__table__,
                   mapper_class=TableHote)
-        model.add('heb_tab_hote', table=TypeTableHoteOfHebergement.__table__,
-                  mapper_class=TypeTableHoteOfHebergement)
         model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMaj.__table__,
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=LogItem.__table__,
@@ -97,6 +93,18 @@ class GitesModel(object):
         model.add('metadata',
                   table=Metadata.__table__,
                   mapper_class=Metadata)
+        model.add('civilite',
+                  table=Civilite.__table__,
+                  mapper_class=Civilite)
+        model.add('blockinghistory',
+                  table=BlockingHistory.__table__,
+                  mapper_class=BlockingHistory)
+        model.add('hebergementblockinghistory',
+                  table=HebergementBlockingHistory.__table__,
+                  mapper_class=HebergementBlockingHistory)
+        model.add('linkhebergementepis',
+                  table=LinkHebergementEpis.__table__,
+                  mapper_class=LinkHebergementEpis)
         metadata.create_all()
         return model
 
