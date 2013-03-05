@@ -2,6 +2,8 @@
 import sqlalchemy
 from sqlalchemy.util._collections import immutabledict
 from sqlalchemy import PickleType
+from sqlalchemy.dialects.sqlite.pysqlite import SQLiteDialect_pysqlite as SQLiteDialect
+from sqlalchemy.ext.declarative import DeferredReflection
 
 
 def makeDictionary():
@@ -55,7 +57,10 @@ def initialize_declarative_mappers(declarativebase, metadata):
     metadata.tables = immutabledict(new_tables)
     for mapper in declaratives_mappers(metadata):
         # Ensure that a primary mapper is defined
-        if not hasattr(mapper, '__mapper__') or \
+        if not isinstance(metadata.bind.dialect, SQLiteDialect) and \
+           issubclass(mapper, DeferredReflection):
+            mapper.prepare(metadata.bind)
+        elif not hasattr(mapper, '__mapper__') or \
             mapper.__mapper__ is not mapper.__mapper__.class_manager.mapper:
             mapper.__mapper__ = sqlalchemy.orm.mapper(mapper,
                                                         mapper.__table__)
