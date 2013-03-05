@@ -12,7 +12,6 @@ down_revision = '33ea541f63ed'
 
 from alembic import op
 from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
-import sqlalchemy as sa
 
 
 def upgrade():
@@ -32,6 +31,7 @@ def upgrade():
         Column('blacklist_provider_pk', String(), ForeignKey('map_provider.provider_pk'), nullable=False),
         UniqueConstraint('blacklist_id', 'blacklist_provider_pk', name='unique_id_provider'),
     )
+
 
 def downgrade():
     print "... Drop TABLE map_blacklist"

@@ -17,7 +17,7 @@ class Proprio(GitesMappedClassBase):
 
     pro_nom2 = sqlalchemy.Column('pro_nom2', sqlalchemy.String())
 
-    pro_pernom1 = sqlalchemy.Column('pro_prenom1', sqlalchemy.String())
+    pro_prenom1 = sqlalchemy.Column('pro_prenom1', sqlalchemy.String())
 
     pro_langue = sqlalchemy.Column('pro_langue', sqlalchemy.String())
 
