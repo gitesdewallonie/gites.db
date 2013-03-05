@@ -403,7 +403,7 @@ def upgrade():
     adHocMetadata.bind = connection.engine
     from gites.db.content import (Hebergement, Metadata, MetadataType,
                               LinkHebergementMetadata)
-    initialize_declarative_mappers(DeclarativeBase, adHocMetadata)
+    initialize_declarative_mappers(DeclarativeBase, adHocMetadata, reflection=False)
     hebergementTable = Hebergement.__table__
     metadataTypeTable = MetadataType.__table__
     metadataTable = Metadata.__table__

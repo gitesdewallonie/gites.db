@@ -46,7 +46,7 @@ def declaratives_mappers(metadata):
             yield klass
 
 
-def initialize_declarative_mappers(declarativebase, metadata):
+def initialize_declarative_mappers(declarativebase, metadata, reflection=True):
     # Avoid troubles with sqlite and the schemas
     tables = dict(declarativebase.metadata.tables)
     # Extends the metadata from the model
@@ -57,8 +57,9 @@ def initialize_declarative_mappers(declarativebase, metadata):
     metadata.tables = immutabledict(new_tables)
     for mapper in declaratives_mappers(metadata):
         # Ensure that a primary mapper is defined
-        if not isinstance(metadata.bind.dialect, SQLiteDialect) and \
-           issubclass(mapper, DeferredReflection):
+        if reflection and \
+            not isinstance(metadata.bind.dialect, SQLiteDialect) and \
+            issubclass(mapper, DeferredReflection):
             mapper.prepare(metadata.bind)
         elif not hasattr(mapper, '__mapper__') or \
             mapper.__mapper__ is not mapper.__mapper__.class_manager.mapper:
