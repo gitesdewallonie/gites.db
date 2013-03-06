@@ -11,8 +11,6 @@ import sqlalchemy
 from sqlalchemy.orm import relation
 from zope.interface import implements
 from Globals import InitializeClass
-from affinitic.caching import cache
-from gites.db import session
 from gites.db.content.charge import Charge
 from gites.db.content.proprio.proprio import Proprio
 from gites.db.content.hebergement.typehebergement import TypeHebergement
@@ -49,12 +47,6 @@ class Hebergement(GitesMappedClassBase):
                                    sqlalchemy.ForeignKey('proprio.pro_pk'))
 
     heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date)
-
-    @classmethod
-    @cache(lambda x, y, z: z, dependencies=['pgsql'])
-    def get(cls, heb_pk):
-        sess = session()
-        return sess.query(cls).get(heb_pk)
 
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
