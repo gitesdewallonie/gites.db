@@ -125,7 +125,6 @@ class Hebergement(GitesMappedClassBase):
         from gites.db.content import LinkHebergementEpis
         from gites.db.content import Province
         from gites.db.content import Commune
-        from gites.db.content import TableHote
         from gites.db.content import MaisonTourisme
         from gites.db.content import Metadata
         from gites.db.content import LinkHebergementMetadata
@@ -150,11 +149,6 @@ class Hebergement(GitesMappedClassBase):
         cls.maisonTourisme = relation(MaisonTourisme,
                                       secondary=Commune.__tablename__,
                                       lazy=True)
-
-#XXX FIXME
-#        cls.tableHote = relation(TableHote,
-#                                 secondary=TypeTableHoteOfHebergement.__tablename__,
-#                                 lazy=True)
 
         cls.activeMetadatas = relation(Metadata,
                                        secondary=LinkHebergementMetadata.__tablename__,

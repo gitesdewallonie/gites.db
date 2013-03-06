@@ -31,3 +31,15 @@ class Metadata(GitesMappedClassBase):
     @classmethod
     def __declare_last__(cls):
         cls.type = sa.orm.relation(MetadataType)
+
+    def getTitre(self, languageCode):
+        if 'fr' in languageCode:
+            return self.met_titre_fr
+        elif 'nl' in languageCode:
+            return self.met_titre_nl
+        elif 'it' in languageCode:
+            return self.met_titre_it
+        elif 'de' in languageCode:
+            return self.met_titre_de
+        else:
+            return self.met_titre_en
