@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import MetaData
-from sqlalchemy.ext.declarative import DeferredReflection
 from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
@@ -28,7 +27,7 @@ from gites.db.content import (BlockingHistory,
                               TypeTableHoteOfHebergementMaj,
                               Civilite)
 from gites.db import DeclarativeBase
-from gites.db.utils import initialize_declarative_mappers
+from affinitic.db.utils import initialize_declarative_mappers
 
 
 class GitesModel(object):
