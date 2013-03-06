@@ -18,7 +18,7 @@ class HebergementMapperTest(unittest2.TestCase):
 
     def test_get_sa_wrapper(self):
         wrapper = getSAWrapper('gites_wallons')
-        self.assertTrue(wrapper.getMapper('provinces') == Province)
+        self.assertTrue(wrapper.getMapper('province') == Province)
 
     def test_get_wrong_sa_wrapper(self):
         wrapper = getSAWrapper('gites_wallons')
