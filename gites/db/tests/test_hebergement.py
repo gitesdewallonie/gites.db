@@ -25,3 +25,5 @@ class HebergementMapperTest(unittest2.TestCase):
         sess.add(pro)
         sess.flush()
         self.assertEqual(heb.proprio.pro_pk, Proprio.get(PK).pro_pk)
+        heb = sess.query(Hebergement).first()
+        proprio = heb.proprio
