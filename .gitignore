@@ -17,6 +17,7 @@ include/
 lib/
 local/
 parts/
+var/
 
 # OS generated files #
 ######################
