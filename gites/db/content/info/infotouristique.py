@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import DOUBLE_PRECISION
 from sqlalchemy.orm import relation
 
 from zope.interface import implements
@@ -21,9 +20,9 @@ class InfoTouristique(GitesMappedClassBase):
 
     infotour_url = sa.Column('infotour_url', sa.String())
 
-    infotour_gps_long = sa.Column('infotour_gps_long', DOUBLE_PRECISION())
+    infotour_gps_long = sa.Column('infotour_gps_long', sa.Float())
 
-    infotour_gps_lat = sa.Column('infotour_gps_lat', DOUBLE_PRECISION())
+    infotour_gps_lat = sa.Column('infotour_gps_lat', sa.Float())
 
     infotour_localite = sa.Column('infotour_localite', sa.String())
 
