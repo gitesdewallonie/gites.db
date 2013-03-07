@@ -49,12 +49,6 @@ class Hebergement(GitesMappedClassBase):
 
     heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date)
 
-    @classmethod
-    @cache(lambda x, y, z: z, dependencies=['pgsql'])
-    def get(cls, heb_pk):
-        sess = session()
-        return sess.query(cls).get(heb_pk)
-
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
         typeHeb = self.type.getTitle(language)

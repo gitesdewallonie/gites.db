@@ -30,7 +30,7 @@ from gites.db.content import (BlockingHistory,
                               TypeTableHoteOfHebergementMaj,
                               Civilite)
 from gites.db import DeclarativeBase
-from gites.db.utils import initialize_declarative_mappers
+from affinitic.db.utils import initialize_declarative_mappers
 
 
 class GitesModel(object):
