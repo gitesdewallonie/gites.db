@@ -10,7 +10,6 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 import sqlalchemy
 from sqlalchemy.orm import relation
 from zope.interface import implements
-from Globals import InitializeClass
 from affinitic.caching import cache
 from gites.db import session
 from gites.db.content.charge import Charge
@@ -161,5 +160,3 @@ class Hebergement(GitesMappedClassBase):
     #        return GitesMappedClassBase.__getattr__(self, attr)
     #    except AttributeError:
     #        return getattr(self.activeMetadatas, attr)
-
-InitializeClass(Hebergement)

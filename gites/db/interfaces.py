@@ -34,6 +34,24 @@ class IInfoTouristique(Interface):
     """
 
 
+class ITypeInfoTouristique(Interface):
+    """
+    List of types infos touristiques
+    """
+
+
+class IInfoPratique(Interface):
+    """
+    List of infos pratiques
+    """
+
+
+class ITypeInfoPratique(Interface):
+    """
+    List of types infos pratiques
+    """
+
+
 class IMaisonTourisme(Interface):
     """
     Describe a maison du tourisme
@@ -54,9 +72,10 @@ class IHebergementMaj(Interface):
 
 class ITypeTableHoteOfHebergementMaj(Interface):
     """
-    mise à jour par le proprio des infos des types 
+    mise à jour par le proprio des infos des types
     de table d'hôtes liées à un hebergement
     """
+
 
 class IGitesRDBFolder(Interface):
     """

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import MetaData
-from sqlalchemy.ext.declarative import DeferredReflection
 from z3c.sqlalchemy import Model
 from z3c.sqlalchemy.interfaces import IModelProvider
 from zope.interface import implements
@@ -11,6 +10,9 @@ from gites.db.content import (BlockingHistory,
                               HebergementBlockingHistory,
                               HebergementMaj,
                               InfoTouristique,
+                              TypeInfoTouristique,
+                              InfoPratique,
+                              TypeInfoPratique,
                               LinkHebergementEpis,
                               LinkHebergementMetadata,
                               LogItem,
@@ -73,6 +75,12 @@ class GitesModel(object):
                   mapper_class=TypeHebergement)
         model.add('info_touristique', table=InfoTouristique.__table__,
                   mapper_class=InfoTouristique)
+        model.add('type_info_touristique', table=TypeInfoTouristique.__table__,
+                  mapper_class=TypeInfoTouristique)
+        model.add('info_pratique', table=InfoPratique.__table__,
+                  mapper_class=InfoPratique)
+        model.add('type_info_pratique', table=TypeInfoPratique.__table__,
+                  mapper_class=TypeInfoPratique)
         model.add('table_hote', table=TableHote.__table__,
                   mapper_class=TableHote)
         model.add('heb_tab_hote_maj', table=TypeTableHoteOfHebergementMaj.__table__,

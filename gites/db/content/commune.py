@@ -10,8 +10,6 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 import sqlalchemy
 from sqlalchemy.orm import relation
 from zope.interface import implements
-from Globals import InitializeClass
-from gites.db import DeclarativeBase
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.province import Province
 from gites.db.content.maisontourisme import MaisonTourisme
@@ -46,5 +44,3 @@ class Commune(GitesMappedClassBase):
         cls.relatedHebergement = relation(Hebergement, lazy=True)
         cls.province = relation(Province, lazy=True)
         cls.maisonTourisme = relation(MaisonTourisme, lazy=True)
-
-InitializeClass(Commune)
