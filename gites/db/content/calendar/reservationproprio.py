@@ -14,9 +14,9 @@ class ReservationProprio(GitesMappedClassBase):
 
     res_type = sa.Column('res_type', sa.String(20), nullable=False)
 
-    heb_pk = sa.Column('heb_fk', sa.Integer,
+    heb_fk = sa.Column('heb_fk', sa.Integer,
                        sa.ForeignKey('hebergement.heb_pk'),
                        nullable=False)
 
-    pro_pk = sa.Column('pro_fk', sa.Integer,
+    pro_fk = sa.Column('pro_fk', sa.Integer,
                        sa.ForeignKey('proprio.pro_pk'))
