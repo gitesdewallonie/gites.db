@@ -14,8 +14,6 @@ down_revision = None
 
 from alembic import op
 from sqlalchemy import select, MetaData
-from gites.db import DeclarativeBase
-from gites.db.utils import initialize_declarative_mappers
 metadatasTypes = [
     {'id':'confort',
      'titre':'Confort'},
@@ -398,6 +396,9 @@ newHoteMetadatas = [
 
 
 def upgrade():
+    from gites.db import DeclarativeBase
+    from gites.db.utils import initialize_declarative_mappers
+
     connection = op.get_bind()
     adHocMetadata = MetaData()
     adHocMetadata.bind = connection.engine
