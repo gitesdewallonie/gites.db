@@ -1,6 +1,7 @@
 import os
 import sqlalchemy
 from zope.component import getUtility
+from affinitic.db.cache import query_callable
 from affinitic.db.interfaces import IDatabase
 from affinitic.pwmanager.interfaces import IPasswordManager
 from z3c.sqlalchemy import createSAWrapper, getSAWrapper
@@ -9,6 +10,7 @@ from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import process_types
 from Products.CMFCore import utils as cmfutils
 
+from .cache import regions
 from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
 
 
@@ -30,10 +32,11 @@ def initialize(context):
     if os.environ.get('ZOPETESTCASE') is None:
         pwManager = getUtility(IPasswordManager, 'pg')
         connString = 'postgres://%s@localhost/gites_wallons' % \
-                            pwManager.getLoginPassWithSeparator(':')
+                pwManager.getLoginPassWithSeparator(':')
         createSAWrapper(connString,
                         forZope=True,
                         echo=True,
+                        session_options={'query_cls': query_callable(regions)},
                         engine_options={'convert_unicode': True,
                                         'encoding': 'utf-8'},
                         encoding='utf-8',

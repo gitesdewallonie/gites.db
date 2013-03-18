@@ -32,7 +32,7 @@ setup(
         'zope.interface',
         'z3c.sqlalchemy',
         'affinitic.caching',
-        'affinitic.db',
+        'affinitic.db [caching]',
         'affinitic.pwmanager',
         'Products.CMFCore',
         'Products.Archetypes'
