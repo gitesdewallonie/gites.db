@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from zope.i18n import translate
 from zope.interface import implements
 from gites.db.interfaces import ITypeHebergement
 from gites.db.mapper import GitesMappedClassBase
@@ -32,6 +33,11 @@ class TypeHebergement(GitesMappedClassBase):
     type_heb_nom_it = sa.Column('type_heb_nom_it', sa.String())
 
     type_heb_nom_uk = sa.Column('type_heb_nom_uk', sa.String())
+
+    def getType(self):
+        from zope.globalrequest import getRequest
+        request = getRequest()
+        return translate(self.type_heb_type, context=request, domain='gites')
 
     def getTitle(self, languageCode='fr'):
         """
