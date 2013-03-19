@@ -397,7 +397,7 @@ newHoteMetadatas = [
 
 def upgrade():
     from gites.db import DeclarativeBase
-    from gites.db.utils import initialize_declarative_mappers
+    from affinitic.db.utils import initialize_declarative_mappers
 
     connection = op.get_bind()
     adHocMetadata = MetaData()

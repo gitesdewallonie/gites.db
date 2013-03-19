@@ -35,7 +35,7 @@ def initialize(context):
                 pwManager.getLoginPassWithSeparator(':')
         createSAWrapper(connString,
                         forZope=True,
-                        echo=True,
+                        echo=False,
                         session_options={'query_cls': query_callable(regions)},
                         engine_options={'convert_unicode': True,
                                         'encoding': 'utf-8'},
