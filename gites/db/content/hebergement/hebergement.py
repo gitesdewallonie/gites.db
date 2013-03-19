@@ -10,8 +10,8 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 import sqlalchemy
 from sqlalchemy.orm import relation
 from zope.interface import implements
-from affinitic.caching import cache
-from gites.db import session
+from affinitic.db.cache import FromCache
+from gites.db.content.hebergement.metadata import Metadata
 from gites.db.content.charge import Charge
 from gites.db.content.proprio.proprio import Proprio
 from gites.db.content.hebergement.typehebergement import TypeHebergement
@@ -112,6 +112,20 @@ class Hebergement(GitesMappedClassBase):
             return self.heb_seminaire_vert_de
         else:
             return self.heb_seminaire_vert_uk
+
+    def _get_metadata(self, metadata_id):
+        from gites.db.content.hebergement.linkhebergementmetadata import LinkHebergementMetadata
+        query = self.session.query(LinkHebergementMetadata.link_met_value)
+        query = query.options(FromCache('gdw'))
+        query = query.join('hebergement').join('metadata')
+        query = query.filter(Hebergement.heb_pk == self.heb_pk)
+        return query.filter(Metadata.met_id == metadata_id).scalar()
+
+    def is_smoker(self):
+        return self._get_metadata('heb_fumeur')
+
+    def accept_dogs(self):
+        return self._get_metadata('heb_animal')
 
     @classmethod
     def __declare_last__(cls):
