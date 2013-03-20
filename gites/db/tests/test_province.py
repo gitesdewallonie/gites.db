@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unittest2
-import sqlalchemy
 from z3c.sqlalchemy import getSAWrapper
 from gites.db.testing import PGRDB
 from gites.db import session
