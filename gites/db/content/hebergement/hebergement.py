@@ -149,8 +149,7 @@ class Hebergement(GitesMappedClassBase):
                                                                    LinkHebergementMetadata.link_met_value == True),
                                        lazy=True)
 
-    #def __getattr__(self, attr):
-    #    try:
-    #        return GitesMappedClassBase.__getattr__(self, attr)
-    #    except AttributeError:
-    #        return getattr(self.activeMetadatas, attr)
+        cls.metadatas = relation(Metadata,
+                                 secondary=LinkHebergementMetadata.__tablename__,
+                                 primaryjoin=(Hebergement.heb_pk == LinkHebergementMetadata.heb_fk),
+                                 lazy=True)
