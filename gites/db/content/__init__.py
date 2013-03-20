@@ -7,6 +7,7 @@ from .hebergement.hebergement import Hebergement
 from .hebergement.hebergementmaj import HebergementMaj
 from .hebergement.linkhebergementepis import LinkHebergementEpis
 from .hebergement.linkhebergementmetadata import LinkHebergementMetadata
+from .hebergement.linkhebergementmetadataupdate import LinkHebergementMetadataUpdate
 from .hebergement.metadata import Metadata
 from .hebergement.metadatatype import MetadataType
 from .hebergement.typehebergement import TypeHebergement
