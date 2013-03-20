@@ -16,28 +16,6 @@ class HebergementMaj(GitesMappedClassBase):
 
     heb_maj_localite = sa.Column('heb_maj_localite', sa.String())
 
-    heb_maj_tenis = sa.Column('heb_maj_tenis', sa.String())
-
-    heb_maj_nautisme = sa.Column('heb_maj_nautisme', sa.String())
-
-    heb_maj_sky = sa.Column('heb_maj_sky', sa.String())
-
-    heb_maj_rando = sa.Column('heb_maj_rando', sa.String())
-
-    heb_maj_piscine = sa.Column('heb_maj_piscine', sa.String())
-
-    heb_maj_peche = sa.Column('heb_maj_peche', sa.String())
-
-    heb_maj_equitation = sa.Column('heb_maj_equitation', sa.String())
-
-    heb_maj_velo = sa.Column('heb_maj_velo', sa.String())
-
-    heb_maj_vtt = sa.Column('heb_maj_vtt', sa.String())
-
-    heb_maj_ravel = sa.Column('heb_maj_ravel', sa.String())
-
-    heb_maj_animal = sa.Column('heb_maj_animal', sa.String())
-
     heb_maj_tarif_we_bs = sa.Column('heb_maj_tarif_we_bs', sa.String())
 
     heb_maj_tarif_we_ms = sa.Column('heb_maj_tarif_we_ms', sa.String())
@@ -58,46 +36,6 @@ class HebergementMaj(GitesMappedClassBase):
 
     heb_maj_pointfort_fr = sa.Column('heb_maj_pointfort_fr', sa.String())
 
-    heb_maj_fumeur = sa.Column('heb_maj_fumeur', sa.String())
-
-    heb_maj_tenis_distance = sa.Column('heb_maj_tenis_distance', sa.String())
-
-    heb_maj_nautisme_distance = sa.Column('heb_maj_nautisme_distance', sa.String())
-
-    heb_maj_sky_distance = sa.Column('heb_maj_sky_distance', sa.String())
-
-    heb_maj_rando_distance = sa.Column('heb_maj_rando_distance', sa.String())
-
-    heb_maj_piscine_distance = sa.Column('heb_maj_piscine_distance', sa.String())
-
-    heb_maj_peche_distance = sa.Column('heb_maj_peche_distance', sa.String())
-
-    heb_maj_equitation_distance = sa.Column('heb_maj_equitation_distance', sa.String())
-
-    heb_maj_velo_distance = sa.Column('heb_maj_velo_distance', sa.String())
-
-    heb_maj_vtt_distance = sa.Column('heb_maj_vtt_distance', sa.String())
-
-    heb_maj_ravel_distance = sa.Column('heb_maj_ravel_distance', sa.String())
-
-    heb_maj_confort_tv = sa.Column('heb_maj_confort_tv', sa.String())
-
-    heb_maj_confort_feu_ouvert = sa.Column('heb_maj_confort_feu_ouvert', sa.String())
-
-    heb_maj_confort_lave_vaiselle = sa.Column('heb_maj_confort_lave_vaiselle', sa.String())
-
-    heb_maj_confort_micro_onde = sa.Column('heb_maj_confort_micro_onde', sa.String())
-
-    heb_maj_confort_lave_linge = sa.Column('heb_maj_confort_lave_linge', sa.String())
-
-    heb_maj_confort_seche_linge = sa.Column('heb_maj_confort_seche_linge', sa.String())
-
-    heb_maj_confort_congelateur = sa.Column('heb_maj_confort_congelateur', sa.String())
-
-    heb_maj_confort_internet = sa.Column('heb_maj_confort_internet', sa.String())
-
-    heb_maj_taxe_sejour = sa.Column('heb_maj_taxe_sejour', sa.String())
-
     heb_maj_taxe_montant = sa.Column('heb_maj_taxe_montant', sa.String())
 
     heb_maj_forfait_montant = sa.Column('heb_maj_forfait_montant', sa.String())
@@ -117,18 +55,6 @@ class HebergementMaj(GitesMappedClassBase):
     heb_maj_lit_enf = sa.Column('heb_maj_lit_enf', sa.String())
 
     heb_maj_distribution_fr = sa.Column('heb_maj_distribution_fr', sa.String())
-
-    heb_maj_commerce = sa.Column('heb_maj_commerce', sa.String())
-
-    heb_maj_restaurant = sa.Column('heb_maj_restaurant', sa.String())
-
-    heb_maj_gare = sa.Column('heb_maj_gare', sa.String())
-
-    heb_maj_gare_distance = sa.Column('heb_maj_gare_distance', sa.String())
-
-    heb_maj_restaurant_distance = sa.Column('heb_maj_restaurant_distance', sa.String())
-
-    heb_maj_commerce_distance = sa.Column('heb_maj_commerce_distance', sa.String())
 
     heb_maj_tarif_chmbr_avec_dej_1p = sa.Column('heb_maj_tarif_chmbr_avec_dej_1p', sa.String())
 
