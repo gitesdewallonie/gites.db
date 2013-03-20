@@ -15,6 +15,10 @@ class MaisonTourisme(GitesMappedClassBase):
 
     mais_url = sa.Column('mais_url', sa.String())
 
+    mais_gps_lat = sa.Column('mais_gps_lat', sa.Float())
+
+    mais_gps_long = sa.Column('mais_gps_long', sa.Float())
+
     def getCommunesName(self):
         return [commune.com_nom for commune in self.commune]
 

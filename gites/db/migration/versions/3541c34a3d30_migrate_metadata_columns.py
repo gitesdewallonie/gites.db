@@ -1,4 +1,4 @@
-"""empty message
+"""migrate metadata columns
 
 Revision ID: 3541c34a3d30
 Revises: 597e9bc85819

@@ -49,6 +49,10 @@ class Hebergement(GitesMappedClassBase):
 
     heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date)
 
+    heb_gps_lat = sqlalchemy.Column('heb_gps_lat', sqlalchemy.Float())
+
+    heb_gps_long = sqlalchemy.Column('heb_gps_long', sqlalchemy.Float())
+
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
         typeHeb = self.type.getTitle(language)

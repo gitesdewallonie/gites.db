@@ -45,6 +45,7 @@ setup(
         ],
         scripts=[
             'alembic',
+            'progressbar',
     ]),
     entry_points={
         'console_scripts': [

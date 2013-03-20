@@ -1,4 +1,4 @@
-"""empty message
+"""migrate hebergement maj
 
 Revision ID: 597e9bc85819
 Revises: 3ed73e05151
