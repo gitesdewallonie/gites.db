@@ -65,7 +65,7 @@ def upgrade():
         sa.Column('metadata_fk', sa.Integer(),
                   sa.ForeignKey('metadata.met_pk'), nullable=False),
         sa.Column('link_met_value', sa.Boolean(), default=False),
-        sa.Column('update_date', sa.Datetime(),
+        sa.Column('update_date', sa.DateTime(),
                   default=sa.func.current_timestamp()))
 
     print "... Remove obselete columns in hebergement_maj"
