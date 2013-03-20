@@ -12,8 +12,11 @@ Create Date: 2013-02-13 16:51:40.867726
 revision = '535e4fbc6bed'
 down_revision = None
 
+import sqlalchemy as sa
+from sqlalchemy import select
 from alembic import op
-from sqlalchemy import select, MetaData
+
+
 metadatasTypes = [
     {'id':'confort',
      'titre':'Confort'},
@@ -396,47 +399,63 @@ newHoteMetadatas = [
 
 
 def upgrade():
-    from gites.db import DeclarativeBase
-    from affinitic.db.utils import initialize_declarative_mappers
-
-    connection = op.get_bind()
-    adHocMetadata = MetaData()
-    adHocMetadata.bind = connection.engine
-    from gites.db.content import (Hebergement, Metadata, MetadataType,
-                              LinkHebergementMetadata)
-    initialize_declarative_mappers(DeclarativeBase, adHocMetadata, reflection=False)
-    hebergementTable = Hebergement.__table__
-    metadataTypeTable = MetadataType.__table__
-    metadataTable = Metadata.__table__
-    linkHebergementMetadataTable = LinkHebergementMetadata.__table__
     print "... Create new tables"
-    metadataTypeTable.create(checkfirst=True)
-    metadataTable.create(checkfirst=True)
-    linkHebergementMetadataTable.create(checkfirst=True)
+    metadata_type_cols = (
+        sa.Column('met_typ_id', sa.String(), nullable=False, primary_key=True,
+                  unique=True),
+        sa.Column('met_typ_titre', sa.String(), nullable=False))
+    op.create_table('metadata_type', *metadata_type_cols)
+    metadata_type = sa.sql.table('metadata_type', *metadata_type_cols)
+
+    metadata_cols = (
+        sa.Column('met_pk', sa.Integer, nullable=False, primary_key=True,
+                  unique=True),
+        sa.Column('met_id', sa.String(), nullable=False),
+        sa.Column('met_titre_fr', sa.String(), nullable=False),
+        sa.Column('met_titre_en', sa.String(), nullable=False),
+        sa.Column('met_titre_nl', sa.String(), nullable=False),
+        sa.Column('met_titre_it', sa.String(), nullable=False),
+        sa.Column('met_titre_de', sa.String(), nullable=False),
+        sa.Column('met_filterable', sa.Boolean(), default=False),
+        sa.Column('metadata_type_id', sa.String(),
+                  sa.ForeignKey('metadata_type.met_typ_id'), nullable=False))
+    op.create_table('metadata', *metadata_cols)
+    metadata = sa.sql.table('metadata', *metadata_cols)
+
+    link_heb_metadata_cols = (
+        sa.Column('link_met_pk', sa.Integer, nullable=False, primary_key=True,
+                  unique=True),
+        sa.Column('heb_fk', sa.Integer(), sa.ForeignKey('hebergement.heb_pk'),
+                  nullable=False),
+        sa.Column('metadata_fk', sa.Integer(),
+                  sa.ForeignKey('metadata.met_pk'), nullable=False),
+        sa.Column('link_met_value', sa.Boolean(), default=False))
+    op.create_table('link_hebergement_metadata', *link_heb_metadata_cols)
+    link_heb_metadata = sa.sql.table('link_hebergement_metadata',
+                                     *link_heb_metadata_cols)
 
     print "... Create metadata types records"
-    op.bulk_insert(metadataTypeTable,
-                     [{'met_typ_id': mt['id'],
-                       'met_typ_titre': mt['titre'],
-                       } for mt in metadatasTypes])
+    op.bulk_insert(metadata_type,
+                   [{'met_typ_id': mt['id'],
+                     'met_typ_titre': mt['titre'],
+                     } for mt in metadatasTypes])
 
     print "... Create all metadata records"
-    op.bulk_insert(metadataTable,
-                     [{'met_id': m['id'],
-                       'met_titre_fr': m['titre_fr'],
-                       'met_titre_nl': m['titre_nl'],
-                       'met_titre_en': m['titre_en'],
-                       'met_titre_it': m['titre_it'],
-                       'met_titre_de': m['titre_de'],
-                       'met_filterable': m['filterable'],
-                       'metadata_type_id': m['type']
-                       } for m in metadatas + newHoteMetadatas])
+    op.bulk_insert(metadata,
+                   [{'met_id': m['id'],
+                     'met_titre_fr': m['titre_fr'],
+                     'met_titre_nl': m['titre_nl'],
+                     'met_titre_en': m['titre_en'],
+                     'met_titre_it': m['titre_it'],
+                     'met_titre_de': m['titre_de'],
+                     'met_filterable': m['filterable'],
+                     'metadata_type_id': m['type']
+                     } for m in metadatas + newHoteMetadatas])
 
     print "... Migrate existing metadata data"
-    query = select([hebergementTable.c.heb_pk],
-                   order_by=hebergementTable.c.heb_pk)
-    result = connection.execute(query).fetchall()
-    hebsPks = [r.heb_pk for r in result]
+    conn = op.get_bind()
+    result = conn.execute('select heb_pk from hebergement order by heb_pk')
+    hebsPks = [r.heb_pk for r in result.fetchall()]
 
     index = 0
     for pk in hebsPks:
