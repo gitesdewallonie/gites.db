@@ -18,6 +18,7 @@ from gites.db.content import (BlockingHistory,
                               LogItem,
                               MaisonTourisme,
                               MapBlacklist,
+                              MapExternalData,
                               MapProvider,
                               Metadata,
                               MetadataType,
@@ -92,6 +93,9 @@ class GitesModel(object):
         model.add('map_blacklist',
                   table=MapBlacklist.__table__,
                   mapper_class=MapBlacklist)
+        model.add('map_external_data',
+                  table=MapExternalData.__table__,
+                  mapper_class=MapExternalData)
         model.add('link_hebergement_metadata',
                   table=LinkHebergementMetadata.__table__,
                   mapper_class=LinkHebergementMetadata)
