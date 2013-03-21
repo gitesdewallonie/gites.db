@@ -2,7 +2,7 @@
 import glob
 import os
 import shutil
-from tempfile import mktemp
+from tempfile import mkstemp
 from zope.configuration import xmlconfig
 from z3c.sqlalchemy import createSAWrapper
 from plone.testing import Layer
@@ -32,7 +32,8 @@ class RDBLayer(Layer):
         for file in glob.glob("%s/%s*stored.db" % (DB_CACHE_DIR, self.dbPrefix)):
             tmpFile = self.restoreDBState(file)
         if tmpFile is None:
-            tmpFile = mktemp(dir=DB_CACHE_DIR, suffix='.db', prefix=self.dbPrefix)
+            tmpFile = mkstemp(dir=DB_CACHE_DIR, suffix='.db',
+                              prefix=self.dbPrefix)[1]
         return tmpFile
 
     def hasStoredDB(self):
