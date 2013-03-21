@@ -74,7 +74,7 @@ class RDBLayer(Layer):
         xmlconfig.file('testing.zcml', self.package, context=configurationContext)
         configurationContext.execute_actions()
         wr = createSAWrapper('sqlite:///%s' % self.tmpDBFile,
-                             forZope=True,
+                             forZope=self.forZope,
                              echo=self.logging,
                              engine_options={'convert_unicode': True},
                              name=self.dbName,
@@ -92,5 +92,12 @@ class PGRdb(RDBLayer):
     model = 'GitesMappings'
     package = gites.db
     logging = True
+    forZope = True
+
+
+class PGRdbNoZope(PGRdb):
+    forZope = False
+
 
 PGRDB = PGRdb(name='PGRDB')
+PGRDBNOZOPE = PGRdb(name='PGRDBNOZOPE')
