@@ -26,3 +26,25 @@ class LinkHebergementMetadata(GitesMappedClassBase):
         cls.metadata = sa.orm.relation(Metadata, lazy=False)
 
         cls.hebergement = sa.orm.relation(Hebergement, lazy=True)
+
+    @classmethod
+    def get_metadata(cls, heb_pk, language, value=None, editable=None,
+                     type=None):
+        """ Returns the associated metadata to the hebergement """
+        from gites.db.content.hebergement.metadata import Metadata
+        title_column = u'met_titre_fr'
+        if hasattr(cls, u'met_titre_%s' % language):
+            title_column = u'met_titre_%s' % language
+        query = cls._session().query(
+            cls.metadata_fk.label('pk'),
+            cls.link_met_value.label('value'),
+            Metadata.met_id.label('id'),
+            getattr(Metadata, title_column).label('title')).join('metadata')
+        query = query.filter(cls.heb_fk == heb_pk)
+        if editable is not None:
+            query = query.filter(Metadata.met_editable == editable)
+        if type is not None:
+            query = query.filter(Metadata.metadata_type_id == type)
+        if value is not None:
+            query = query.filter(cls.link_met_value == value)
+        return query.all()

@@ -34,14 +34,10 @@ class Metadata(GitesMappedClassBase):
     def __declare_last__(cls):
         cls.type = sa.orm.relation(MetadataType)
 
+    @classmethod
+    def get_editable(cls):
+        """ Returns the metadata that can be edited """
+        return cls._session().query(cls).filter(cls.met_editable == True).all()
+
     def getTitre(self, languageCode):
-        if 'fr' in languageCode:
-            return self.met_titre_fr
-        elif 'nl' in languageCode:
-            return self.met_titre_nl
-        elif 'it' in languageCode:
-            return self.met_titre_it
-        elif 'de' in languageCode:
-            return self.met_titre_de
-        else:
-            return self.met_titre_en
+        return getattr(self, 'met_titre_%s' % languageCode, self.met_titre_fr)
