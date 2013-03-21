@@ -59,7 +59,7 @@ class GitesModel(object):
                   mapper_class=Commune)
         model.add('proprio', table=Proprio.__table__,
                   mapper_class=Proprio)
-        model.add('proprioMaj', table=ProprioMaj.__table__,
+        model.add('proprio_maj', table=ProprioMaj.__table__,
                   mapper_class=ProprioMaj)
         model.add('province', table=Province.__table__,
                   mapper_class=Province)
@@ -67,7 +67,7 @@ class GitesModel(object):
                   mapper_class=Charge)
         model.add('hebergement', table=Hebergement.__table__,
                   mapper_class=Hebergement)
-        model.add('hebergementMaj', table=HebergementMaj.__table__,
+        model.add('hebergement_maj', table=HebergementMaj.__table__,
                   mapper_class=HebergementMaj)
         model.add('maison_tourisme', table=MaisonTourisme.__table__,
                   mapper_class=MaisonTourisme)

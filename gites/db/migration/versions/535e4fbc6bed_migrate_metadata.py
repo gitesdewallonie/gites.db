@@ -375,7 +375,7 @@ newHoteMetadatas = [
      'titre_it':'?',
      'titre_de':'?',
      'filterable': False,
-     'type': 'confort',
+     'type': 'tablehote',
      'existingFk': 1},
     {'id':'heb_tabhot_repas_familial',
      'titre_fr':'Repas familial',
@@ -384,7 +384,7 @@ newHoteMetadatas = [
      'titre_it':'?',
      'titre_de':'?',
      'filterable': False,
-     'type': 'confort',
+     'type': 'tablehote',
      'existingFk': 2},
     {'id':'heb_tabhot_gastronomique',
      'titre_fr':'Menu gastronomique',
@@ -393,7 +393,7 @@ newHoteMetadatas = [
      'titre_it':'?',
      'titre_de':'?',
      'filterable': False,
-     'type': 'confort',
+     'type': 'tablehote',
      'existingFk': 3}
   ]
 
