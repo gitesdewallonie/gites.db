@@ -18,6 +18,7 @@ from .info.infopratique import InfoPratique
 from .info.typeinfopratique import TypeInfoPratique
 from .map.mapblacklist import MapBlacklist
 from .map.mapprovider import MapProvider
+from .map.mapexternaldata import MapExternalData
 from .proprio.civilite import Civilite
 from .proprio.proprio import Proprio
 from .proprio.propriomaj import ProprioMaj
