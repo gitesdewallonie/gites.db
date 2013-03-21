@@ -23,10 +23,10 @@ class MapExternalData(GitesMappedClassBase):
 
     ext_data_picture_url = sa.Column('ext_data_picture_url', sa.String())
 
-    ext_data_latitude = sa.Column('ext_data_latitude', sa.String(),
+    ext_data_latitude = sa.Column('ext_data_latitude', sa.Float(),
                                    nullable=False)
 
-    ext_data_longitude = sa.Column('ext_data_longitude', sa.String(),
+    ext_data_longitude = sa.Column('ext_data_longitude', sa.Float(),
                                    nullable=False)
 
     ext_data_url = sa.Column('ext_data_url', sa.String(),
