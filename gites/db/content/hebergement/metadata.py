@@ -41,3 +41,9 @@ class Metadata(GitesMappedClassBase):
 
     def getTitre(self, languageCode):
         return getattr(self, 'met_titre_%s' % languageCode, self.met_titre_fr)
+
+    def Title(self):
+        from zope.globalrequest import getRequest
+        request = getRequest()
+        language = request.get('LANGUAGE', 'en')
+        return self.getTitre(language)
