@@ -1,7 +1,8 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            i18n_domain="gites">
 
+    <include package="collective.monkeypatcher" />
+
     <include package="gites.db"/>
 
 </configure>
-

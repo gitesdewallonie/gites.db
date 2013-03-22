@@ -5,8 +5,10 @@ import shutil
 from tempfile import mkstemp
 from zope.configuration import xmlconfig
 from z3c.sqlalchemy import createSAWrapper
+from z3c.sqlalchemy import getSAWrapper
 from plone.testing import Layer
 from plone.testing import zca
+
 
 DB_CACHE_DIR = os.path.join(os.getcwd(), '.testdb')
 
@@ -72,12 +74,14 @@ class RDBLayer(Layer):
         xmlconfig.file('testing.zcml', self.package, context=configurationContext)
         configurationContext.execute_actions()
         wr = createSAWrapper('sqlite:///%s' % self.tmpDBFile,
-                            forZope=True,
-                            echo=self.logging,
-                            engine_options={'convert_unicode': True},
-                            name=self.dbName,
-                            model=self.model)
+                             forZope=self.forZope,
+                             echo=self.logging,
+                             engine_options={'convert_unicode': True},
+                             name=self.dbName,
+                             model=self.model)
         self['%s_wrapper' % self.dbPrefix] = wr
+        wrapper = getSAWrapper('gites_wallons')
+        wrapper.metadata.create_all()
 
 import gites.db
 
@@ -88,5 +92,12 @@ class PGRdb(RDBLayer):
     model = 'GitesMappings'
     package = gites.db
     logging = True
+    forZope = True
+
+
+class PGRdbNoZope(PGRdb):
+    forZope = False
+
 
 PGRDB = PGRdb(name='PGRDB')
+PGRDBNOZOPE = PGRdb(name='PGRDBNOZOPE')

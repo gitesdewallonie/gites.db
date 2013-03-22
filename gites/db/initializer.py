@@ -52,6 +52,7 @@ class GitesModel(object):
         """
         initialize_declarative_mappers(DeclarativeBase, metadata)
         model = Model()
+        model.metadata = metadata
         model.add('reservation_proprio',
                   table=ReservationProprio.__table__,
                   mapper_class=ReservationProprio)

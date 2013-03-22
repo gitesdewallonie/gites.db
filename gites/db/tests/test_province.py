@@ -6,7 +6,7 @@ from gites.db import session
 from gites.db.content import Province
 
 
-class HebergementMapperTest(unittest2.TestCase):
+class ProvinceMapperTest(unittest2.TestCase):
     layer = PGRDB
 
     def test_simple_get(self):
