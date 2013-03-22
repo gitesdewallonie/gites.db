@@ -29,4 +29,4 @@ class LinkHebergementMetadataUpdate(GitesMappedClassBase):
     def __declare_last__(cls):
         cls.link_metadata = sa.orm.relation(LinkHebergementMetadata,
                                             lazy=False)
-        cls.metadata = sa.orm.relation(Metadata, lazy=False)
+        cls.metadata_info = sa.orm.relation(Metadata, lazy=False)

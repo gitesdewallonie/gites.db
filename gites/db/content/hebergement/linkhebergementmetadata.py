@@ -23,7 +23,7 @@ class LinkHebergementMetadata(GitesMappedClassBase):
 
     @classmethod
     def __declare_last__(cls):
-        cls.metadata = sa.orm.relation(Metadata, lazy=False)
+        cls.metadata_info = sa.orm.relation(Metadata, lazy=False)
 
         cls.hebergement = sa.orm.relation(Hebergement, lazy=True)
 
@@ -39,7 +39,8 @@ class LinkHebergementMetadata(GitesMappedClassBase):
             cls.metadata_fk.label('pk'),
             cls.link_met_value.label('value'),
             Metadata.met_id.label('id'),
-            getattr(Metadata, title_column).label('title')).join('metadata')
+            getattr(Metadata, title_column).label('title'))
+        query = query.join('metadata_info')
         query = query.filter(cls.heb_fk == heb_pk)
         if editable is not None:
             query = query.filter(Metadata.met_editable == editable)

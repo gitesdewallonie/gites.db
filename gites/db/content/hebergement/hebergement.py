@@ -121,7 +121,7 @@ class Hebergement(GitesMappedClassBase):
         from gites.db.content.hebergement.linkhebergementmetadata import LinkHebergementMetadata
         query = self.session.query(LinkHebergementMetadata.link_met_value)
         query = query.options(FromCache('gdw'))
-        query = query.join('hebergement').join('metadata')
+        query = query.join('hebergement').join('metadata_info')
         query = query.filter(Hebergement.heb_pk == self.heb_pk)
         return query.filter(Metadata.met_id == metadata_id).scalar()
 
