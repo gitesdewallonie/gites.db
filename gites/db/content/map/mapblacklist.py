@@ -11,7 +11,10 @@ class MapBlacklist(GitesMappedClassBase):
     blacklist_pk = sa.Column('blacklist_pk', sa.Integer(), primary_key=True,
                              unique=True)
 
-    blacklist_id = sa.Column('blacklist_id', sa.String(), nullable=False)
+    blacklist_id = sa.Column('blacklist_id',
+                             sa.String(),
+                             sa.ForeignKey('map_external_data.ext_data_id'),
+                             nullable=False)
 
     blacklist_name = sa.Column('blacklist_name', sa.String(), nullable=False)
 
