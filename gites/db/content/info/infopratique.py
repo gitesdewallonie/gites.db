@@ -2,6 +2,8 @@
 
 import sqlalchemy as sa
 from sqlalchemy.orm import relation
+import geoalchemy
+from geoalchemy.postgis import PGComparator
 
 from zope.interface import implements
 
@@ -31,6 +33,10 @@ class InfoPratique(GitesMappedClassBase):
                                           sa.ForeignKey('type_info_pratique.typinfoprat_pk'))
 
     infoprat_localite = sa.Column('infoprat_localite', sa.String())
+
+    infoprat_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
+                                                                      srid=3447),
+                                                  comparator=PGComparator)
 
     def getName(self):
         """

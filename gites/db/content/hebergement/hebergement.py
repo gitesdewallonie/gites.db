@@ -8,6 +8,8 @@ Copyright by Affinitic sprl
 $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 """
 import sqlalchemy
+import geoalchemy
+from geoalchemy.postgis import PGComparator
 from sqlalchemy.orm import relation
 from zope.interface import implements
 from affinitic.db.cache import FromCache
@@ -52,6 +54,10 @@ class Hebergement(GitesMappedClassBase):
     heb_gps_lat = sqlalchemy.Column('heb_gps_lat', sqlalchemy.Float())
 
     heb_gps_long = sqlalchemy.Column('heb_gps_long', sqlalchemy.Float())
+
+    heb_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
+                                                                 srid=3447),
+                                             comparator=PGComparator)
 
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')

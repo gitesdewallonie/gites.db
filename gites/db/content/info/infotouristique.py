@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
 from sqlalchemy.orm import relation
+import geoalchemy
+from geoalchemy.postgis import PGComparator
 
 from zope.interface import implements
 
@@ -31,6 +33,10 @@ class InfoTouristique(GitesMappedClassBase):
 
     infotour_type_infotour_fk = sa.Column('infotour_type_infotour_fk', sa.Integer,
                                           sa.ForeignKey('type_info_touristique.typinfotour_pk'))
+
+    infotour_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
+                                                                      srid=3447),
+                                                  comparator=PGComparator)
 
     def getInfoTourisqueName(self):
         """

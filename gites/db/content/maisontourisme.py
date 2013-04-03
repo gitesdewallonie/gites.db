@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+import geoalchemy
 from zope.interface import implements
+from geoalchemy.postgis import PGComparator
 from gites.db.interfaces import IMaisonTourisme
 from gites.db.mapper import GitesMappedClassBase
 
@@ -18,6 +20,10 @@ class MaisonTourisme(GitesMappedClassBase):
     mais_gps_lat = sa.Column('mais_gps_lat', sa.Float())
 
     mais_gps_long = sa.Column('mais_gps_long', sa.Float())
+
+    mais_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
+                                                                 srid=3447),
+                                              comparator=PGComparator)
 
     def getCommunesName(self):
         return [commune.com_nom for commune in self.commune]

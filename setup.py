@@ -8,11 +8,10 @@ setup(
     version=version,
     description="Db connexion for Gites de Wallonie",
     long_description=open("README.txt").read() + "\n" +
-                     open(os.path.join("docs", "HISTORY.txt")).read(),
+    open(os.path.join("docs", "HISTORY.txt")).read(),
     classifiers=[
         "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+        "Topic :: Software Development :: Libraries :: Python Modules"],
     keywords='',
     author='Affinitic',
     author_email='info@affinitic.be',
@@ -26,6 +25,7 @@ setup(
         'setuptools',
         'psycopg2',
         'SQLAlchemy',
+        'geoalchemy',
         'Acquisition',
         'Zope2',
         'zope.component',
@@ -45,11 +45,9 @@ setup(
         ],
         scripts=[
             'alembic',
-            'progressbar',
-    ]),
+            'progressbar']),
     entry_points={
         'console_scripts': [
             'gdw_db_migration = gites.db.migration.migration:main',
             'xml_heb_ch_mh_proprio = gites.db.scripts.xml_heb_ch_mh_proprio:main',
-            'xml_heb_gr_proprio = gites.db.scripts.xml_heb_gr_proprio:main']}
-    )
+            'xml_heb_gr_proprio = gites.db.scripts.xml_heb_gr_proprio:main']})
