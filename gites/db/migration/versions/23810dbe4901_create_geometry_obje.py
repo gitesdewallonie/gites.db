@@ -27,6 +27,8 @@ def upgrade():
     query = sa.select([hebergement.c.heb_pk,
                        hebergement.c.heb_gps_lat,
                        hebergement.c.heb_gps_long])
+    query.append_whereclause(sa.and_(hebergement.c.heb_gps_lat != None,
+                                     hebergement.c.heb.gps_long != None))
     hebergements = connection.execute(query).fetchall()
     i = 0
     pbar = progressbar.ProgressBar(widgets=[progressbar.Percentage(),
