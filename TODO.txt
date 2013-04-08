@@ -1,0 +1,8 @@
+#4864 GDW2: Créer script update hebergement groupement
+
+    + script de migration
+        + ajouter colonne heb_groupement_pk
+        + remplir colonne heb_groupement_pk
+
+    - script de mise a jour
+    - cron

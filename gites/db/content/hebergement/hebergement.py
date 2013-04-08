@@ -29,6 +29,8 @@ class Hebergement(GitesMappedClassBase):
 
     heb_nom = sqlalchemy.Column('heb_nom', sqlalchemy.String())
 
+    heb_cgt_cap_max = sqlalchemy.Column('heb_cgt_cap_max', sqlalchemy.Integer())
+
     heb_code_gdw = sqlalchemy.Column('heb_code_gdw', sqlalchemy.String())
 
     heb_code_gdw = sqlalchemy.Column('heb_code_gdw', sqlalchemy.String())
@@ -58,6 +60,8 @@ class Hebergement(GitesMappedClassBase):
     heb_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
                                                                  srid=3447),
                                              comparator=PGComparator)
+
+    heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk', sqlalchemy.Integer())
 
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
