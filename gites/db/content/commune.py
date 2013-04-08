@@ -14,9 +14,10 @@ from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.province import Province
 from gites.db.content.maisontourisme import MaisonTourisme
 from gites.db.interfaces import ICommune
+from OFS.Traversable import Traversable
 
 
-class Commune(GitesMappedClassBase):
+class Commune(GitesMappedClassBase, Traversable):
     implements(ICommune)
     __tablename__ = u'commune'
 
@@ -37,6 +38,9 @@ class Commune(GitesMappedClassBase):
 
     com_mais_fk = sqlalchemy.Column('com_mais_fk', sqlalchemy.Integer,
                                     sqlalchemy.ForeignKey('maison_tourisme.mais_pk'))
+
+    def getId(self):
+        return self.com_id
 
     @classmethod
     def __declare_last__(cls):

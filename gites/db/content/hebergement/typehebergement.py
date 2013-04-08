@@ -4,9 +4,10 @@ from zope.i18n import translate
 from zope.interface import implements
 from gites.db.interfaces import ITypeHebergement
 from gites.db.mapper import GitesMappedClassBase
+from OFS.Traversable import Traversable
 
 
-class TypeHebergement(GitesMappedClassBase):
+class TypeHebergement(GitesMappedClassBase, Traversable):
     implements(ITypeHebergement)
     __tablename__ = u'type_heb'
 
