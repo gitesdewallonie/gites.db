@@ -3,6 +3,3 @@
     + script de migration
         + ajouter colonne heb_groupement_pk
         + remplir colonne heb_groupement_pk
-
-    - script de mise a jour
-    - cron
