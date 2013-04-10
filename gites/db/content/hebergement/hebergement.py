@@ -19,9 +19,10 @@ from gites.db.content.proprio.proprio import Proprio
 from gites.db.content.hebergement.typehebergement import TypeHebergement
 from gites.db.interfaces import IHebergement
 from gites.db.mapper import GitesMappedClassBase
+from OFS.Traversable import Traversable
 
 
-class Hebergement(GitesMappedClassBase):
+class Hebergement(GitesMappedClassBase, Traversable):
     implements(IHebergement)
     __tablename__ = u'hebergement'
 
