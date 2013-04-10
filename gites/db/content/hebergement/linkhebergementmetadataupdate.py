@@ -30,3 +30,9 @@ class LinkHebergementMetadataUpdate(GitesMappedClassBase):
         cls.link_metadata = sa.orm.relation(LinkHebergementMetadata,
                                             lazy=False)
         cls.metadata_info = sa.orm.relation(Metadata, lazy=False)
+
+    @classmethod
+    def get_updates(cls, heb_pk):
+        query = cls._session().query(cls).join('link_metadata').filter(
+            LinkHebergementMetadata.heb_fk == heb_pk)
+        return query.all()
