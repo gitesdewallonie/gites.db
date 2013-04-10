@@ -64,6 +64,12 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk', sqlalchemy.Integer())
 
+    @property
+    def REQUEST(self):
+        from zope.globalrequest import getRequest
+        request = getRequest()
+        return request
+
     def Title(self):
         language = self.REQUEST.get('LANGUAGE', 'en')
         typeHeb = self.type.getTitle(language)
