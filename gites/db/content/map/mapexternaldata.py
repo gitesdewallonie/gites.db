@@ -2,6 +2,9 @@
 import sqlalchemy as sa
 from sqlalchemy import and_
 from sqlalchemy.orm import relation
+import geoalchemy
+from geoalchemy.postgis import PGComparator
+
 from gites.db.mapper import GitesMappedClassBase
 
 
@@ -37,6 +40,10 @@ class MapExternalData(GitesMappedClassBase):
     ext_data_provider_pk = sa.Column('ext_data_provider_pk', sa.String(),
                                      sa.ForeignKey('map_provider.provider_pk'),
                                      nullable=False)
+
+    ext_data_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
+                                                                      srid=3447),
+                                                  comparator=PGComparator)
 
     @classmethod
     def __declare_last__(cls):
