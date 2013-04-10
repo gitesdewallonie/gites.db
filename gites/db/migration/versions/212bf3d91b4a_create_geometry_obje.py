@@ -31,6 +31,8 @@ def upgrade():
                                      mapExternalData.c.ext_data_longitude != None))
     mapExternalDatas = connection.execute(query).fetchall()
     i = 0
+    if len(mapExternalDatas) == 0:
+        return
     pbar = progressbar.ProgressBar(widgets=[progressbar.Percentage(),
                                             progressbar.Bar()],
                                    maxval=len(mapExternalDatas)).start()
