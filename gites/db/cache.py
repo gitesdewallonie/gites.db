@@ -8,7 +8,10 @@ def md5_key_mangler(key):
     distill them into an md5 hash.
 
     """
-    return md5.md5(key).hexdigest()
+    try:
+        return md5.md5(key).hexdigest()
+    except UnicodeEncodeError:
+        return md5.md5(key.encode('utf-8')).hexdigest()
 
 regions = {}
 regions['gdw'] = make_region(key_mangler=md5_key_mangler).configure(
