@@ -75,6 +75,9 @@ class Hebergement(GitesMappedClassBase, Traversable):
         typeHeb = self.type.getTitle(language)
         return u"%s - %s - %s" % (typeHeb, self.heb_nom, self.heb_localite)
 
+    def getUrl(self):
+        return self.REQUEST.ACTUAL_URL
+
     def getVignette(self):
         return "%s00.jpg" % (self.heb_code_gdw)
 
