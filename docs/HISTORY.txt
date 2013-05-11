@@ -4,7 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Uses the new decorators for the relations from affinitic.db : #4930
 
 
 0.3 (2010-12-15)

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
-from gites.db.interfaces import IProprioMaj
 from zope.interface import implements
+from affinitic.db import mapper
+from gites.db.interfaces import IProprioMaj
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.proprio.civilite import Civilite
 from gites.db.content.commune import Commune
@@ -48,8 +49,10 @@ class ProprioMaj(GitesMappedClassBase):
     pro_maj_com_fk = sa.Column('pro_maj_com_fk', sa.Integer,
                                sa.ForeignKey('commune.com_pk'))
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.civilite = sa.orm.relation(Civilite)
+    @mapper.Relation
+    def civilite(cls):
+        return sa.orm.relation(Civilite)
 
-        cls.commune = sa.orm.relation(Commune)
+    @mapper.Relation
+    def commune(cls):
+        return sa.orm.relation(Commune)

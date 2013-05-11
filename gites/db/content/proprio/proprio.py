@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy
-from sqlalchemy.orm import relation
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.proprio.civilite import Civilite
 from gites.db.content.commune import Commune
@@ -43,8 +43,10 @@ class Proprio(GitesMappedClassBase):
     pro_reactivation_hash = sqlalchemy.Column('pro_reactivation_hash',
                                               sqlalchemy.String())
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.civilite = relation(Civilite)
+    @mapper.Relation
+    def civilite(cls):
+        return sqlalchemy.orm.relation(Civilite)
 
-        cls.commune = relation(Commune)
+    @mapper.Relation
+    def commune(cls):
+        return sqlalchemy.orm.relation(Commune)

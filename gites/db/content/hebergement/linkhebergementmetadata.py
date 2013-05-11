@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.hebergement.hebergement import Hebergement
 from gites.db.content.hebergement.metadata import Metadata
@@ -21,11 +22,13 @@ class LinkHebergementMetadata(GitesMappedClassBase):
 
     link_met_value = sa.Column('link_met_value', sa.Boolean(), default=False)
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.metadata_info = sa.orm.relation(Metadata, lazy=False)
+    @mapper.Relation
+    def metadata_info(cls):
+        return sa.orm.relation(Metadata, lazy=False)
 
-        cls.hebergement = sa.orm.relation(Hebergement, lazy=True)
+    @mapper.Relation
+    def hebergement(cls):
+        return sa.orm.relation(Hebergement, lazy=True)
 
     @classmethod
     def get_metadata(cls, heb_pk, language, value=None, editable=None,

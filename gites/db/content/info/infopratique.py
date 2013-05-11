@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import sqlalchemy as sa
-from sqlalchemy.orm import relation
 import geoalchemy
 from geoalchemy.postgis import PGComparator
 
 from zope.interface import implements
 
+from affinitic.db import mapper
+
 from gites.db.interfaces import IInfoPratique
 from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.info.typeinfopratique import TypeInfoPratique
 
 
 class InfoPratique(GitesMappedClassBase):
@@ -38,6 +40,10 @@ class InfoPratique(GitesMappedClassBase):
                                                                       srid=3447),
                                                   comparator=PGComparator)
 
+    @mapper.Relation
+    def type(cls):
+        return sa.orm.relation(TypeInfoPratique, lazy=True)
+
     def getName(self):
         """
         get the name of ze info pratique
@@ -49,9 +55,3 @@ class InfoPratique(GitesMappedClassBase):
         get the url of ze info pratique
         """
         return self.info_pratique.infoprat_url
-
-    @classmethod
-    def __declare_last__(cls):
-        from gites.db.content import TypeInfoPratique
-
-        cls.type = relation(TypeInfoPratique, lazy=True)

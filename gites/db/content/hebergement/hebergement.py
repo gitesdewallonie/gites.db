@@ -10,8 +10,8 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 import sqlalchemy
 import geoalchemy
 from geoalchemy.postgis import PGComparator
-from sqlalchemy.orm import relation
 from zope.interface import implements
+from affinitic.db import mapper
 from affinitic.db.cache import FromCache
 from gites.db.content.hebergement.metadata import Metadata
 from gites.db.content.charge import Charge
@@ -148,43 +148,69 @@ class Hebergement(GitesMappedClassBase, Traversable):
     def accept_dogs(self):
         return self._get_metadata('heb_animal')
 
-    @classmethod
-    def __declare_last__(cls):
-        from gites.db.content import LinkHebergementEpis
-        from gites.db.content import Province
-        from gites.db.content import Commune
-        from gites.db.content import MaisonTourisme
-        from gites.db.content import Metadata
-        from gites.db.content import LinkHebergementMetadata
-        from gites.db.content import ReservationProprio
+    @mapper.Relation
+    def type(cls):
+        return sqlalchemy.orm.relation(TypeHebergement, lazy=True)
 
-        cls.type = relation(TypeHebergement, lazy=True)
+    @mapper.Relation
+    def proprio(cls):
+        return sqlalchemy.orm.relation(Proprio, lazy=True,
+                                       backref='hebergements')
 
-        cls.proprio = relation(Proprio, lazy=True, backref='hebergements')
+    @mapper.RelationImport('gites.db.content:ReservationProprio')
+    @mapper.Relation
+    def reservations(cls, ReservationProprio):
+        return sqlalchemy.orm.relation(ReservationProprio, lazy=True,
+                                       backref='hebergement')
 
-        cls.reservations = relation(ReservationProprio, lazy=True, backref='hebergement')
+    @mapper.Relation
+    def charge(cls):
+        return sqlalchemy.orm.relation(Charge, lazy=True)
 
-        cls.charge = relation(Charge, lazy=True)
+    @mapper.RelationImport('gites.db.content:Commune')
+    @mapper.Relation
+    def commune(cls, Commune):
+        return sqlalchemy.orm.relation(Commune, lazy=True)
 
-        cls.commune = relation(Commune, lazy=True)
+    @mapper.RelationImport('gites.db.content:LinkHebergementEpis')
+    @mapper.Relation
+    def epis(cls, LinkHebergementEpis):
+        return sqlalchemy.orm.relation(LinkHebergementEpis, lazy=True)
 
-        cls.epis = relation(LinkHebergementEpis, lazy=True)
-
-        cls.province = relation(Province,
-                                secondary=Commune.__tablename__,
-                                lazy=True)
-
-        cls.maisonTourisme = relation(MaisonTourisme,
-                                      secondary=Commune.__tablename__,
-                                      lazy=True)
-
-        cls.activeMetadatas = relation(Metadata,
-                                       secondary=LinkHebergementMetadata.__tablename__,
-                                       primaryjoin=sqlalchemy.and_(Hebergement.heb_pk == LinkHebergementMetadata.heb_fk,
-                                                                   LinkHebergementMetadata.link_met_value == True),
+    @mapper.RelationImport('gites.db.content:Province',
+                           'gites.db.content:Commune')
+    @mapper.Relation
+    def province(cls, Province, Commune):
+        return sqlalchemy.orm.relation(Province,
+                                       secondary=Commune.__tablename__,
                                        lazy=True)
 
-        cls.metadatas = relation(Metadata,
-                                 secondary=LinkHebergementMetadata.__tablename__,
-                                 primaryjoin=(Hebergement.heb_pk == LinkHebergementMetadata.heb_fk),
-                                 lazy=True)
+    @mapper.RelationImport('gites.db.content:MaisonTourisme',
+                           'gites.db.content:Commune')
+    @mapper.Relation
+    def maisonTourisme(cls, MaisonTourisme, Commune):
+        return sqlalchemy.orm.relation(MaisonTourisme,
+                                       secondary=Commune.__tablename__,
+                                       lazy=True)
+
+    @mapper.RelationImport('gites.db.content:Metadata',
+                           'gites.db.content:LinkHebergementMetadata')
+    @mapper.Relation
+    def activeMetadatas(cls, Metadata, LinkHebergementMetadata):
+        return sqlalchemy.orm.relation(
+            Metadata,
+            secondary=LinkHebergementMetadata.__tablename__,
+            primaryjoin=sqlalchemy.and_(
+                cls.heb_pk == LinkHebergementMetadata.heb_fk,
+                LinkHebergementMetadata.link_met_value == True),
+            lazy=True)
+
+    @mapper.RelationImport('gites.db.content:Metadata',
+                           'gites.db.content:LinkHebergementMetadata')
+    @mapper.Relation
+    def metadatas(cls, Metadata, LinkHebergementMetadata):
+        return sqlalchemy.orm.relation(
+            Metadata,
+            secondary=LinkHebergementMetadata.__tablename__,
+            primaryjoin=(cls.heb_pk == LinkHebergementMetadata.heb_fk),
+            lazy=True)

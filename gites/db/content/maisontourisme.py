@@ -3,6 +3,7 @@ import sqlalchemy as sa
 import geoalchemy
 from zope.interface import implements
 from geoalchemy.postgis import PGComparator
+from affinitic.db import mapper
 from gites.db.interfaces import IMaisonTourisme
 from gites.db.mapper import GitesMappedClassBase
 
@@ -30,13 +31,15 @@ class MaisonTourisme(GitesMappedClassBase):
 
     com_nom = property(getCommunesName)
 
-    @classmethod
-    def __declare_last__(cls):
-        from gites.db.content import Commune
-        from gites.db.content import InfoTouristique
+    @mapper.RelationImport('gites.db.content:Commune')
+    @mapper.Relation
+    def commune(cls, Commune):
+        return sa.orm.relation(Commune, lazy=True)
 
-        cls.commune = sa.orm.relation(Commune, lazy=True)
-
-        cls.infosTouristique = sa.orm.relation(InfoTouristique,
-                                               secondary=Commune.__table__,
-                                               lazy=True)
+    @mapper.RelationImport('gites.db.content:InfoTouristique',
+                           'gites.db.content:Commune')
+    @mapper.Relation
+    def infosTouristique(cls, InfoTouristique, Commune):
+        return sa.orm.relation(InfoTouristique,
+                               secondary=Commune.__table__,
+                               lazy=True)

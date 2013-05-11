@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.content.hebergement.hebergement import Hebergement
 from gites.db.mapper import GitesMappedClassBase
 
@@ -25,7 +26,6 @@ class HebergementBlockingHistory(GitesMappedClassBase):
     heb_blockhistory_days = sa.Column('heb_blockhistory_days', sa.Integer,
                                       nullable=True)
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.hebergement = sa.orm.relation(Hebergement,
-                                          backref='hebblockinghistory')
+    @mapper.Relation
+    def hebergement(cls):
+        return sa.orm.relation(Hebergement, backref='hebblockinghistory')

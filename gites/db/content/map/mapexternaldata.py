@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
-from sqlalchemy import and_
-from sqlalchemy.orm import relation
 import geoalchemy
 from geoalchemy.postgis import PGComparator
 
+from affinitic.db import mapper
+
 from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.map.mapprovider import MapProvider
+
+MapProvider  # Pyflakes fix
 
 
 class MapExternalData(GitesMappedClassBase):
@@ -45,12 +48,13 @@ class MapExternalData(GitesMappedClassBase):
                                                                       srid=3447),
                                                   comparator=PGComparator)
 
-    @classmethod
-    def __declare_last__(cls):
-        from gites.db.content import MapBlacklist
-
-        cls.blacklist = relation(MapBlacklist,
-                                 lazy=True,
-                                 primaryjoin=and_(MapExternalData.ext_data_id == MapBlacklist.blacklist_id,
-                                                  MapExternalData.ext_data_provider_pk == MapBlacklist.blacklist_provider_pk),
-                                 backref='mapExternalData')
+    @mapper.RelationImport('gites.db.content:MapBlacklist')
+    @mapper.Relation
+    def blacklist(cls, MapBlacklist):
+        return sa.orm.relation(
+            MapBlacklist,
+            lazy=True,
+            primaryjoin=sa.and_(
+                cls.ext_data_id == MapBlacklist.blacklist_id,
+                cls.ext_data_provider_pk == MapBlacklist.blacklist_provider_pk),
+            backref='mapExternalData')

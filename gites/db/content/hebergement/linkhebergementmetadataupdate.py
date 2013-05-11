@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.hebergement.linkhebergementmetadata import \
     LinkHebergementMetadata
@@ -25,11 +26,13 @@ class LinkHebergementMetadataUpdate(GitesMappedClassBase):
     update_date = sa.Column('update_date', sa.DateTime(),
                             default=sa.func.current_timestamp())
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.link_metadata = sa.orm.relation(LinkHebergementMetadata,
-                                            lazy=False)
-        cls.metadata_info = sa.orm.relation(Metadata, lazy=False)
+    @mapper.Relation
+    def link_metadata(cls):
+        return sa.orm.relation(LinkHebergementMetadata, lazy=False)
+
+    @mapper.Relation
+    def metadata_info(cls):
+        return sa.orm.relation(Metadata, lazy=False)
 
     @classmethod
     def get_updates(cls, heb_pk):

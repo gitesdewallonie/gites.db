@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
 from gites.db.content.hebergement.metadatatype import MetadataType
 
@@ -30,9 +31,9 @@ class Metadata(GitesMappedClassBase):
                                  sa.ForeignKey('metadata_type.met_typ_id'),
                                  nullable=False)
 
-    @classmethod
-    def __declare_last__(cls):
-        cls.type = sa.orm.relation(MetadataType)
+    @mapper.Relation
+    def type(cls):
+        return sa.orm.relation(MetadataType)
 
     @classmethod
     def get_editable(cls):
