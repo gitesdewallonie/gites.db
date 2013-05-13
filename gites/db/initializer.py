@@ -9,6 +9,7 @@ from gites.db.content import (BlockingHistory,
                               Hebergement,
                               HebergementBlockingHistory,
                               HebergementMaj,
+                              HebergementVideo,
                               InfoTouristique,
                               TypeInfoTouristique,
                               InfoPratique,
@@ -70,6 +71,8 @@ class GitesModel(object):
                   mapper_class=Hebergement)
         model.add('hebergement_maj', table=HebergementMaj.__table__,
                   mapper_class=HebergementMaj)
+        model.add('hebergement_video', table=HebergementVideo.__table__,
+                  mapper_class=HebergementVideo)
         model.add('maison_tourisme', table=MaisonTourisme.__table__,
                   mapper_class=MaisonTourisme)
         model.add('type_heb', TypeHebergement.__table__,

@@ -12,6 +12,7 @@ from .hebergement.metadata import Metadata
 from .hebergement.metadatatype import MetadataType
 from .hebergement.typehebergement import TypeHebergement
 from .hebergement.typetablehoteofhebergementmaj import TypeTableHoteOfHebergementMaj
+from .hebergement.hebergementvideo import HebergementVideo
 from .info.infotouristique import InfoTouristique
 from .info.typeinfotouristique import TypeInfoTouristique
 from .info.infopratique import InfoPratique
