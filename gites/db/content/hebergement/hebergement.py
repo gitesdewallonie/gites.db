@@ -34,8 +34,6 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_code_gdw = sqlalchemy.Column('heb_code_gdw', sqlalchemy.String())
 
-    heb_code_gdw = sqlalchemy.Column('heb_code_gdw', sqlalchemy.String())
-
     heb_site_public = sqlalchemy.Column('heb_site_public', sqlalchemy.String())
 
     heb_calendrier_proprio = sqlalchemy.Column('heb_calendrier_proprio', sqlalchemy.String())
