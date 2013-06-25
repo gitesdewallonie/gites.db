@@ -62,6 +62,8 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk', sqlalchemy.Integer())
 
+    heb_tarif_charge = sqlalchemy.Column('heb_tarif_charge', sqlalchemy.String())
+
     @property
     def REQUEST(self):
         from zope.globalrequest import getRequest
