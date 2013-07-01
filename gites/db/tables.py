@@ -169,9 +169,9 @@ def getCharge(metadata):
 
 def getHebergementTable(metadata):
     autoload = False
-    if metadata.bind.has_table('hebergement'):
+    if metadata.bind.has_table('hebergement_view'):
         autoload = True
-    return Table('hebergement', metadata,
+    return Table('hebergement_view', metadata,
              Column('heb_pk', Integer, primary_key=True),
              Column('heb_nom', String()),
              Column('heb_code_gdw', String()),
