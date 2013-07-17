@@ -145,6 +145,14 @@ class Hebergement(GitesMappedClassBase, Traversable):
         query = query.filter(Hebergement.heb_pk == self.heb_pk)
         return query.filter(Metadata.met_id == metadata_id).scalar()
 
+    def epis_nombre(self):
+        from gites.db.content import LinkHebergementEpis
+        query = self.session.query(LinkHebergementEpis.heb_nombre_epis)
+        query = query.options(FromCache('gdw'))
+        query = query.filter_by(heb_pk=self.heb_pk)
+        query = query.limit(1)
+        return query.scalar()
+
     def is_smoker(self):
         return self._get_metadata('heb_fumeur')
 
