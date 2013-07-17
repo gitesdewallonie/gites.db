@@ -1,0 +1,17 @@
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 16 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 525 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 864 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1055 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1472 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1473 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1474 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1475 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1562 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 1757 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2081 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2082 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2083 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2097 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2098 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2110 and metadata_fk = 3;
+ update link_hebergement_metadata set link_met_value = true where heb_fk = 2267 and metadata_fk = 3;
