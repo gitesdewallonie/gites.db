@@ -11,3 +11,6 @@ class MetadataType(GitesMappedClassBase):
 
     met_typ_titre = sa.Column('met_typ_titre', sa.String(),
                               nullable=False)
+
+    met_typ_sort_ord = sa.Column('met_typ_sort_ord', sa.Integer(),
+                                 nullable=False, unique=True)
