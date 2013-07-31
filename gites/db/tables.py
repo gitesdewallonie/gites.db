@@ -178,6 +178,8 @@ def getHebergementTable(metadata):
              Column('heb_code_gdw', String()),
              Column('heb_site_public', String()),
              Column('heb_calendrier_proprio', String()),
+             Column('heb_fumeur', String()),
+             Column('heb_animal', String()),
              Column('heb_charge_fk', Integer,
                     ForeignKey('charge.cha_pk')),
              Column('heb_com_fk', Integer,
