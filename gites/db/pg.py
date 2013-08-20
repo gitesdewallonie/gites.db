@@ -12,7 +12,7 @@ from affinitic.pwmanager.interfaces import IPasswordManager
 
 class GitesDB(PGDB):
     db = 'gites_wallons'
-    verbose = True
+    verbose = False
 
     @property
     def url(self):
