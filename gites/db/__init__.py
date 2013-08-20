@@ -17,16 +17,18 @@ from config import PROJECTNAME, DEFAULT_ADD_CONTENT_PERMISSION
 from affinitic.db.event import register_logging
 from affinitic.db.utils import enable_sa_deprecation_warnings
 
-logger = logging.getLogger('affinitic.db')
-logpath = '/'.join([os.environ.get('CLIENT_HOME', '.'), 'sqlalchemy.log'])
-fh = TimedRotatingFileHandler(logpath, 'midnight', 1)
-formatter = logging.Formatter(" %(asctime)s \n %(message)s \n--")
-fh.setFormatter(formatter)
-fh.suffix = "%Y-%m-%d-%H-%M"
-logger.addHandler(fh)
 
-register_logging()
-enable_sa_deprecation_warnings()
+def enable_log():
+    logger = logging.getLogger('affinitic.db')
+    logpath = '/'.join([os.environ.get('CLIENT_HOME', '.'), 'sqlalchemy.log'])
+    fh = TimedRotatingFileHandler(logpath, 'midnight', 1)
+    formatter = logging.Formatter(" %(asctime)s \n %(message)s \n--")
+    fh.setFormatter(formatter)
+    fh.suffix = "%Y-%m-%d-%H-%M"
+    logger.addHandler(fh)
+
+    register_logging()
+    enable_sa_deprecation_warnings()
 
 
 def session():
@@ -44,6 +46,7 @@ DeclarativeBase = sqlalchemy.ext.declarative.declarative_base(cls=DeferredReflec
 
 
 def initialize(context):
+    enable_log()
     if os.environ.get('ZOPETESTCASE') is None:
         pwManager = getUtility(IPasswordManager, 'pg')
         connString = 'postgres://%s@localhost/gites_wallons' % \
