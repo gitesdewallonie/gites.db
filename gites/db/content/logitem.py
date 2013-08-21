@@ -6,11 +6,10 @@ Licensed under the GPL license, see LICENCE.txt for more details.
 Copyright by Affinitic sprl
 """
 import sqlalchemy
-from z3c.sqlalchemy.mapper import MappedClassBase
-from gites.db import DeclarativeBase
+from gites.db.mapper import GitesMappedClassBase
 
 
-class LogItem(DeclarativeBase, MappedClassBase):
+class LogItem(GitesMappedClassBase):
     __tablename__ = u'log'
 
     log_pk = sqlalchemy.Column('log_pk', sqlalchemy.Integer(),
