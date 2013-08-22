@@ -8,6 +8,8 @@
   <include package="Products.Five"/>
   <include package="affinitic.pwmanager"/>
   <include package="affinitic.caching"/>
+  <includeOverrides package="affinitic.caching" file="overrides.zcml"/>
+
   <include package="plone.memoize"/>
   <five:registerPackage package="." initialize=".initialize" />
 
