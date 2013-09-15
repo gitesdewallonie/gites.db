@@ -36,8 +36,6 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_site_public = sqlalchemy.Column('heb_site_public', sqlalchemy.String())
 
-    heb_calendrier_proprio = sqlalchemy.Column('heb_calendrier_proprio', sqlalchemy.String())
-
     heb_charge_fk = sqlalchemy.Column('heb_charge_fk', sqlalchemy.Integer,
                                       sqlalchemy.ForeignKey('charge.cha_pk'))
 
@@ -50,7 +48,13 @@ class Hebergement(GitesMappedClassBase, Traversable):
     heb_pro_fk = sqlalchemy.Column('heb_pro_fk', sqlalchemy.Integer,
                                    sqlalchemy.ForeignKey('proprio.pro_pk'))
 
+    heb_calendrier_proprio = sqlalchemy.Column('heb_calendrier_proprio', sqlalchemy.String())
+
     heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date)
+
+    heb_calendrier_desactivation_alloch = sqlalchemy.Column('heb_calendrier_desactivation_alloch',
+                                                            sqlalchemy.Boolean(),
+                                                            default=False)
 
     heb_gps_lat = sqlalchemy.Column('heb_gps_lat', sqlalchemy.Float())
 
