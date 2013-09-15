@@ -52,9 +52,9 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date)
 
-    heb_calendrier_desactivation_alloch = sqlalchemy.Column('heb_calendrier_desactivation_alloch',
-                                                            sqlalchemy.Boolean(),
-                                                            default=False)
+    heb_desactivation_alloch = sqlalchemy.Column('heb_desactivation_alloch',
+                                                 sqlalchemy.Boolean(),
+                                                 default=False)
 
     heb_gps_lat = sqlalchemy.Column('heb_gps_lat', sqlalchemy.Float())
 
