@@ -189,6 +189,8 @@ def getHebergementTable(metadata):
              Column('heb_pro_fk', Integer,
                     ForeignKey('proprio.pro_pk')),
              Column('heb_calendrier_proprio_date_maj', Date),
+             Column('heb_desactivation_alloch', Boolean(),
+                    default=False),
              useexisting=True,
              autoload=autoload)
 
