@@ -4,6 +4,7 @@ from .calendar.blockinghistory import BlockingHistory
 from .calendar.hebergementblockinghistory import HebergementBlockingHistory
 from .calendar.reservationproprio import ReservationProprio
 from .hebergement.hebergement import Hebergement
+from .hebergement.hebergementapp import HebergementApp
 from .hebergement.hebergementmaj import HebergementMaj
 from .hebergement.linkhebergementepis import LinkHebergementEpis
 from .hebergement.linkhebergementmetadata import LinkHebergementMetadata

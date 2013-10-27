@@ -7,6 +7,7 @@ from gites.db.content import (BlockingHistory,
                               Charge,
                               Commune,
                               Hebergement,
+                              HebergementApp,
                               HebergementBlockingHistory,
                               HebergementMaj,
                               HebergementVideo,
@@ -69,6 +70,8 @@ class GitesModel(object):
                   mapper_class=Charge)
         model.add('hebergement', table=Hebergement.__table__,
                   mapper_class=Hebergement)
+        model.add('hebergement_app', table=HebergementApp.__table__,
+                  mapper_class=HebergementApp)
         model.add('hebergement_maj', table=HebergementMaj.__table__,
                   mapper_class=HebergementMaj)
         model.add('hebergement_video', table=HebergementVideo.__table__,
