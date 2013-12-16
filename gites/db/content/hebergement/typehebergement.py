@@ -35,6 +35,8 @@ class TypeHebergement(GitesMappedClassBase, Traversable):
 
     type_heb_nom_uk = sa.Column('type_heb_nom_uk', sa.String())
 
+    type_heb_type = sa.Column('type_heb_type', sa.String())
+
     def getType(self):
         from zope.globalrequest import getRequest
         request = getRequest()
