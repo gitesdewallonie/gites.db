@@ -1,13 +1,36 @@
 # -*- coding: utf-8 -*-
 import os
+import transaction
 from zope.configuration import xmlconfig
 import gocept.testdb
+from sqlalchemy.orm import clear_mappers
 from z3c.sqlalchemy import createSAWrapper
 from z3c.sqlalchemy import getSAWrapper
 from plone.testing import Layer
 from plone.testing import zca
 
 CURRENT_DIR = os.path.dirname(__file__)
+
+
+def createHeb(session):
+    from gites.db.content import (Hebergement, TypeHebergement, Proprio,
+                                  LinkHebergementEpis, Commune,
+                                  HebergementApp)
+    typeHebGite = TypeHebergement(type_heb_nom='gites')
+    proprio = Proprio(pro_nom1=u'Foo',
+                      pro_etat=True)
+    epis3 = LinkHebergementEpis(heb_nombre_epis=3)
+    yvoir = Commune(com_nom=u'Yvoir')
+    heb_app = HebergementApp(heb_app_sort_order=1)
+    heb = Hebergement(heb_nom='Home sweet home',
+                      type=typeHebGite,
+                      proprio=proprio,
+                      epis=[epis3],
+                      commune=yvoir,
+                      app=heb_app,
+                      heb_site_public='1')
+    session.add(heb)
+    session.flush()
 
 
 class RDBLayer(Layer):
@@ -26,10 +49,22 @@ class RDBLayer(Layer):
         """
         Hook to allow subclasses to setup initial layer data.
         """
-        pass
+        createHeb(self.wrapper.session)
+        transaction.commit()
+
+    def tearDown(self):
+        clear_mappers()
+        self.invalidate()
+        self.db.drop_all()
+
+    def invalidate(self):
+        """
+        Invalidates the connections to the database
+        """
+        self.engine.dispose()
+        del self.engine
 
     def testTearDown(self):
-        import transaction
         transaction.abort()
 
     def setupDatabase(self):
@@ -47,7 +82,8 @@ class RDBLayer(Layer):
                              engine_options={'convert_unicode': True},
                              name=self.dbName,
                              model=self.model)
-        self['%s_wrapper' % self.dbPrefix] = wr
+        self['%s_wrapper' % self.dbPrefix] = self.wrapper = wr
+        self.engine = self.wrapper.engine
         wrapper = getSAWrapper('gites_wallons')
         wrapper.metadata.create_all()
 
