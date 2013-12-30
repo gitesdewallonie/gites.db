@@ -61,6 +61,7 @@ class RDBLayer(Layer):
         """
         Invalidates the connections to the database
         """
+        self.wrapper.session.close()
         self.engine.dispose()
         del self.engine
 
