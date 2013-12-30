@@ -58,3 +58,9 @@ class MapExternalData(GitesMappedClassBase):
                 cls.ext_data_id == MapBlacklist.blacklist_id,
                 cls.ext_data_provider_pk == MapBlacklist.blacklist_provider_pk),
             backref='mapExternalData')
+
+    @mapper.RelationImport('gites.db.content:MapProvider')
+    @mapper.Relation
+    def provider(cls, MapProvider):
+        return sa.orm.relation(
+            MapProvider, lazy=True)
