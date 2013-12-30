@@ -41,8 +41,7 @@ setup(
             'unittest2',
             'zope.testing',
             'plone.testing',
-            'gocept.testdb'
-        ],
+            'gocept.testdb'],
         scripts=[
             'alembic',
             'progressbar']),
