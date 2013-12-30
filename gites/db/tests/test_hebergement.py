@@ -9,7 +9,7 @@ class HebergementMapperTest(unittest2.TestCase):
     layer = PGRDB
 
     def test_simple_get(self):
-        PK = 1
+        PK = 99
         heb = Hebergement(heb_pk=PK)
         sess = session()
         sess.add(heb)
@@ -17,7 +17,7 @@ class HebergementMapperTest(unittest2.TestCase):
         self.assertEqual(heb.heb_pk, Hebergement.first(heb_pk=PK).heb_pk)
 
     def test_proprio_link(self):
-        PK = 1
+        PK = 98
         heb = Hebergement(heb_pk=PK, heb_pro_fk=PK)
         pro = Proprio(pro_pk=PK)
         sess = session()
