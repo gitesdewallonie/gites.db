@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-import glob
 import os
-import shutil
-from tempfile import mkstemp
 from zope.configuration import xmlconfig
+import gocept.testdb
 from z3c.sqlalchemy import createSAWrapper
 from z3c.sqlalchemy import getSAWrapper
 from plone.testing import Layer
 from plone.testing import zca
 
-
-DB_CACHE_DIR = os.path.join(os.getcwd(), '.testdb')
+CURRENT_DIR = os.path.dirname(__file__)
 
 
 class RDBLayer(Layer):
@@ -22,38 +19,8 @@ class RDBLayer(Layer):
         raise NotImplementedError
 
     def setUp(self):
-        self.tmpDBFile = self.getDBFile()
         self.setupDatabase()
-        self.storeDBState()
         self.setupData()
-
-    def getDBFile(self):
-        if not os.path.exists(DB_CACHE_DIR):
-            os.mkdir(DB_CACHE_DIR)
-        tmpFile = None
-        for file in glob.glob("%s/%s*stored.db" % (DB_CACHE_DIR, self.dbPrefix)):
-            tmpFile = self.restoreDBState(file)
-        if tmpFile is None:
-            tmpFile = mkstemp(dir=DB_CACHE_DIR, suffix='.db',
-                              prefix=self.dbPrefix)[1]
-        return tmpFile
-
-    def hasStoredDB(self):
-        return len(glob.glob("%s/%s*stored.db" % (DB_CACHE_DIR, self.dbPrefix))) > 0
-
-    def storeDBState(self):
-        if self.hasStoredDB():
-            return
-        filepath, filename = os.path.split(self.tmpDBFile)
-        filename = filename.replace('.db', 'stored.db')
-        shutil.copyfile(self.tmpDBFile, os.path.join(filepath, filename))
-
-    def restoreDBState(self, dbFile):
-        filepath, filename = os.path.split(dbFile)
-        filename = filename.replace('stored.db', '.db')
-        newFilePath = os.path.join(filepath, filename)
-        shutil.copyfile(dbFile, newFilePath)
-        return newFilePath
 
     def setupData(self):
         """
@@ -65,15 +32,16 @@ class RDBLayer(Layer):
         import transaction
         transaction.abort()
 
-    def tearDown(self):
-        if os.path.exists(self.tmpDBFile):
-            os.unlink(self.tmpDBFile)
-
     def setupDatabase(self):
         configurationContext = self['configurationContext']
         xmlconfig.file('testing.zcml', self.package, context=configurationContext)
         configurationContext.execute_actions()
-        wr = createSAWrapper('sqlite:///%s' % self.tmpDBFile,
+        schema_file = os.path.join(CURRENT_DIR, 'tests', 'gites_wallons.sql')
+        self.db = gocept.testdb.PostgreSQL(encoding='UTF8',
+                                           db_template='gites_wallons_testing',
+                                           schema_path=schema_file)
+        self.db.create()
+        wr = createSAWrapper(self.db.dsn,
                              forZope=self.forZope,
                              echo=self.logging,
                              engine_options={'convert_unicode': True},
