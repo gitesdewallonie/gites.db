@@ -12,6 +12,8 @@ class HebergementMaj(GitesMappedClassBase):
 
     heb_maj_nom = sa.Column('heb_maj_nom', sa.String())
 
+    heb_maj_url = sa.Column('heb_maj_url', sa.String())
+
     heb_maj_adresse = sa.Column('heb_maj_adresse', sa.String())
 
     heb_maj_localite = sa.Column('heb_maj_localite', sa.String())

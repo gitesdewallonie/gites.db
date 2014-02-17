@@ -15,9 +15,11 @@ import sqlalchemy as sa
 
 
 def upgrade():
-    print "... Add heb_url column"
+    print "... Add heb_url and heb_maj_url columns"
     op.add_column('hebergement',
                   sa.Column('heb_url', sa.String()))
+    op.add_column('hebergement_maj',
+                  sa.Column('heb_maj_url', sa.String()))
     print "... Fill hebergement.heb_url data from proprio.pro_url"
     op.execute("""UPDATE hebergement
                   SET heb_url = (SELECT pro_url
@@ -27,5 +29,6 @@ def upgrade():
 
 
 def downgrade():
-    print "... Drop heb_url column"
+    print "... Drop heb_url and heb_maj_url columns"
     op.drop_column('hebergement', 'heb_url')
+    op.drop_column('hebergement_maj', 'heb_maj_url')

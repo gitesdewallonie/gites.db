@@ -38,8 +38,6 @@ class ProprioMaj(GitesMappedClassBase):
 
     pro_maj_email = sa.Column('pro_maj_email', sa.String())
 
-    pro_maj_url = sa.Column('pro_maj_url', sa.String())
-
     pro_maj_date_crea = sa.Column('pro_maj_date_crea', sa.Date(),
                                   default=sa.func.current_timestamp())
 

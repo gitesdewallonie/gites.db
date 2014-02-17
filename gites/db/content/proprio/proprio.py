@@ -27,8 +27,6 @@ class Proprio(GitesMappedClassBase):
 
     pro_email = sqlalchemy.Column('pro_email', sqlalchemy.String())
 
-    pro_url = sqlalchemy.Column('pro_url', sqlalchemy.String())
-
     pro_etat = sqlalchemy.Column('pro_etat', sqlalchemy.Boolean())
 
     pro_maj_info_etat = sqlalchemy.Column('pro_maj_info_etat',
