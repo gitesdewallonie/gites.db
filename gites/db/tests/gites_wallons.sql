@@ -19492,6 +19492,7 @@ CREATE TABLE hebergement (
     heb_pk integer NOT NULL,
     heb_code_gdw character varying,
     heb_nom character varying,
+    heb_url character varying,
     heb_adresse character varying,
     heb_localite character varying,
     heb_code_cgt character varying,
