@@ -24,6 +24,10 @@ class HebergementApp(GitesMappedClassBase):
     heb_app_heb_fk = sqlalchemy.Column('heb_app_heb_fk', sqlalchemy.Integer,
                                        sqlalchemy.ForeignKey('hebergement.heb_pk'))
 
+    heb_app_groupement_line_length = sqlalchemy.Column('heb_app_groupement_line_length', sqlalchemy.Integer())
+
+    heb_app_groupement_angle_start = sqlalchemy.Column('heb_app_groupement_angle_start', sqlalchemy.Float())
+
     @mapper.Relation
     def hebergement(cls):
         return sqlalchemy.orm.relation(Hebergement, lazy=True, uselist=False,
