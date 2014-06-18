@@ -8,6 +8,8 @@ Changelog
 
 - PIVOT: Add migration to create pivot_origin and pivot_notification tables affinitic refs #5830
 
+- Add cron table refs #5841
+
 
 0.3 (2010-12-15)
 ----------------
