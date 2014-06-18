@@ -32,3 +32,4 @@ from maisontourisme import MaisonTourisme
 from province import Province
 from .pivot.origin import PivotOrigin
 from .pivot.notification import PivotNotification
+from cron import Cron
