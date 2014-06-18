@@ -28,9 +28,9 @@ class PivotNotification(GitesMappedClassBase):
                                sa.String(),
                                nullable=False)
 
-    not_date = sa.Column('notf_date',
-                         sa.DateTime(),
-                         nullable=False)
+    notf_date = sa.Column('notf_date',
+                          sa.DateTime(),
+                          nullable=False)
 
     notf_treated = sa.Column('notf_treated',
                              sa.Boolean())
@@ -48,3 +48,21 @@ class PivotNotification(GitesMappedClassBase):
                              sa.Integer(),
                              primary_key=True,
                              unique=True)
+
+    def get_untreated_notifications(self, origin):
+        """
+        Return untreated or unapplied notifications depeding on the origin
+        """
+        pass
+
+    def get_notifications(self, origin):
+        """
+        Return all notifications depending on the origin
+        """
+        pass
+
+    def treat_notification(self, pk, cmt, user):
+        """
+        Treat notification
+        """
+        pass
