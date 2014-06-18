@@ -31,7 +31,9 @@ from gites.db.content import (BlockingHistory,
                               TableHote,
                               TypeHebergement,
                               TypeTableHoteOfHebergementMaj,
-                              Civilite)
+                              Civilite,
+                              PivotOrigin,
+                              PivotNotification)
 from gites.db import DeclarativeBase
 from affinitic.db import utils
 
@@ -124,6 +126,13 @@ class GitesModel(object):
         model.add('linkhebergementepis',
                   table=LinkHebergementEpis.__table__,
                   mapper_class=LinkHebergementEpis)
+
+        model.add('pivot_origin',
+                  table=PivotOrigin.__table__,
+                  mapper_class=PivotOrigin)
+        model.add('pivot_notification',
+                  table=PivotNotification.__table__,
+                  mapper_class=PivotNotification)
         utils.initialize_defered_mappers(model.metadata)
         return model
 

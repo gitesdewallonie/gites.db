@@ -30,3 +30,5 @@ from commune import Commune
 from logitem import LogItem
 from maisontourisme import MaisonTourisme
 from province import Province
+from .pivot.origin import PivotOrigin
+from .pivot.notification import PivotNotification
