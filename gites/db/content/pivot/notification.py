@@ -49,19 +49,19 @@ class PivotNotification(GitesMappedClassBase):
                              primary_key=True,
                              unique=True)
 
-    def getUntreatedNotifications(self, origin):
+    def get_untreated_notifications(self, origin):
         """
         Return untreated or unapplied notifications depeding on the origin
         """
         pass
 
-    def getNotifications(self, origin):
+    def get_notifications(self, origin):
         """
         Return all notifications depending on the origin
         """
         pass
 
-    def treatNotification(self, pk, cmt, user):
+    def treat_notification(self, pk, cmt, user):
         """
         Treat notification
         """
