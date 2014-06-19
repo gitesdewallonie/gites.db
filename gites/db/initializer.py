@@ -18,7 +18,6 @@ from gites.db.content import (BlockingHistory,
                               LinkHebergementEpis,
                               LinkHebergementMetadata,
                               LogItem,
-                              LogModification,
                               MaisonTourisme,
                               MapBlacklist,
                               MapExternalData,
@@ -98,8 +97,6 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=LogItem.__table__,
                   mapper_class=LogItem)
-        model.add('log_modification', table=LogModification.__table__,
-                  mapper_class=LogModification)
         model.add('map_provider',
                   table=MapProvider.__table__,
                   mapper_class=MapProvider)
