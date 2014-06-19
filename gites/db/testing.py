@@ -37,6 +37,13 @@ def createHeb(session):
     session.flush()
 
 
+class GitesTestDB(GitesDB):
+
+    @property
+    def url(self):
+        return self.dsn
+
+
 class RDBLayer(Layer):
     defaultBases = (zca.ZCML_DIRECTIVES, )
     logging = False
@@ -133,7 +140,7 @@ class PGScriptRDB(RDBLayer):
         self.db.create()
         self.engine = create_engine(self.db.dsn)
         self.engine.connect()
-        self.pg = GitesDB()
+        self.pg = GitesTestDB()
         self.pg.dsn = self.db.dsn
         provideUtility(self.pg, IDatabase, 'postgres')
 
