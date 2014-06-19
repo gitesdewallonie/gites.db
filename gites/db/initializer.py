@@ -32,8 +32,8 @@ from gites.db.content import (BlockingHistory,
                               TypeHebergement,
                               TypeTableHoteOfHebergementMaj,
                               Civilite,
-                              PivotOrigin,
-                              PivotNotification,
+                              NotificationOrigin,
+                              Notification,
                               Cron)
 from gites.db import DeclarativeBase
 from affinitic.db import utils
@@ -129,11 +129,11 @@ class GitesModel(object):
                   mapper_class=LinkHebergementEpis)
 
         model.add('pivot_origin',
-                  table=PivotOrigin.__table__,
-                  mapper_class=PivotOrigin)
+                  table=NotificationOrigin.__table__,
+                  mapper_class=NotificationOrigin)
         model.add('pivot_notification',
-                  table=PivotNotification.__table__,
-                  mapper_class=PivotNotification)
+                  table=Notification.__table__,
+                  mapper_class=Notification)
 
         model.add('cron',
                   table=Cron.__table__,
