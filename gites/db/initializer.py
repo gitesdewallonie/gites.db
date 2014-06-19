@@ -18,6 +18,7 @@ from gites.db.content import (BlockingHistory,
                               LinkHebergementEpis,
                               LinkHebergementMetadata,
                               LogItem,
+                              LogModification,
                               MaisonTourisme,
                               MapBlacklist,
                               MapExternalData,
@@ -97,6 +98,8 @@ class GitesModel(object):
                   mapper_class=TypeTableHoteOfHebergementMaj)
         model.add('log_item', table=LogItem.__table__,
                   mapper_class=LogItem)
+        model.add('log_modification', table=LogModification.__table__,
+                  mapper_class=LogModification)
         model.add('map_provider',
                   table=MapProvider.__table__,
                   mapper_class=MapProvider)
@@ -128,16 +131,11 @@ class GitesModel(object):
                   table=LinkHebergementEpis.__table__,
                   mapper_class=LinkHebergementEpis)
 
-        model.add('pivot_origin',
-                  table=NotificationOrigin.__table__,
+        model.add('notification_origin', table=NotificationOrigin.__table__,
                   mapper_class=NotificationOrigin)
-        model.add('pivot_notification',
-                  table=Notification.__table__,
+        model.add('notification', table=Notification.__table__,
                   mapper_class=Notification)
-
-        model.add('cron',
-                  table=Cron.__table__,
-                  mapper_class=Cron)
+        model.add('cron', table=Cron.__table__, mapper_class=Cron)
 
         utils.initialize_defered_mappers(model.metadata)
         return model
