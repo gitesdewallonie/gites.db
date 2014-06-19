@@ -45,7 +45,9 @@ class Notification(GitesMappedClassBase):
         """
         Return all notifications depending on the origin
         """
-        pass
+        query = cls._session().query(cls)
+        query = query.filter(cls.origin == origin)
+        return query.all()
 
     def treat(self, treated, user):
         """
