@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from gites.db.mapper import GitesMappedClassBase
 
 
-class PivotOrigin(GitesMappedClassBase):
+class NotificationOrigin(GitesMappedClassBase):
     __tablename__ = u'notification_origin'
 
-    pk = sa.Column('origin_pk', sa.String, primary_key=True, unique=True)
+    pk = sa.Column('pk', sa.String, primary_key=True, unique=True)
