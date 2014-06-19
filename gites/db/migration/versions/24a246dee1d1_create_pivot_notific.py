@@ -16,40 +16,37 @@ from sqlalchemy.sql import table, column
 
 
 def upgrade():
-    print "... Create TABLE pivot_origin"
+    print "... Create TABLE notification_origin"
     op.create_table(
-        'pivot_origin',
-        Column('origin_pk', String(), primary_key=True, unique=True),
+        'notification_origin',
+        Column('pk', String, primary_key=True, unique=True),
     )
 
-    print "... Insert into pivot_origin:"
+    print "... Insert into notification_origin:"
     print "... PIVOT, GDW"
-    pivot_origin_table = table('pivot_origin',
-                               column('origin_pk', String()))
-    op.bulk_insert(pivot_origin_table,
-                   [
-                       {'origin_pk': 'GDW'},
-                       {'origin_pk': 'PIVOT'},
-                   ])
+    pivot_origin_table = table('notification_origin', column('pk', String))
+    op.bulk_insert(pivot_origin_table, [{'pk': 'GDW'}, {'pk': 'PIVOT'}])
 
-    print "... Create TABLE pivot_notification"
+    print "... Create TABLE notification"
     op.create_table(
-        'pivot_notification',
-        Column('notf_pk', Integer(), primary_key=True, unique=True),
-        Column('notf_origin', String(), ForeignKey('pivot_origin.origin_pk'), nullable=False),
-        Column('notf_table', String(), nullable=False),
-        Column('notf_old_value', String(), nullable=False),
-        Column('notf_new_value', String(), nullable=False),
-        Column('notf_date', DateTime(), nullable=False),
-        Column('notf_treated', Boolean()),
-        Column('notf_applied', Boolean()),
-        Column('notf_cmt', String()),
-        Column('notf_user', String()),
+        'notification',
+        Column('pk', Integer, primary_key=True, unique=True),
+        Column('origin', String, ForeignKey('notification_origin.pk'),
+               nullable=False),
+        Column('table', String, nullable=False),
+        Column('column', String, nullable=False),
+        Column('table_pk', String, nullable=False),
+        Column('old_value', String),
+        Column('new_value', String),
+        Column('date', DateTime, nullable=False),
+        Column('treated', Boolean),
+        Column('cmt', String),
+        Column('user', String),
     )
 
 
 def downgrade():
-    print "... Drop TABLE pivot_notification"
-    op.drop_table('pivot_notification')
-    print "... Drop TABLE pivot_origin"
-    op.drop_table('pivot_origin')
+    print "... Drop TABLE notification"
+    op.drop_table('notification')
+    print "... Drop TABLE notification_origin"
+    op.drop_table('notification_origin')

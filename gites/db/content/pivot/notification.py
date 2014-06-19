@@ -3,48 +3,29 @@ import sqlalchemy as sa
 from gites.db.mapper import GitesMappedClassBase
 
 
-class PivotNotification(GitesMappedClassBase):
-    __tablename__ = u'pivot_notification'
+class Notification(GitesMappedClassBase):
+    __tablename__ = u'notification'
 
-    notf_pk = sa.Column('notf_pk',
-                        sa.Integer(),
-                        primary_key=True,
-                        unique=True)
+    pk = sa.Column('pk', sa.Integer, primary_key=True, unique=True)
 
-    notf_origin = sa.Column('notf_origin',
-                            sa.String(),
-                            sa.ForeignKey('pivot_origin.origin_pk'),
-                            nullable=False)
+    origin = sa.Column('origin', sa.String,
+                       sa.ForeignKey('notification_origin.pk'),
+                       nullable=False)
 
-    notf_table = sa.Column('notf_table',
-                           sa.String(),
-                           nullable=False)
+    table = sa.Column('table', sa.String, nullable=False)
 
-    notf_old_value = sa.Column('notf_old_value',
-                               sa.String(),
-                               nullable=False)
+    column = sa.Column('column', sa.String, nullable=False)
 
-    notf_new_value = sa.Column('notf_new_value',
-                               sa.String(),
-                               nullable=False)
+    table_pk = sa.Column('table_pk', sa.String, nullable=False),
 
-    not_date = sa.Column('notf_date',
-                         sa.DateTime(),
-                         nullable=False)
+    old_value = sa.Column('old_value', sa.String)
 
-    notf_treated = sa.Column('notf_treated',
-                             sa.Boolean())
+    new_value = sa.Column('new_value', sa.String)
 
-    notf_applied = sa.Column('notf_applied',
-                             sa.Boolean())
+    date = sa.Column('date', sa.DateTime, nullable=False)
 
-    notf_cmt = sa.Column('notf_cmt',
-                         sa.String())
+    treated = sa.Column('treated', sa.Boolean)
 
-    notf_user = sa.Column('notf_user',
-                          sa.String())
+    cmt = sa.Column('cmt', sa.String)
 
-    blacklist_pk = sa.Column('blacklist_pk',
-                             sa.Integer(),
-                             primary_key=True,
-                             unique=True)
+    user = sa.Column('user', sa.String)
