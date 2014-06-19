@@ -29,3 +29,21 @@ class Notification(GitesMappedClassBase):
     cmt = sa.Column('cmt', sa.String)
 
     user = sa.Column('user', sa.String)
+
+    def get_untreated_notifications(self, origin):
+        """
+        Return untreated or unapplied notifications depeding on the origin
+        """
+        pass
+
+    def get_notifications(self, origin):
+        """
+        Return all notifications depending on the origin
+        """
+        pass
+
+    def treat_notification(self, pk, cmt, user):
+        """
+        Treat notification
+        """
+        pass
