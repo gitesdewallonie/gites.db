@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+import gocept.testdb
 import os
 import transaction
 from zope.configuration import xmlconfig
-import gocept.testdb
+from zope.component import provideUtility
+from sqlalchemy import create_engine
 from sqlalchemy.orm import clear_mappers
 from z3c.sqlalchemy import createSAWrapper
 from z3c.sqlalchemy import getSAWrapper
 from plone.testing import Layer
 from plone.testing import zca
+from affinitic.db.interfaces import IDatabase
+from gites.db.pg import GitesDB
 
 CURRENT_DIR = os.path.dirname(__file__)
 
@@ -98,6 +102,40 @@ class PGRdb(RDBLayer):
     package = gites.db
     logging = True
     forZope = True
+
+
+class PGScriptRDB(RDBLayer):
+    dbPrefix = 'pg'
+    dbName = 'gites_wallons'
+    package = gites.db
+
+    def setupData(self):
+        pass
+
+    def testTearDown(self):
+        pass
+
+    def invalidate(self):
+        """
+        Invalidates the connections to the database
+        """
+        self.db.drop_all()
+
+    def setupDatabase(self):
+        configurationContext = self['configurationContext']
+        xmlconfig.file('testing.zcml', self.package,
+                       context=configurationContext)
+        configurationContext.execute_actions()
+        schema_file = os.path.join(CURRENT_DIR, 'tests', 'gites_wallons.sql')
+        self.db = gocept.testdb.PostgreSQL(encoding='UTF8',
+                                           db_template='gites_wallons_testing',
+                                           schema_path=schema_file)
+        self.db.create()
+        self.engine = create_engine(self.db.dsn)
+        self.engine.connect()
+        self.pg = GitesDB()
+        self.pg.dsn = self.db.dsn
+        provideUtility(self.pg, IDatabase, 'postgres')
 
 
 class PGRdbNoZope(PGRdb):
