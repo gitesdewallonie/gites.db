@@ -30,6 +30,8 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_nom = sqlalchemy.Column('heb_nom', sqlalchemy.String())
 
+    heb_code_cgt = sqlalchemy.Column('heb_code_cgt', sqlalchemy.String())
+
     heb_url = sqlalchemy.Column('heb_url', sqlalchemy.String())
 
     heb_cgt_cap_max = sqlalchemy.Column('heb_cgt_cap_max', sqlalchemy.Integer())
