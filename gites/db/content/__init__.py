@@ -18,7 +18,6 @@ from .info.infotouristique import InfoTouristique
 from .info.typeinfotouristique import TypeInfoTouristique
 from .info.infopratique import InfoPratique
 from .info.typeinfopratique import TypeInfoPratique
-from gites.db.content.log_modification import LogModification
 from .map.mapblacklist import MapBlacklist
 from .map.mapprovider import MapProvider
 from .map.mapexternaldata import MapExternalData
