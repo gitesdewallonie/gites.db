@@ -45,5 +45,10 @@ class Tarifs(GitesMappedClassBase):
 
     @mapper.Relation
     def hebergement(cls):
-        return sa.orm.relation(Hebergement, uselist=False,
-                               backref=sa.orm.backref(cls, uselist=True))
+        return sa.orm.relation(
+            Hebergement, uselist=False,
+            foreign_keys=[Hebergement.heb_pk],
+            primaryjoin=cls.heb_pk == Hebergement.heb_pk,
+            backref=sa.orm.backref('tarifs', uselist=True,
+                                   foreign_keys=[Hebergement.heb_pk],
+                                   primaryjoin=Hebergement.heb_pk == cls.heb_pk))
