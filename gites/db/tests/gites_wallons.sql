@@ -42034,6 +42034,42 @@ REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
+--
+-- Name: notification; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE notification (
+    pk integer NOT NULL,
+    origin character varying NOT NULL,
+    "table" character varying NOT NULL,
+    "column" character varying NOT NULL,
+    table_pk character varying NOT NULL,
+    old_value character varying,
+    new_value character varying,
+    date timestamp without time zone NOT NULL,
+    treated boolean,
+    cmt character varying,
+    "user" character varying
+);
+
+--
+-- Name: notification_origin; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE notification_origin (
+    pk character varying NOT NULL
+);
+
+--
+-- Name: cron; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE cron (
+    cron_pk integer NOT NULL,
+    cron_script character varying NOT NULL,
+    cron_start_date timestamp without time zone NOT NULL,
+    cron_end_date timestamp without time zone
+);
 
 --
 -- PostgreSQL database dump complete

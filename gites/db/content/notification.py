@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.pivot.origin import NotificationOrigin
 
 
 class Notification(GitesMappedClassBase):
@@ -59,3 +61,7 @@ class Notification(GitesMappedClassBase):
         setattr(self, 'treated', treated)
         setattr(self, 'user', user)
         self.save()
+
+    @mapper.Relation
+    def notification_origin(cls):
+        return sa.orm.relation(NotificationOrigin, lazy=True)
