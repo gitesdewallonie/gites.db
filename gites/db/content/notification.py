@@ -38,15 +38,18 @@ class Notification(GitesMappedClassBase):
         query = cls._session().query(cls)
         query = query.filter(cls.origin == origin)
         query = query.filter(cls.treated == None)
+        query = query.order_by(cls.table_pk, cls.date)
         return query.all()
 
     @classmethod
-    def get_notifications(cls, origin):
+    def get_treated_notifications(cls, origin):
         """
         Return all notifications depending on the origin
         """
         query = cls._session().query(cls)
         query = query.filter(cls.origin == origin)
+        query = query.filter(cls.treated != None)
+        query = query.order_by(cls.table_pk, cls.date)
         return query.all()
 
     def treat(self, treated, user):
