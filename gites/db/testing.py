@@ -129,7 +129,22 @@ class PGScriptRDB(RDBLayer):
         """
         Invalidates the connections to the database
         """
-        self.db.drop_all()
+        db_name = self.session.bind.url.database
+        self.session.close()
+        new_session = self.pg.session
+        query = new_session.execute(
+            "SELECT procpid FROM pg_stat_activity where datname = '{0}'"
+            "order by backend_start asc".format(db_name))
+        connections = [l[0] for l in query.fetchall()]
+        for conn in connections:
+            statement = 'SELECT pg_terminate_backend({0})'.format(conn)
+            try:
+                new_session.execute(statement).fetchall()
+            except:
+                pass
+        self.conn.invalidate()
+        self.engine.dispose()
+        del self.engine
 
     def setupDatabase(self):
         configurationContext = self['configurationContext']
@@ -142,10 +157,10 @@ class PGScriptRDB(RDBLayer):
                                            schema_path=schema_file)
         self.db.create()
         self.engine = create_engine(self.db.dsn)
-        self.engine.connect()
+        self.conn = self.engine.connect()
         self.pg = GitesTestDB()
         self.pg.dsn = self.db.dsn
-        self.pg.session
+        self.session = self.pg.session
         initialize_declarative_mappers(DeclarativeBase, self.pg.metadata)
         initialize_defered_mappers(self.pg.metadata)
         provideUtility(self.pg, IDatabase, 'postgres')
