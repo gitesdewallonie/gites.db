@@ -61,16 +61,17 @@ def upgrade():
     op.create_table(
         'tarifs',
         sa.Column('pk', sa.Integer, primary_key=True, unique=True),
-        sa.Column('heb_pk', sa.Integer, nullable=False),
-        sa.Column('type', sa.String, sa.ForeignKey('tarifs_type.type'),
-                  nulable=False),
-        sa.Column('subtype', sa.String, sa.ForeignKey('tarifs_type.subtype'),
-                  nulable=False),
+        sa.Column('heb_pk', sa.Integer,
+                  sa.ForeignKey('hebergement.heb_pk'), nullable=False),
+        sa.Column('type', sa.String, nullable=False),
+        sa.Column('subtype', sa.String, nullable=False),
         sa.Column('date', sa.DateTime, nullable=False),
         sa.Column('user', sa.String, nullable=False),
         sa.Column('min', sa.Float),
         sa.Column('max', sa.Float),
         sa.Column('cmt', sa.String),
+        sa.ForeignKeyConstraint(['type', 'subtype'],
+                                ['tarifs_type.type', 'tarifs_type.subtype'])
     )
 
 
