@@ -2,7 +2,7 @@
 import sqlalchemy as sa
 from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
-from gites.db.content.pivot.origin import NotificationOrigin
+from gites.db.content.notification_origin import NotificationOrigin
 
 
 class Notification(GitesMappedClassBase):

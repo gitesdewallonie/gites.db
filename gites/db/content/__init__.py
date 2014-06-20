@@ -31,7 +31,7 @@ from logitem import LogItem
 from maisontourisme import MaisonTourisme
 from province import Province
 from notification import Notification
-from origin import NotificationOrigin
+from notification_origin import NotificationOrigin
 from cron import Cron
 from tarifs import Tarifs
 from tarifs_type import TarifsType
