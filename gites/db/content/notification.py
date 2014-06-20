@@ -32,23 +32,35 @@ class Notification(GitesMappedClassBase):
 
     user = sa.Column('user', sa.String)
 
-    def get_untreated_notifications(self, origin):
+    @classmethod
+    def get_untreated_notifications(cls, origin):
         """
         Return untreated or unapplied notifications depeding on the origin
         """
-        pass
+        query = cls._session().query(cls)
+        query = query.filter(cls.origin == origin)
+        query = query.filter(cls.treated == None)
+        query = query.order_by(cls.table_pk, cls.date)
+        return query.all()
 
-    def get_notifications(self, origin):
+    @classmethod
+    def get_treated_notifications(cls, origin):
         """
         Return all notifications depending on the origin
         """
-        pass
+        query = cls._session().query(cls)
+        query = query.filter(cls.origin == origin)
+        query = query.filter(cls.treated != None)
+        query = query.order_by(cls.table_pk, cls.date)
+        return query.all()
 
-    def treat_notification(self, pk, cmt, user):
+    def treat(self, treated, user):
         """
         Treat notification
         """
-        pass
+        setattr(self, 'treated', treated)
+        setattr(self, 'user', user)
+        self.save()
 
     @mapper.Relation
     def notification_origin(cls):
