@@ -10,7 +10,7 @@ Copyright by Affinitic sprl
 from affinitic.db import mapper
 from gites.db.content.hebergement.hebergement import Hebergement
 from gites.db.content.tarifs_type import TarifsType
-from gites.db.mappers import GitesMappedClassBase
+from gites.db.mapper import GitesMappedClassBase
 import sqlalchemy as sa
 
 TarifsType  # Pyflakes
@@ -41,7 +41,14 @@ class Tarifs(GitesMappedClassBase):
 
     cmt = sa.Column('cmt', sa.String)
 
+    valid = sa.Column('valid', sa.Boolean)
+
     @mapper.Relation
     def hebergement(cls):
-        return sa.orm.relation(Hebergement, uselist=False,
-                               backref=sa.orm.backref(cls, uselist=True))
+        return sa.orm.relation(
+            Hebergement, uselist=False,
+            foreign_keys=[Hebergement.heb_pk],
+            primaryjoin=cls.heb_pk == Hebergement.heb_pk,
+            backref=sa.orm.backref('tarifs', uselist=True,
+                                   foreign_keys=[Hebergement.heb_pk],
+                                   primaryjoin=Hebergement.heb_pk == cls.heb_pk))

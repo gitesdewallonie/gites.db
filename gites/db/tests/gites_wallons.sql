@@ -42034,8 +42034,94 @@ REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
+--
+-- Name: notification; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE notification (
+    pk integer NOT NULL,
+    origin character varying NOT NULL,
+    "table" character varying NOT NULL,
+    "column" character varying NOT NULL,
+    table_pk character varying NOT NULL,
+    old_value character varying,
+    new_value character varying,
+    date timestamp without time zone NOT NULL,
+    treated boolean,
+    cmt character varying,
+    "user" character varying
+);
+
+--
+-- Name: notification_origin; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE notification_origin (
+    pk character varying NOT NULL
+);
+
+--
+-- Name: cron; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE cron (
+    cron_pk integer NOT NULL,
+    cron_script character varying NOT NULL,
+    cron_start_date timestamp without time zone NOT NULL,
+    cron_end_date timestamp without time zone
+);
+
+--
+-- Name: tarifs_type; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE tarifs_type (
+    type character varying NOT NULL,
+    subtype character varying NOT NULL
+);
+
+
+--
+-- Data for Name: tarifs_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO tarifs_type (type, subtype) VALUES ('LOW_SEASON', 'WEEK');
+INSERT INTO tarifs_type (type, subtype) VALUES ('LOW_SEASON', 'WEEKEND');
+INSERT INTO tarifs_type (type, subtype) VALUES ('MEDIUM_SEASON', 'WEEK');
+INSERT INTO tarifs_type (type, subtype) VALUES ('MEDIUM_SEASON', 'WEEKEND');
+INSERT INTO tarifs_type (type, subtype) VALUES ('HIGH_SEASON', 'WEEK');
+INSERT INTO tarifs_type (type, subtype) VALUES ('HIGH_SEASON', 'WEEKEND');
+INSERT INTO tarifs_type (type, subtype) VALUES ('FEAST_WEEKEND', '3_NIGHTS');
+INSERT INTO tarifs_type (type, subtype) VALUES ('FEAST_WEEKEND', '4_NIGHTS');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'END_OF_YEAR');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'GUARANTEE');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'OTHER');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'SOJOURN_TAX');
+INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'ACCORDING_TO_CONSUMPTION');
+INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'INCLUDED');
+INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'INCLUSIVE');
+INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', '1_PERSON');
+INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', '2_PERSONS');
+INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', 'PERSON_SUP');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'WITHOUT_BREAKFAST');
+INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'TABLE_HOTES');;
+
+--
+-- Name: tarifs; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE tarifs (
+    pk integer NOT NULL,
+    heb_pk integer NOT NULL,
+    type character varying NOT NULL,
+    subtype character varying NOT NULL,
+    date timestamp without time zone NOT NULL,
+    "user" character varying NOT NULL,
+    min double precision,
+    max double precision,
+    cmt character varying
+);
 
 --
 -- PostgreSQL database dump complete
 --
-

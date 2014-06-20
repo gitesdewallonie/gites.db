@@ -11,6 +11,9 @@ from z3c.sqlalchemy import getSAWrapper
 from plone.testing import Layer
 from plone.testing import zca
 from affinitic.db.interfaces import IDatabase
+from affinitic.db.utils import (initialize_declarative_mappers,
+                                initialize_defered_mappers)
+from gites.db import DeclarativeBase
 from gites.db.pg import GitesDB
 
 CURRENT_DIR = os.path.dirname(__file__)
@@ -142,6 +145,9 @@ class PGScriptRDB(RDBLayer):
         self.engine.connect()
         self.pg = GitesTestDB()
         self.pg.dsn = self.db.dsn
+        self.pg.session
+        initialize_declarative_mappers(DeclarativeBase, self.pg.metadata)
+        initialize_defered_mappers(self.pg.metadata)
         provideUtility(self.pg, IDatabase, 'postgres')
 
 

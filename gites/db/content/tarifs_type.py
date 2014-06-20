@@ -7,7 +7,7 @@ Licensed under the GPL license, see LICENCE.txt for more details.
 Copyright by Affinitic sprl
 """
 
-from gites.db.mappers import GitesMappedClassBase
+from gites.db.mapper import GitesMappedClassBase
 import sqlalchemy as sa
 
 

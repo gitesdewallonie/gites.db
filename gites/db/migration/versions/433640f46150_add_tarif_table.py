@@ -70,6 +70,7 @@ def upgrade():
         sa.Column('min', sa.Float),
         sa.Column('max', sa.Float),
         sa.Column('cmt', sa.String),
+        sa.Column('valid', sa.Boolean),
         sa.ForeignKeyConstraint(['type', 'subtype'],
                                 ['tarifs_type.type', 'tarifs_type.subtype'])
     )
