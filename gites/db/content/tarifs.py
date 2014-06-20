@@ -41,6 +41,8 @@ class Tarifs(GitesMappedClassBase):
 
     cmt = sa.Column('cmt', sa.String)
 
+    valid = sa.Column('valid', sa.Boolean)
+
     @mapper.Relation
     def hebergement(cls):
         return sa.orm.relation(Hebergement, uselist=False,
