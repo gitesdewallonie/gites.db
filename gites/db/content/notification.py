@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sqlalchemy as sa
+from affinitic.db import mapper
 from gites.db.mapper import GitesMappedClassBase
+from gites.db.content.pivot.origin import NotificationOrigin
 
 
 class Notification(GitesMappedClassBase):
@@ -16,7 +18,7 @@ class Notification(GitesMappedClassBase):
 
     column = sa.Column('column', sa.String, nullable=False)
 
-    table_pk = sa.Column('table_pk', sa.String, nullable=False),
+    table_pk = sa.Column('table_pk', sa.String, nullable=False)
 
     old_value = sa.Column('old_value', sa.String)
 
@@ -47,3 +49,7 @@ class Notification(GitesMappedClassBase):
         Treat notification
         """
         pass
+
+    @mapper.Relation
+    def notification_origin(cls):
+        return sa.orm.relation(NotificationOrigin, lazy=True)
