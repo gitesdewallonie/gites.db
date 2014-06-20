@@ -1,4 +1,4 @@
-#NOCHECK
+# NOCHECK
 # -*- coding: utf-8 -*-
 from .calendar.blockinghistory import BlockingHistory
 from .calendar.hebergementblockinghistory import HebergementBlockingHistory
@@ -30,6 +30,6 @@ from commune import Commune
 from logitem import LogItem
 from maisontourisme import MaisonTourisme
 from province import Province
-from .pivot.origin import NotificationOrigin
 from notification import Notification
+from origin import NotificationOrigin
 from cron import Cron
