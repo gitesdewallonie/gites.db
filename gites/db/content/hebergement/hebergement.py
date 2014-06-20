@@ -161,11 +161,23 @@ class Hebergement(GitesMappedClassBase, Traversable):
         query = query.limit(1)
         return query.scalar()
 
+    @property
+    def heb_nombre_epis(self):
+        return self.epis_nombre()
+
     def is_smoker(self):
         return self._get_metadata('heb_fumeur')
 
+    @property
+    def heb_fumeur(self):
+        return self.is_smoker()
+
     def accept_dogs(self):
         return self._get_metadata('heb_animal')
+
+    @property
+    def heb_animal(self):
+        return self.accept_dogs()
 
     @mapper.Relation
     def type(cls):
@@ -223,6 +235,10 @@ class Hebergement(GitesMappedClassBase, Traversable):
                 cls.heb_pk == LinkHebergementMetadata.heb_fk,
                 LinkHebergementMetadata.link_met_value == True),
             lazy=True)
+
+    @property
+    def heb_gid_access_tous(self):
+        return self._get_metadata('heb_gid_access_tous')
 
     @mapper.RelationImport('gites.db.content:Metadata',
                            'gites.db.content:LinkHebergementMetadata')
