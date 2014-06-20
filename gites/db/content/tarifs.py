@@ -52,3 +52,19 @@ class Tarifs(GitesMappedClassBase):
             backref=sa.orm.backref('tarifs', uselist=True,
                                    foreign_keys=[Hebergement.heb_pk],
                                    primaryjoin=Hebergement.heb_pk == cls.heb_pk))
+
+    @classmethod
+    def get_hebergement_tarifs(cls, heb_pk):
+        """
+        Get all actual valid tarifs for an hebergement
+        """
+        query = cls._session().query(
+            sa.func.max(cls.pk))
+        query = query.filter(cls.heb_pk == heb_pk)
+        query = query.filter(cls.valid == True)
+        query = query.group_by(cls.type, cls.subtype)
+        pks = query.all()
+
+        query = cls._session().query(cls)
+        query = query.filter(cls.pk.in_(pks))
+        return query.all()
