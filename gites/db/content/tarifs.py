@@ -62,9 +62,19 @@ class Tarifs(GitesMappedClassBase):
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
         query = query.filter(cls.valid == True)
+        query = query.filter(cls.type != 'CHARGES')
         query = query.group_by(cls.type, cls.subtype)
         pks = query.all()
 
+        query = cls._session().query(
+            sa.func.max(cls.pk))
+        query = query.filter(cls.heb_pk == heb_pk)
+        query = query.filter(cls.valid == True)
+        query = query.filter(cls.type == 'CHARGES')
+        pks2 = query.all()
+
+        pks_all = pks + pks2
+
         query = cls._session().query(cls)
-        query = query.filter(cls.pk.in_(pks))
+        query = query.filter(cls.pk.in_(pks_all))
         return query.all()
