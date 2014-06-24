@@ -98,4 +98,4 @@ class Tarifs(GitesMappedClassBase):
         query = query.filter(cls.min == min)
         query = query.filter(cls.max == max)
         query = query.filter(cls.cmt == cmt)
-        return query.all() and True or False
+        return query.count() > 0
