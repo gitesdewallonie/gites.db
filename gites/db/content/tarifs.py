@@ -54,10 +54,7 @@ class Tarifs(GitesMappedClassBase):
                                    primaryjoin=Hebergement.heb_pk == cls.heb_pk))
 
     @classmethod
-    def get_hebergement_tarifs(cls, heb_pk):
-        """
-        Get all actual valid tarifs for an hebergement
-        """
+    def _tarifs_pks(cls, heb_pk):
         query = cls._session().query(
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
@@ -74,7 +71,31 @@ class Tarifs(GitesMappedClassBase):
         pks2 = query.all()
 
         pks_all = pks + pks2
+        return pks_all
+
+    @classmethod
+    def get_hebergement_tarifs(cls, heb_pk):
+        """
+        Get all actual valid tarifs for an hebergement
+        """
+        pks_all = cls._tarifs_pks(heb_pk)
 
         query = cls._session().query(cls)
         query = query.filter(cls.pk.in_(pks_all))
         return query.all()
+
+    @classmethod
+    def exists_tarifs(cls, heb_pk, type, subtype, min, max, cmt):
+        """
+        Verify if that tarif with same value exists
+        """
+        pks_all = cls._tarifs_pks(heb_pk)
+
+        query = cls._session().query(cls)
+        query = query.filter(cls.pk.in_(pks_all))
+        query = query.filter(cls.type == type)
+        query = query.filter(cls.subtype == subtype)
+        query = query.filter(cls.min == min)
+        query = query.filter(cls.max == max)
+        query = query.filter(cls.cmt == cmt)
+        return query.all() and True or False
