@@ -95,7 +95,7 @@ class Tarifs(GitesMappedClassBase):
         return query.all()
 
     @classmethod
-    def get_hebergement_tarif_to_confirm(cls, heb_pk, type, subtype):
+    def get_hebergement_tarif_to_confirm(cls, heb_pk, type, subtype=None):
         """
         Get all heb with tarifs that need to be confirmed
         """
@@ -103,7 +103,8 @@ class Tarifs(GitesMappedClassBase):
         query = query.filter(cls.valid == None)
         query = query.filter(cls.heb_pk == heb_pk)
         query = query.filter(cls.type == type)
-        query = query.filter(cls.subtype == subtype)
+        if subtype:
+            query = query.filter(cls.subtype == subtype)
         query = query.order_by(cls.pk)
         result = query.first()
         return result
