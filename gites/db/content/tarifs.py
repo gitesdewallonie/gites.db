@@ -58,16 +58,16 @@ class Tarifs(GitesMappedClassBase):
         query = cls._session().query(
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
-        query = query.filter(cls.valid == True)
         query = query.filter(cls.type != 'CHARGES')
+        query = query.filter(cls.valid == True)
         query = query.group_by(cls.type, cls.subtype)
         pks = query.all()
 
         query = cls._session().query(
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
-        query = query.filter(cls.valid == True)
         query = query.filter(cls.type == 'CHARGES')
+        query = query.filter(cls.valid == True)
         pks2 = query.all()
 
         pks_all = pks + pks2
@@ -85,6 +85,47 @@ class Tarifs(GitesMappedClassBase):
         return query.all()
 
     @classmethod
+    def get_tarifs_to_confirm(cls):
+        """
+        Get all heb with tarifs that need to be confirmed
+        """
+        query = cls._session().query(cls.heb_pk)
+        query = query.filter(cls.valid == None)
+        query = query.group_by(cls.heb_pk)
+        return query.all()
+
+    @classmethod
+    def get_hebergement_tarif_to_confirm(cls, heb_pk, type, subtype):
+        """
+        Get all heb with tarifs that need to be confirmed
+        """
+        query = cls._session().query(cls)
+        query = query.filter(cls.valid == None)
+        query = query.filter(cls.heb_pk == heb_pk)
+        query = query.filter(cls.type == type)
+        query = query.filter(cls.subtype == subtype)
+        query = query.order_by(cls.pk)
+        result = query.first()
+        return result
+
+    @classmethod
+    def get_hebergement_tarif_to_confirm_with_value(cls, heb_pk, type, subtype, min, max, cmt):
+        """
+        Get all heb with tarifs that need to be confirmed
+        """
+        query = cls._session().query(cls)
+        query = query.filter(cls.valid == None)
+        query = query.filter(cls.heb_pk == heb_pk)
+        query = query.filter(cls.type == type)
+        query = query.filter(cls.subtype == subtype)
+        query = query.filter(cls.min == min)
+        query = query.filter(cls.max == max)
+        query = query.filter(cls.cmt == cmt)
+        query = query.order_by(cls.pk)
+        result = query.first()
+        return result
+
+    @classmethod
     def exists_tarifs(cls, heb_pk, type, subtype, min, max, cmt):
         """
         Verify if that tarif with same value exists
@@ -98,4 +139,5 @@ class Tarifs(GitesMappedClassBase):
         query = query.filter(cls.min == min)
         query = query.filter(cls.max == max)
         query = query.filter(cls.cmt == cmt)
+        query = query.filter(cls.valid == True)
         return query.count() > 0
