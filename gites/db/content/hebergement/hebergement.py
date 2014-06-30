@@ -249,3 +249,14 @@ class Hebergement(GitesMappedClassBase, Traversable):
             secondary=LinkHebergementMetadata.__tablename__,
             primaryjoin=(cls.heb_pk == LinkHebergementMetadata.heb_fk),
             lazy=True)
+
+    @classmethod
+    def get_last_changes(cls, date, session=None, cgt_not_empty=False):
+        """Return the modified lines since the given date"""
+        if not session:
+            session = cls._session()
+        query = session.query(cls)
+        query = query.filter(cls.heb_date_modification >= date)
+        if cgt_not_empty:
+            query = query.filter(cls.heb_code_cgt != u'')
+        return query.all()
