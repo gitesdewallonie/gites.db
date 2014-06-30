@@ -19612,7 +19612,9 @@ SET default_with_oids = false;
 CREATE TABLE hebergement_app (
     heb_app_pk integer NOT NULL,
     heb_app_sort_order integer,
-    heb_app_heb_fk integer
+    heb_app_heb_fk integer,
+    heb_app_groupement_line_length integer,
+    heb_app_groupement_angle_start float
 );
 
 
