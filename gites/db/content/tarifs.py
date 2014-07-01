@@ -87,17 +87,18 @@ class Tarifs(GitesMappedClassBase):
     @classmethod
     def get_tarifs_to_confirm(cls):
         """
-        Get all heb with tarifs that need to be confirmed
+        Get all heb_pk of tarifs that need to be confirmed
         """
         query = cls._session().query(cls.heb_pk)
         query = query.filter(cls.valid == None)
         query = query.group_by(cls.heb_pk)
+        query = query.order_by(cls.heb_pk)
         return query.all()
 
     @classmethod
     def get_hebergement_tarif_to_confirm(cls, heb_pk, type, subtype=None):
         """
-        Get all heb with tarifs that need to be confirmed
+        Get tarifs that need to be confirmed for one specific heb and type
         """
         query = cls._session().query(cls)
         query = query.filter(cls.valid == None)
