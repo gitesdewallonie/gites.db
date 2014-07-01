@@ -42121,7 +42121,8 @@ CREATE TABLE tarifs (
     "user" character varying NOT NULL,
     min double precision,
     max double precision,
-    cmt character varying
+    cmt character varying,
+    valid boolean
 );
 
 --

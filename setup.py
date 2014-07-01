@@ -38,6 +38,7 @@ setup(
         'Products.Archetypes'],
     extras_require=dict(
         test=[
+            'affinitic.testing',
             'unittest2',
             'zope.testing',
             'plone.testing',

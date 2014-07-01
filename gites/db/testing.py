@@ -13,6 +13,7 @@ from plone.testing import zca
 from affinitic.db.interfaces import IDatabase
 from affinitic.db.utils import (initialize_declarative_mappers,
                                 initialize_defered_mappers)
+from affinitic.testing import DatabaseTestCase
 from gites.db import DeclarativeBase
 from gites.db.pg import GitesDB
 
@@ -168,6 +169,14 @@ class PGScriptRDB(RDBLayer):
 
 class PGRdbNoZope(PGRdb):
     forZope = False
+
+
+class GitesWallonsDBTestCase(DatabaseTestCase):
+    databases = ('gites_wallons', )
+
+    @property
+    def gites_wallons_session(self):
+        return getSAWrapper('gites_wallons').session
 
 
 PGRDB = PGRdb(name='PGRDB')
