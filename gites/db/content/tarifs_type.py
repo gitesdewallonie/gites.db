@@ -17,3 +17,7 @@ class TarifsType(GitesMappedClassBase):
     type = sa.Column('type', sa.String, primary_key=True, nullable=False)
 
     subtype = sa.Column('subtype', sa.String, primary_key=True, nullable=False)
+
+    gite = sa.Column('gite', sa.Boolean, nullable=False)
+
+    chambre = sa.Column('chambre', sa.Boolean, nullable=False)

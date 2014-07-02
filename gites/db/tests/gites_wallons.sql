@@ -30628,6 +30628,18 @@ CREATE TABLE type_heb (
 );
 
 
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (0, 'Aucun', 'Aucun', null, null, null, null, 'aucun', 'none', 'none-2', 'none-3', 'none-1', null);
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (5, 'MH', 'Maison d''Hôtes', 'Gastenverblijf', 'Gästehaus', 'Casa degli Ospiti', 'Guest House', 'maison-d-hotes', 'gastenverblijf', 'gastehaus', 'casa-degli-ospiti', 'guest-house', 'chambre');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (6, 'CH', 'Chambre d''hôtes', 'Gastenkamer', 'Gästezimmer', 'Camera per gli Ospiti', 'Bed & breakfast', 'chambre-d-hotes', 'gastenkamer', 'gastezimmer', 'camera-per-gli-ospiti', 'bed-and-breakfast', 'chambre');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (9, 'CHECR', 'Chambre', 'Kamer', 'Zimmer', 'Camera', 'Room', 'chambre', 'kamer', 'zimmer', 'camera', 'room', 'chambre');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (1, 'GR', 'Gîte rural', 'Gîte op het platteland', 'Ferienhaus auf dem Land', 'Abitazione Rurale', 'Rural Gîte', 'gite-rural', 'gite-op-het-platteland', 'ferienhaus-auf-dem-land', 'abitazione-rurale', 'rural-gite', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (3, 'MT', 'Meublé de tourisme', 'Vakantiewoning', 'Ferienwohnung', 'Ammobiliato di Turismo', 'Furnished Accommodation', 'meuble-de-tourisme', 'vakantiewoning', 'ferienwohnung', 'ammobiliato-di-turismo', 'furnished-accommodation', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (10, 'GRECR', 'Logement', 'Woning', 'Unterkunft', 'Alloggio', 'Accommodation', 'logement', 'woning', 'unterkunft', 'alloggio', 'accommodation', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (11, 'GG', 'Gîtes groupés', 'Gegroepeerde gîtes', 'Gruppierte Ferienhäuser', 'Alloggi raggruppati', 'Grouped gites', 'gites-groupes', 'gegroepeerde-gites', 'gruppierte-ferienhauser', 'alloggi-raggruppati', 'grouped-gites', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (2, 'GF', 'Gîte à la ferme', 'Gîte op de boerderij', 'Ferienhaus auf dem Bauernhof', 'Allogio in fattoria', 'Farm cottage', 'gite-a-la-ferme', 'gite-op-de-boerderij', 'ferienhaus-auf-dem-bauernhof', 'allogio-in-fattoria', 'farm-cottage', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (4, 'GC', 'Gîte citadin', 'Stadsvakantieverblijf', 'Ferienhaus in der Stadt', 'Abitazione cittadina', 'City gîte', 'gite-citadin', 'stadsvakantieverblijf', 'ferienhaus-in-der-stadt', 'abitazione-cittadina', 'city-gite', 'gite');
+INSERT INTO type_heb(type_heb_pk, type_heb_code, type_heb_nom, type_heb_nom_nl, type_heb_nom_de, type_heb_nom_it, type_heb_nom_uk, type_heb_id, type_heb_id_nl, type_heb_id_de, type_heb_id_it, type_heb_id_uk, type_heb_type) VALUES (7, 'MV', 'Meublé de vacances', 'Vakantieverblijf', 'Ferienunterkunft', 'Ammobiliato per le vacanze', 'Furnished Holiday Accommodation', 'meuble-de-vacances', 'vakantieverblijf', 'ferienunterkunft', 'ammobiliato-per-le-vacanze', 'furnished-holiday-accommodation', 'gite');
+
 --
 -- Name: type_heb_type_heb_pk_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
@@ -42079,34 +42091,35 @@ CREATE TABLE cron (
 
 CREATE TABLE tarifs_type (
     type character varying NOT NULL,
-    subtype character varying NOT NULL
+    subtype character varying NOT NULL,
+    gite boolean NOT NULL,
+    chambre boolean NOT NULL
 );
 
 
 --
 -- Data for Name: tarifs_type; Type: TABLE DATA; Schema: public; Owner: -
 --
-
-INSERT INTO tarifs_type (type, subtype) VALUES ('LOW_SEASON', 'WEEK');
-INSERT INTO tarifs_type (type, subtype) VALUES ('LOW_SEASON', 'WEEKEND');
-INSERT INTO tarifs_type (type, subtype) VALUES ('MEDIUM_SEASON', 'WEEK');
-INSERT INTO tarifs_type (type, subtype) VALUES ('MEDIUM_SEASON', 'WEEKEND');
-INSERT INTO tarifs_type (type, subtype) VALUES ('HIGH_SEASON', 'WEEK');
-INSERT INTO tarifs_type (type, subtype) VALUES ('HIGH_SEASON', 'WEEKEND');
-INSERT INTO tarifs_type (type, subtype) VALUES ('FEAST_WEEKEND', '3_NIGHTS');
-INSERT INTO tarifs_type (type, subtype) VALUES ('FEAST_WEEKEND', '4_NIGHTS');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'END_OF_YEAR');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'GUARANTEE');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'OTHER');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'SOJOURN_TAX');
-INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'ACCORDING_TO_CONSUMPTION');
-INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'INCLUDED');
-INSERT INTO tarifs_type (type, subtype) VALUES ('CHARGES', 'INCLUSIVE');
-INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', '1_PERSON');
-INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', '2_PERSONS');
-INSERT INTO tarifs_type (type, subtype) VALUES ('ROOM', 'PERSON_SUP');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'WITHOUT_BREAKFAST');
-INSERT INTO tarifs_type (type, subtype) VALUES ('OTHER', 'TABLE_HOTES');;
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('LOW_SEASON', 'WEEK', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('LOW_SEASON', 'WEEKEND', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('MEDIUM_SEASON', 'WEEK', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('MEDIUM_SEASON', 'WEEKEND', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('HIGH_SEASON', 'WEEK', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('HIGH_SEASON', 'WEEKEND', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('FEAST_WEEKEND', '3_NIGHTS', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('FEAST_WEEKEND', '4_NIGHTS', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('CHARGES', 'ACCORDING_TO_CONSUMPTION', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('CHARGES', 'INCLUDED', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('CHARGES', 'INCLUSIVE', true, false);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('ROOM', '1_PERSON', false, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('ROOM', '2_PERSONS', false, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('ROOM', 'PERSON_SUP', false, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'END_OF_YEAR', true, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'GUARANTEE', true, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'OTHER', true, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'SOJOURN_TAX', true, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'WITHOUT_BREAKFAST', true, true);
+INSERT INTO tarifs_type(type, subtype, gite, chambre) VALUES ('OTHER', 'TABLE_HOTES', true, true);
 
 --
 -- Name: tarifs; Type: TABLE; Schema: public; Owner: -; Tablespace:
@@ -42124,6 +42137,30 @@ CREATE TABLE tarifs (
     cmt character varying,
     valid boolean
 );
+
+--
+-- Name: tarifs_pk_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tarifs_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tarifs_pk_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tarifs_pk_seq OWNED BY tarifs.pk;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tarifs ALTER COLUMN pk SET DEFAULT nextval('tarifs_pk_seq'::regclass);
 
 --
 -- PostgreSQL database dump complete

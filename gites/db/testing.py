@@ -21,17 +21,16 @@ CURRENT_DIR = os.path.dirname(__file__)
 
 
 def createHeb(session):
-    from gites.db.content import (Hebergement, TypeHebergement, Proprio,
+    from gites.db.content import (Hebergement, Proprio,
                                   LinkHebergementEpis, Commune,
                                   HebergementApp)
-    typeHebGite = TypeHebergement(type_heb_nom='gites')
     proprio = Proprio(pro_nom1=u'Foo',
                       pro_etat=True)
     epis3 = LinkHebergementEpis(heb_nombre_epis=3)
     yvoir = Commune(com_nom=u'Yvoir')
     heb_app = HebergementApp(heb_app_sort_order=1)
     heb = Hebergement(heb_nom='Home sweet home',
-                      type=typeHebGite,
+                      heb_typeheb_fk=1,
                       proprio=proprio,
                       epis=[epis3],
                       commune=yvoir,
