@@ -42066,6 +42066,31 @@ CREATE TABLE notification (
     "user" character varying
 );
 
+
+--
+-- Name: notification_pk_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notification_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notification_pk_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notification_pk_seq OWNED BY notification.pk;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notification ALTER COLUMN pk SET DEFAULT nextval('notification_pk_seq'::regclass);
+
 --
 -- Name: notification_origin; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
