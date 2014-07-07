@@ -143,3 +143,15 @@ class Tarifs(GitesMappedClassBase):
         query = query.filter(cls.cmt == cmt)
         query = query.filter(cls.valid == True)
         return query.count() > 0
+
+    @classmethod
+    def get_last_changes(cls, date, session=None, cgt_not_empty=False):
+        """Return the modified lines since the given date"""
+        if not session:
+            session = cls._session()
+        query = session.query(cls).join("hebergement")
+        query = query.filter(cls.date >= date)
+        query = query.filter(cls.valid == True)
+        if cgt_not_empty:
+            query = query.filter(Hebergement.heb_code_cgt != u'')
+        return query.all()
