@@ -41,6 +41,9 @@ class Proprio(GitesMappedClassBase):
     pro_reactivation_hash = sqlalchemy.Column('pro_reactivation_hash',
                                               sqlalchemy.String())
 
+    pro_date_modification = sqlalchemy.Column('pro_date_modification',
+                                              sqlalchemy.DateTime())
+
     @mapper.Relation
     def civilite(cls):
         return sqlalchemy.orm.relation(Civilite)
@@ -48,3 +51,12 @@ class Proprio(GitesMappedClassBase):
     @mapper.Relation
     def commune(cls):
         return sqlalchemy.orm.relation(Commune)
+
+    @classmethod
+    def get_last_changes(cls, date, session=None):
+        """Return the modified lines since the given date"""
+        if not session:
+            session = cls._session()
+        query = session.query(cls)
+        query = query.filter(cls.pro_date_modification >= date)
+        return query.all()
