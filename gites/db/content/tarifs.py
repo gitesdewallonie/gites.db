@@ -53,9 +53,15 @@ class Tarifs(GitesMappedClassBase):
                                    foreign_keys=[Hebergement.heb_pk],
                                    primaryjoin=Hebergement.heb_pk == cls.heb_pk))
 
+    @property
+    def heb_code_cgt(self):
+        return self.hebergement.heb_code_cgt
+
     @classmethod
-    def _tarifs_pks(cls, heb_pk):
-        query = cls._session().query(
+    def _tarifs_pks(cls, heb_pk, session=None):
+        if not session:
+            session = cls._session()
+        query = session.query(
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
         query = query.filter(cls.type != 'CHARGES')
@@ -63,7 +69,7 @@ class Tarifs(GitesMappedClassBase):
         query = query.group_by(cls.type, cls.subtype)
         pks = query.all()
 
-        query = cls._session().query(
+        query = session.query(
             sa.func.max(cls.pk))
         query = query.filter(cls.heb_pk == heb_pk)
         query = query.filter(cls.type == 'CHARGES')
@@ -74,13 +80,15 @@ class Tarifs(GitesMappedClassBase):
         return pks_all
 
     @classmethod
-    def get_hebergement_tarifs(cls, heb_pk):
+    def get_hebergement_tarifs(cls, heb_pk, session=None):
         """
         Get all actual valid tarifs for an hebergement
         """
-        pks_all = cls._tarifs_pks(heb_pk)
+        if not session:
+            session = cls._session()
+        pks_all = cls._tarifs_pks(heb_pk, session=session)
 
-        query = cls._session().query(cls)
+        query = session.query(cls)
         query = query.filter(cls.pk.in_(pks_all))
         return query.all()
 
