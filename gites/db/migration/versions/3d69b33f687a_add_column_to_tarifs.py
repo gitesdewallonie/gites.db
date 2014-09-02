@@ -30,6 +30,12 @@ def upgrade():
     op.execute("""UPDATE tarifs_type SET gite = true, chambre = true
                WHERE "type" = 'OTHER';""")
 
+    op.execute("""UPDATE tarifs_type SET gite = false
+               WHERE subtype in ('WITHOUT_BREAKFAST', 'TABLE_HOTES')""")
+
+    op.execute("""UPDATE tarifs_type SET chambre = false
+               WHERE subtype in ('END_OF_YEAR', 'GUARANTEE')""")
+
     op.execute("ALTER TABLE tarifs_type ALTER COLUMN gite SET NOT NULL;")
     op.execute("ALTER TABLE tarifs_type ALTER COLUMN chambre SET NOT NULL;")
 
