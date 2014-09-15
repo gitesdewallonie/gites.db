@@ -4,11 +4,23 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Add migration to add gite and chambre columns to tarifs_type : #5838 Affinitic
+  [schminitz]
+
+- Add mappers for Tarifs and TarifsType table
+  [mpeeters]
+
 - Uses the new decorators for the relations from affinitic.db : #4930
+  [mpeeters]
 
-- PIVOT: Add migration to create pivot_origin and pivot_notification tables affinitic refs #5830
+- Add PGScriptRDB layer
+  [mpeeters]
 
-- Add cron table refs #5841
+- Add a mapper for the notification table
+
+- PIVOT: Add migration to create pivot_origin and pivot_notification tables : #5830 Affinitic
+
+- Add cron table : #5841
 
 
 0.3 (2010-12-15)
