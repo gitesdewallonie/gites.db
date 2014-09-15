@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2014-09-15)
 ----------------
 
 - Add migration to add gite and chambre columns to tarifs_type : #5838 Affinitic
