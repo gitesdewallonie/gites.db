@@ -4,7 +4,8 @@ Changelog
 0.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add informations needed for tarif-to-confirm affinitic refs #5982
+  [schminitz]
 
 
 0.4.1 (2014-09-29)
