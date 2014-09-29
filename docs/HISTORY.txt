@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4.2 (unreleased)
+0.4.2 (2014-09-29)
 ------------------
 
 - Add informations needed for tarif-to-confirm affinitic refs #5982
