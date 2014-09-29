@@ -9,6 +9,7 @@ Copyright by Affinitic sprl
 
 from affinitic.db import mapper
 from gites.db.content.hebergement.hebergement import Hebergement
+from gites.db.content.proprio.proprio import Proprio
 from gites.db.content.tarifs_type import TarifsType
 from gites.db.mapper import GitesMappedClassBase
 import sqlalchemy as sa
@@ -93,13 +94,21 @@ class Tarifs(GitesMappedClassBase):
         return query.all()
 
     @classmethod
-    def get_tarifs_to_confirm(cls):
+    def get_tarifs_to_confirm(cls, session=None):
         """
         Get all heb_pk of tarifs that need to be confirmed
         """
-        query = cls._session().query(cls.heb_pk)
+        if not session:
+            session = cls._session()
+
+        query = session.query(cls.heb_pk,
+                              Hebergement.heb_nom,
+                              Proprio.pro_pk,
+                              Proprio.pro_nom1,
+                              Proprio.pro_prenom1)
+        query = query.join("hebergement", "proprio")
         query = query.filter(cls.valid == None)
-        query = query.group_by(cls.heb_pk)
+        query = query.group_by(cls.heb_pk, Hebergement.heb_nom, Proprio.pro_pk, Proprio.pro_nom1, Proprio.pro_prenom1)
         query = query.order_by(cls.heb_pk)
         return query.all()
 
