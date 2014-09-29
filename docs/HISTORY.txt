@@ -4,7 +4,8 @@ Changelog
 0.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add migration to change OTHER to OTHER_CLEAN : #5984
+  [schminitz]
 
 
 0.4 (2014-09-15)
