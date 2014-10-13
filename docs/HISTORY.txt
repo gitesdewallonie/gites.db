@@ -4,7 +4,8 @@ Changelog
 0.4.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update the hebergement view to include tarifs and provinces
+  [mpeeters]
 
 
 0.4.2 (2014-09-29)
