@@ -4,7 +4,8 @@ Changelog
 0.4.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix the tarifs in the hebergement_view : #6043
+  [mpeeters]
 
 
 0.4.3 (2014-10-13)
