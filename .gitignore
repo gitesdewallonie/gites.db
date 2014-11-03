@@ -22,3 +22,9 @@ var/
 # OS generated files #
 ######################
 .DS_Store*
+
+# Documentation
+docs/Makefile
+docs/html/
+docs/doctrees/
+docs/make.bat
