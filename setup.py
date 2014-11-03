@@ -45,7 +45,13 @@ setup(
             'gocept.testdb'],
         scripts=[
             'alembic',
-            'progressbar']),
+            'progressbar'],
+        docs=['z3c.recipe.sphinxdoc',
+              'docutils',
+              'repoze.sphinx.autointerface',
+              'affinitic.sphinxcontrib.sqlalchemy',
+              'collective.sphinx.includechangelog',
+              'collective.sphinx.includedoc']),
     entry_points={
         'console_scripts': [
             'gdw_db_migration = gites.db.migration.migration:main',
