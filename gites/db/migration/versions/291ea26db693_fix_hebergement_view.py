@@ -152,57 +152,59 @@ def upgrade():
                CASE heb_tabhot_gourmand.link_met_value WHEN true THEN 'oui' ELSE 'non' END AS heb_tabhot_gourmand,
                CASE heb_tabhot_repas_familial.link_met_value WHEN true THEN 'oui' ELSE 'non' END AS heb_tabhot_repas_familial,
                CASE heb_tabhot_gastronomique.link_met_value WHEN true THEN 'oui' ELSE 'non' END AS heb_tabhot_gastronomique,
+               CASE heb_bienvenu_velo.link_met_value WHEN true THEN 'oui' ELSE 'non' END as heb_bienvenu_velo,
+               CASE heb_wallonie_qualite.link_met_value WHEN true THEN 'oui' ELSE 'non' END as heb_wallonie_qualite,
                CASE
-                    WHEN heb_tarif_we_bs.max is null THEN CAST(heb_tarif_we_bs.min AS TEXT)
+                    WHEN heb_tarif_we_bs.max is null THEN coalesce(CAST(heb_tarif_we_bs.min AS TEXT), '0')
                     ELSE heb_tarif_we_bs.min || '/' || heb_tarif_we_bs.max
                END AS heb_tarif_we_bs,
                CASE
-                    WHEN heb_tarif_sem_bs.max is null THEN CAST(heb_tarif_sem_bs.min AS TEXT)
+                    WHEN heb_tarif_sem_bs.max is null THEN coalesce(CAST(heb_tarif_sem_bs.min AS TEXT), '0')
                     ELSE heb_tarif_sem_bs.min || '/' || heb_tarif_sem_bs.max
                END AS heb_tarif_sem_bs,
                CASE
-                    WHEN heb_tarif_we_ms.max is null THEN CAST(heb_tarif_we_ms.min AS TEXT)
+                    WHEN heb_tarif_we_ms.max is null THEN coalesce(CAST(heb_tarif_we_ms.min AS TEXT), '0')
                     ELSE heb_tarif_we_ms.min || '/' || heb_tarif_we_ms.max
                END AS heb_tarif_we_ms,
                CASE
-                    WHEN heb_tarif_sem_ms.max is null THEN CAST(heb_tarif_sem_ms.min AS TEXT)
+                    WHEN heb_tarif_sem_ms.max is null THEN coalesce(CAST(heb_tarif_sem_ms.min AS TEXT), '0')
                     ELSE heb_tarif_sem_ms.min || '/' || heb_tarif_sem_ms.max
                END AS heb_tarif_sem_ms,
                CASE
-                    WHEN heb_tarif_we_hs.max is null THEN CAST(heb_tarif_we_hs.min AS TEXT)
+                    WHEN heb_tarif_we_hs.max is null THEN coalesce(CAST(heb_tarif_we_hs.min AS TEXT), '0')
                     ELSE heb_tarif_we_hs.min || '/' || heb_tarif_we_hs.max
                END AS heb_tarif_we_hs,
                CASE
-                    WHEN heb_tarif_sem_hs.max is null THEN CAST(heb_tarif_sem_hs.min AS TEXT)
+                    WHEN heb_tarif_sem_hs.max is null THEN coalesce(CAST(heb_tarif_sem_hs.min AS TEXT), '0')
                     ELSE heb_tarif_sem_hs.min || '/' || heb_tarif_sem_hs.max
                END AS heb_tarif_sem_hs,
                CASE
-                    WHEN heb_tarif_we_3n.max is null THEN CAST(heb_tarif_we_3n.min AS TEXT)
+                    WHEN heb_tarif_we_3n.max is null THEN coalesce(CAST(heb_tarif_we_3n.min AS TEXT), '0')
                     ELSE heb_tarif_we_3n.min || '/' || heb_tarif_we_3n.max
                END AS heb_tarif_we_3n,
                CASE
-                    WHEN heb_tarif_we_4n.max is null THEN CAST(heb_tarif_we_4n.min AS TEXT)
+                    WHEN heb_tarif_we_4n.max is null THEN coalesce(CAST(heb_tarif_we_4n.min AS TEXT), '0')
                     ELSE heb_tarif_we_4n.min || '/' || heb_tarif_we_4n.max
                END AS heb_tarif_we_4n,
                CASE
-                    WHEN heb_tarif_semaine_fin_annee.max is null THEN CAST(heb_tarif_semaine_fin_annee.min AS TEXT)
+                    WHEN heb_tarif_semaine_fin_annee.max is null THEN coalesce(CAST(heb_tarif_semaine_fin_annee.min AS TEXT), '0')
                     ELSE heb_tarif_semaine_fin_annee.min || '/' || heb_tarif_semaine_fin_annee.max
                END AS heb_tarif_semaine_fin_annee,
-               heb_tarif_garantie.min as heb_tarif_garantie,
+               coalesce(heb_tarif_garantie.min, 0) as heb_tarif_garantie,
                CASE
                     WHEN heb_taxe_montant.min is null THEN ''
                     ELSE heb_taxe_montant.min || ' ' || heb_taxe_montant.cmt
                END AS heb_taxe_montant,
                heb_tarif_divers.cmt as heb_tarif_divers,
-               heb_tarif_chmbr_avec_dej_1p.min as heb_tarif_chmbr_avec_dej_1p,
-               heb_tarif_chmbr_avec_dej_2p.min as heb_tarif_chmbr_avec_dej_2p,
+               coalesce(heb_tarif_chmbr_avec_dej_1p.min, 0) as heb_tarif_chmbr_avec_dej_1p,
+               coalesce(heb_tarif_chmbr_avec_dej_2p.min, 0) as heb_tarif_chmbr_avec_dej_2p,
                CASE
                     WHEN heb_tarif_chmbr_avec_dej_2p.min is not null AND heb_tarif_chmbr_pers_sup.min is not null
                     THEN heb_tarif_chmbr_avec_dej_2p.min + heb_tarif_chmbr_pers_sup.min
-                    ELSE null
+                    ELSE '0'
                END AS heb_tarif_chmbr_avec_dej_3p,
                heb_tarif_divers.cmt AS heb_tarif_chmbr_autre_1p,
-               heb_tarif_chmbr_table_hote_1p AS heb_tarif_chmbr_table_hote_1p,
+               coalesce(heb_tarif_chmbr_table_hote_1p.min, 0) AS heb_tarif_chmbr_table_hote_1p,
                provinces.prov_nom,
                provinces.prov_code
         FROM hebergement
@@ -383,6 +385,10 @@ def upgrade():
                ON heb_tabhot_repas_familial.heb_fk = hebergement.heb_pk AND heb_tabhot_repas_familial.metadata_fk = 43
         LEFT JOIN link_hebergement_metadata AS heb_tabhot_gastronomique
                ON heb_tabhot_gastronomique.heb_fk = hebergement.heb_pk AND heb_tabhot_gastronomique.metadata_fk = 44
+        LEFT JOIN link_hebergement_metadata AS heb_bienvenu_velo
+               ON heb_bienvenu_velo.heb_fk = hebergement.heb_pk AND heb_bienvenu_velo.metadata_fk = 47
+        LEFT JOIN link_hebergement_metadata AS heb_wallonie_qualite
+               ON heb_wallonie_qualite.heb_fk = hebergement.heb_pk AND heb_wallonie_qualite.metadata_fk = 63
         LEFT JOIN commune
                ON hebergement.heb_com_fk = commune.com_pk
         LEFT JOIN provinces
