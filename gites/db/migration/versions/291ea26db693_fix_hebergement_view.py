@@ -155,7 +155,7 @@ def upgrade():
                CASE
                     WHEN heb_tarif_we_bs.max is null THEN CAST(heb_tarif_we_bs.min AS TEXT)
                     ELSE heb_tarif_we_bs.min || '/' || heb_tarif_we_bs.max
-               END AS heb_tarif_ws_bs,
+               END AS heb_tarif_we_bs,
                CASE
                     WHEN heb_tarif_sem_bs.max is null THEN CAST(heb_tarif_sem_bs.min AS TEXT)
                     ELSE heb_tarif_sem_bs.min || '/' || heb_tarif_sem_bs.max
@@ -163,7 +163,7 @@ def upgrade():
                CASE
                     WHEN heb_tarif_we_ms.max is null THEN CAST(heb_tarif_we_ms.min AS TEXT)
                     ELSE heb_tarif_we_ms.min || '/' || heb_tarif_we_ms.max
-               END AS heb_tarif_ws_ms,
+               END AS heb_tarif_we_ms,
                CASE
                     WHEN heb_tarif_sem_ms.max is null THEN CAST(heb_tarif_sem_ms.min AS TEXT)
                     ELSE heb_tarif_sem_ms.min || '/' || heb_tarif_sem_ms.max
@@ -171,7 +171,7 @@ def upgrade():
                CASE
                     WHEN heb_tarif_we_hs.max is null THEN CAST(heb_tarif_we_hs.min AS TEXT)
                     ELSE heb_tarif_we_hs.min || '/' || heb_tarif_we_hs.max
-               END AS heb_tarif_ws_hs,
+               END AS heb_tarif_we_hs,
                CASE
                     WHEN heb_tarif_sem_hs.max is null THEN CAST(heb_tarif_sem_hs.min AS TEXT)
                     ELSE heb_tarif_sem_hs.min || '/' || heb_tarif_sem_hs.max
