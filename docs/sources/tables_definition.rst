@@ -8,3 +8,12 @@ Table charge
 
 .. automapper:: Charge
    :undoc-members:
+
+
+Table hébergement
+-----------------
+
+.. currentmodule:: gites.db.content.hebergement
+
+.. automapper:: Hebergement
+  :undoc-members:
