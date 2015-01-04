@@ -1,10 +1,23 @@
 Changelog
 =========
 
-0.4.5 (unreleased)
+0.4.6 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+0.4.5 (2015-01-15)
+------------------
+
+- Add a migration revision to update the tarifs_view
+  [mpeeters]
+
+- Add database documentation
+  [ameurant]
+
+- Add a script zcml file
+  [mpeeters]
 
 
 0.4.4 (2014-10-20)
