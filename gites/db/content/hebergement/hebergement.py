@@ -83,7 +83,8 @@ class Hebergement(GitesMappedClassBase, Traversable):
 
     heb_location = geoalchemy.GeometryColumn('heb_location',
                                              geoalchemy.Geometry(dimension=2, srid=3447),
-                                             comparator=PGComparator)
+                                             comparator=PGComparator,
+                                             doc=u"Gélocalisation de l'hébergement")
 
     heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk', sqlalchemy.Integer(),
                                           doc=u"Identifiant unique pour un groupement d'hébergement")
