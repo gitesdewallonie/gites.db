@@ -13,7 +13,7 @@ Table charge
 Table hébergement
 -----------------
 
-.. currentmodule:: gites.db.content.hebergement
+.. currentmodule:: gites.db.content.hebergement.hebergement
 
 .. automapper:: Hebergement
   :undoc-members:
