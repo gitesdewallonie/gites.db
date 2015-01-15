@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4.5 (unreleased)
+0.4.5 (2015-01-15)
 ------------------
 
 - Add a migration revision to update the tarifs_view
