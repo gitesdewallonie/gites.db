@@ -40,7 +40,7 @@ class InfoTouristique(GitesMappedClassBase):
     infotour_gps_lat = sa.Column('infotour_gps_lat', sa.Float(),
                                  doc=u"Coorodonée latitudinale de l'information touristique")
 
-    infotour_localite = sa.Column('infotour_localite', sa.String()
+    infotour_localite = sa.Column('infotour_localite', sa.String(),
                                   doc=u"Localité de l'information touristique")
 
     infotour_commune_fk = sa.Column('infotour_commune_fk', sa.Integer,
