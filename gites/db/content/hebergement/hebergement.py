@@ -23,12 +23,16 @@ from OFS.Traversable import Traversable
 
 
 class Hebergement(GitesMappedClassBase, Traversable):
+    """
+    Description d'un hébergement
+    """
+
     implements(IHebergement)
     __tablename__ = u"hebergement"
 
     heb_pk = sqlalchemy.Column('heb_pk', sqlalchemy.Integer,
                                primary_key=True,
-                               doc=u"Identifiant unique")
+                               doc=u"Identifiant unique pour un hébergement")
 
     heb_nom = sqlalchemy.Column('heb_nom', sqlalchemy.String(),
                                 doc=u"Nom de l'hébergement")
@@ -37,7 +41,7 @@ class Hebergement(GitesMappedClassBase, Traversable):
                                      doc=u"Code CGT de l'hébergement")
 
     heb_url = sqlalchemy.Column('heb_url', sqlalchemy.String(),
-                                doc=u"Url du site de l'hébergement")
+                                doc=u"Url du site privé de l'hébergement")
 
     heb_cgt_cap_max = sqlalchemy.Column('heb_cgt_cap_max', sqlalchemy.Integer(),
                                         doc=u"Capacité maximale de l'hébergement")

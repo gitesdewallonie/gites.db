@@ -6,30 +6,56 @@ from gites.db.content.hebergement.metadatatype import MetadataType
 
 
 class Metadata(GitesMappedClassBase):
+    """
+    Table permettant de décrire en différentes langues
+    (FR, EN, NL, IT, DE)
+    les métadata d'un hébergement
+    """
+
     __tablename__ = u'metadata'
 
-    met_pk = sa.Column('met_pk', sa.Integer, nullable=False, primary_key=True,
-                       unique=True)
+    met_pk = sa.Column('met_pk', sa.Integer,
+                       nullable=False,
+                       primary_key=True,
+                       unique=True,
+                       doc=u"Identifiant unique de la métadata")
 
-    met_id = sa.Column('met_id', sa.String(), nullable=False)
+    met_id = sa.Column('met_id', sa.String(),
+                       nullable=False,
+                       doc=u"Nom unique de la métadata")
 
-    met_titre_fr = sa.Column('met_titre_fr', sa.String(), nullable=False)
+    met_titre_fr = sa.Column('met_titre_fr', sa.String(),
+                             nullable=False,
+                             doc=u"Nom de la métadata version française")
 
-    met_titre_en = sa.Column('met_titre_en', sa.String(), nullable=False)
+    met_titre_en = sa.Column('met_titre_en', sa.String(),
+                             nullable=False,
+                             doc=u"Nom de la métadata version anglaise")
 
-    met_titre_nl = sa.Column('met_titre_nl', sa.String(), nullable=False)
+    met_titre_nl = sa.Column('met_titre_nl', sa.String(),
+                             nullable=False,
+                             doc=u"Nom de la métadata version néerlandaise")
 
-    met_titre_it = sa.Column('met_titre_it', sa.String(), nullable=False)
+    met_titre_it = sa.Column('met_titre_it', sa.String(),
+                             nullable=False,
+                             doc=u"Nom de la métadata version italienne")
 
-    met_titre_de = sa.Column('met_titre_de', sa.String(), nullable=False)
+    met_titre_de = sa.Column('met_titre_de', sa.String(),
+                             nullable=False,
+                             doc=u"Nom de la métadata version allemande")
 
-    met_filterable = sa.Column('met_filterable', sa.Boolean(), default=False)
+    met_filterable = sa.Column('met_filterable', sa.Boolean(),
+                               default=False,
+                               doc=u"La métadata est-elle filtrable (true/false) ?")
 
-    met_editable = sa.Column('met_editable', sa.Boolean(), default=False)
+    met_editable = sa.Column('met_editable', sa.Boolean(),
+                             default=False,
+                             doc=u"La métadata est-elle éditable (true/false) ?")
 
     metadata_type_id = sa.Column('metadata_type_id', sa.String(),
                                  sa.ForeignKey('metadata_type.met_typ_id'),
-                                 nullable=False)
+                                 nullable=False,
+                                 doc=u"Numéro d'identifiant unique vers la table type de métadata")
 
     @mapper.Relation
     def type(cls):

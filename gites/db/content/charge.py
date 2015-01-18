@@ -17,17 +17,24 @@ class Charge(GitesMappedClassBase):
     """
     __tablename__ = u'charge'
 
-    cha_pk = sa.Column('cha_pk', sa.Integer, primary_key=True)
+    cha_pk = sa.Column('cha_pk', sa.Integer,
+                       primary_key=True,
+                       doc=u"Identifiant unique")
 
-    cha_type_fr = sa.Column('cha_type_fr', sa.String())
+    cha_type_fr = sa.Column('cha_type_fr', sa.String(),
+                            doc=u"Description d'une charge version française")
 
-    cha_type_en = sa.Column('cha_type_en', sa.String())
+    cha_type_en = sa.Column('cha_type_en', sa.String(),
+                            doc=u"Description d'une charge version anglaise")
 
-    cha_type_nl = sa.Column('cha_type_nl', sa.String())
+    cha_type_nl = sa.Column('cha_type_nl', sa.String(),
+                            doc=u"Description d'une charge version néerlandaise")
 
-    cha_type_de = sa.Column('cha_type_de', sa.String())
+    cha_type_de = sa.Column('cha_type_de', sa.String(),
+                            doc=u"Description d'une charge version allemande")
 
-    cha_type_it = sa.Column('cha_type_it', sa.String())
+    cha_type_it = sa.Column('cha_type_it', sa.String(),
+                            doc=u"Description d'une charge version italienne")
 
     def getTitle(self, languageCode):
         if 'fr' in languageCode:

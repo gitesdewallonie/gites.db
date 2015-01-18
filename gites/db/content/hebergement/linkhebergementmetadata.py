@@ -7,20 +7,31 @@ from gites.db.content.hebergement.metadata import Metadata
 
 
 class LinkHebergementMetadata(GitesMappedClassBase):
+    """
+    Table de jointure permettant de gérer les métadata d'un hébergement
+    """
+
     __tablename__ = u'link_hebergement_metadata'
 
-    link_met_pk = sa.Column('link_met_pk', sa.Integer, nullable=False,
-                            primary_key=True, unique=True)
+    link_met_pk = sa.Column('link_met_pk', sa.Integer,
+                            nullable=False,
+                            primary_key=True,
+                            unique=True,
+                            doc=u"Numéro d'identifiant")
 
     heb_fk = sa.Column('heb_fk', sa.Integer(),
                        sa.ForeignKey('hebergement.heb_pk'),
-                       nullable=False)
+                       nullable=False,
+                       doc=u"Numéro d'identifiant unique vers la table hébergement")
 
     metadata_fk = sa.Column('metadata_fk', sa.Integer(),
                             sa.ForeignKey('metadata.met_pk'),
-                            nullable=False)
+                            nullable=False,
+                            doc=u"Numéro d'identifiant unique vers la table métadata")
 
-    link_met_value = sa.Column('link_met_value', sa.Boolean(), default=False)
+    link_met_value = sa.Column('link_met_value', sa.Boolean(),
+                               default=False,
+                               doc=u"???")
 
     @mapper.Relation
     def metadata_info(cls):

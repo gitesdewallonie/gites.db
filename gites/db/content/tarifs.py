@@ -18,31 +18,52 @@ TarifsType  # Pyflakes
 
 
 class Tarifs(GitesMappedClassBase):
+    """
+    Table permettant de gérer les tarifs d'un hébergement
+    """
+
     __tablename__ = u'tarifs'
     __table_args__ = (
         sa.ForeignKeyConstraint(['type', 'subtype'],
                                 ['tarifs_type.type', 'tarifs_type.subtype']),
     )
 
-    pk = sa.Column('pk', sa.Integer, primary_key=True, unique=True)
+    pk = sa.Column('pk', sa.Integer,
+                   primary_key=True,
+                   unique=True,
+                   doc=u"Numéro d'identifiant unique")
 
-    heb_pk = sa.Column('heb_pk', sa.Integer, nullable=False)
+    heb_pk = sa.Column('heb_pk', sa.Integer,
+                       nullable=False,
+                       doc=u"Numéro d'identifiant unique vers la table hébergement")
 
-    type = sa.Column('type', sa.String, nullable=False)
+    type = sa.Column('type', sa.String,
+                     nullable=False,
+                     doc=u"Type de tarif ???")
 
-    subtype = sa.Column('subtype', sa.String, nullable=False)
+    subtype = sa.Column('subtype', sa.String,
+                        nullable=False,
+                        doc=u"Sous type de tarif ???")
 
-    date = sa.Column('date', sa.DateTime, nullable=False)
+    date = sa.Column('date', sa.DateTime,
+                     nullable=False,
+                     doc=u"Date ???")
 
-    user = sa.Column('user', sa.String, nullable=False)
+    user = sa.Column('user', sa.String,
+                     nullable=False,
+                     doc=u"User ???")
 
-    min = sa.Column('min', sa.Float)
+    min = sa.Column('min', sa.Float,
+                    doc=u"Tarif minimum ???")
 
-    max = sa.Column('max', sa.Float)
+    max = sa.Column('max', sa.Float,
+                    doc=u"Tarif maximum ???")
 
-    cmt = sa.Column('cmt', sa.String)
+    cmt = sa.Column('cmt', sa.String,
+                    doc=u"Commentaire")
 
-    valid = sa.Column('valid', sa.Boolean)
+    valid = sa.Column('valid', sa.Boolean,
+                      doc=u"Validité ???")
 
     @mapper.Relation
     def hebergement(cls):

@@ -9,33 +9,51 @@ from OFS.Traversable import Traversable
 
 class TypeHebergement(GitesMappedClassBase, Traversable):
     implements(ITypeHebergement)
+    """
+    Table décrivant le type d'un hébergement en différentes langues
+    """
+
     __tablename__ = u'type_heb'
 
-    type_heb_pk = sa.Column('type_heb_pk', sa.Integer, primary_key=True)
+    type_heb_pk = sa.Column('type_heb_pk', sa.Integer,
+                            primary_key=True,
+                            doc=u"Numéro d'identifiant unique du type d'hébergement")
 
-    type_heb_code = sa.Column('type_heb_code', sa.String())
+    type_heb_code = sa.Column('type_heb_code', sa.String(),
+                              doc=u"Code du type d'hébergement")
 
-    type_heb_nom = sa.Column('type_heb_nom', sa.String())
+    type_heb_nom = sa.Column('type_heb_nom', sa.String(),
+                             doc=u"Nom du type d'hébergement")
 
-    type_heb_id = sa.Column('type_heb_id', sa.String())
+    type_heb_id = sa.Column('type_heb_id', sa.String(),
+                            doc=u"Identifiant du type d'hébergement")
 
-    type_heb_id_nl = sa.Column('type_heb_id_nl', sa.String())
+    type_heb_id_nl = sa.Column('type_heb_id_nl', sa.String(),
+                               doc=u"Identifiant du type d'hébergement version néerlandaise")
 
-    type_heb_id_de = sa.Column('type_heb_id_de', sa.String())
+    type_heb_id_de = sa.Column('type_heb_id_de', sa.String(),
+                               doc=u"Identifiant du type d'hébergement version allemande")
 
-    type_heb_id_it = sa.Column('type_heb_id_it', sa.String())
+    type_heb_id_it = sa.Column('type_heb_id_it', sa.String(),
+                               doc=u"Identifiant du type d'hébergement version italienne")
 
-    type_heb_id_uk = sa.Column('type_heb_id_uk', sa.String())
+    type_heb_id_uk = sa.Column('type_heb_id_uk', sa.String(),
+                               doc=u"Identifiant du type d'hébergement version anglaise")
 
-    type_heb_nom_nl = sa.Column('type_heb_nom_nl', sa.String())
+    type_heb_nom_nl = sa.Column('type_heb_nom_nl', sa.String(),
+                                doc=u"Nom du type d'hébergement version néerlandaise")
 
-    type_heb_nom_de = sa.Column('type_heb_nom_de', sa.String())
+    type_heb_nom_de = sa.Column('type_heb_nom_de', sa.String(),
+                                doc=u"Nom du type d'hébergement version allemande")
 
-    type_heb_nom_it = sa.Column('type_heb_nom_it', sa.String())
+    type_heb_nom_it = sa.Column('type_heb_nom_it', sa.String(),
+                                doc=u"Nom du type d'hébergement version italienne")
 
-    type_heb_nom_uk = sa.Column('type_heb_nom_uk', sa.String())
+    type_heb_nom_uk = sa.Column('type_heb_nom_uk', sa.String(),
+                                doc=u"Nom du type d'hébergement version anglaise")
 
-    type_heb_type = sa.Column('type_heb_type', sa.String())
+    type_heb_type = sa.Column('type_heb_type', sa.String(),
+                              doc=u"Type de l'hébergement")
 
     def getType(self):
         from zope.globalrequest import getRequest
