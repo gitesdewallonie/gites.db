@@ -11,7 +11,7 @@ $Id: event.py 67630 2006-04-27 00:54:03Z jfroche $
 from z3c.sqlalchemy.mapper import MappedClassBase
 from charge import Charge
 from commune import Commune
-from hebergement import Hebergement
+from hebergement import Hebergement, HebergementBase
 from infotouristique import InfoTouristique
 from maisontourisme import MaisonTourisme
 from typehebergement import TypeHebergement

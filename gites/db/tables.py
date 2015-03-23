@@ -165,6 +165,31 @@ def getCharge(metadata):
           autoload=autoload)
 
 
+def getHebergementBaseTable(metadata):
+    autoload = False
+    if metadata.bind.has_table('hebergement'):
+        autoload = True
+    return Table('hebergement', metadata,
+             Column('heb_pk', Integer, primary_key=True),
+             Column('heb_nom', String()),
+             Column('heb_url', String()),
+             Column('heb_code_gdw', String()),
+             Column('heb_code_gdw', String()),
+             Column('heb_site_public', String()),
+             Column('heb_calendrier_proprio', String()),
+             Column('heb_charge_fk', Integer,
+                    ForeignKey('charge.cha_pk')),
+             Column('heb_com_fk', Integer,
+                    ForeignKey('commune.com_pk')),
+             Column('heb_typeheb_fk', Integer,
+                    ForeignKey('type_heb.type_heb_pk')),
+             Column('heb_pro_fk', Integer,
+                    ForeignKey('proprio.pro_pk')),
+             Column('heb_calendrier_proprio_date_maj', Date),
+             useexisting=True,
+             autoload=autoload)
+
+
 def getHebergementTable(metadata):
     autoload = False
     if metadata.bind.has_table('hebergement_view'):

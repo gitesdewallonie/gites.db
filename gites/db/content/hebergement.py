@@ -84,3 +84,7 @@ class Hebergement(Implicit, MappedClassBase):
             return self.heb_seminaire_vert_uk
 
 InitializeClass(Hebergement)
+
+
+class HebergementBase(Implicit, MappedClassBase):
+    pass
