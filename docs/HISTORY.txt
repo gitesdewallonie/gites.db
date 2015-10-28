@@ -4,7 +4,8 @@ Changelog
 0.4.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add prod_date_naiss to proprio and proprio_maj migration refs #6289
+  [schminitz]
 
 
 0.4.5 (2015-01-15)
