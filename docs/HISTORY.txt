@@ -4,7 +4,8 @@ Changelog
 0.4.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Import error fix
+  [schminitz]
 
 
 0.4.6 (2015-10-28)
