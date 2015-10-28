@@ -68,6 +68,9 @@ class ProprioMaj(GitesMappedClassBase):
                                sa.ForeignKey('commune.com_pk'),
                                doc=u"Numéro d'identifiant unique vers la table commune")
 
+    pro_maj_date_naiss = sa.Column('pro_maj_date_naiss', sa.Date(),
+                                   doc=u"Date de naissance du proprio")
+
     @mapper.Relation
     def civilite(cls):
         return sa.orm.relation(Civilite)

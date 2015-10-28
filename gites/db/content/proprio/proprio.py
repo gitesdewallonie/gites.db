@@ -61,6 +61,9 @@ class Proprio(GitesMappedClassBase):
     pro_date_modification = sqlalchemy.Column('pro_date_modification', sqlalchemy.DateTime(),
                                               doc=u"Dernière date de modification des données du propriétaire")
 
+    pro_date_naiss = sqlalchemy.Column('pro_date_naiss', sqlalchemy.Date(),
+                                       doc=u"Date de naissance du proprio")
+
     @mapper.Relation
     def civilite(cls):
         return sqlalchemy.orm.relation(Civilite)
