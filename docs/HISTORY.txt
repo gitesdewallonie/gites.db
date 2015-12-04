@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.4.8 (unreleased)
-------------------
+0.5 (2015-12-04)
+----------------
 
 - Add a migration for the creation of hebergement_xml_view : #6313
   [mpeeters]
