@@ -30,48 +30,69 @@ class Hebergement(GitesMappedClassBase, Traversable):
     implements(IHebergement)
     __tablename__ = u"hebergement"
 
-    heb_pk = sqlalchemy.Column('heb_pk', sqlalchemy.Integer,
+    heb_pk = sqlalchemy.Column('heb_pk',
+                               sqlalchemy.Integer,
                                primary_key=True,
                                doc=u"Identifiant unique pour un hébergement")
 
-    heb_nom = sqlalchemy.Column('heb_nom', sqlalchemy.String(),
+    heb_nom = sqlalchemy.Column('heb_nom',
+                                sqlalchemy.String(),
                                 doc=u"Nom de l'hébergement")
 
-    heb_code_cgt = sqlalchemy.Column('heb_code_cgt', sqlalchemy.String(),
+    heb_commercialiation_actif = sqlalchemy.Column('heb_commercialisation_actif',
+                                                   sqlalchemy.Boolean(),
+                                                   doc=u"Hébergement en mode commercialisation")
+
+    heb_commercialiation_id = sqlalchemy.Column('heb_commercialisation_id',
+                                                sqlalchemy.String(),
+                                                doc=u"Identifiant pour la commercialisation")
+
+    heb_code_cgt = sqlalchemy.Column('heb_code_cgt',
+                                     sqlalchemy.String(),
                                      doc=u"Code CGT de l'hébergement")
 
-    heb_url = sqlalchemy.Column('heb_url', sqlalchemy.String(),
+    heb_url = sqlalchemy.Column('heb_url',
+                                sqlalchemy.String(),
                                 doc=u"Url du site privé de l'hébergement")
 
-    heb_cgt_cap_max = sqlalchemy.Column('heb_cgt_cap_max', sqlalchemy.Integer(),
+    heb_cgt_cap_max = sqlalchemy.Column('heb_cgt_cap_max',
+                                        sqlalchemy.Integer(),
                                         doc=u"Capacité maximale de l'hébergement")
 
-    heb_code_gdw = sqlalchemy.Column('heb_code_gdw', sqlalchemy.String(),
+    heb_code_gdw = sqlalchemy.Column('heb_code_gdw',
+                                     sqlalchemy.String(),
                                      doc=u"Code GDW de l'hébergement")
 
-    heb_site_public = sqlalchemy.Column('heb_site_public', sqlalchemy.String(),
+    heb_site_public = sqlalchemy.Column('heb_site_public',
+                                        sqlalchemy.String(),
                                         doc=u"Hébergement publié sur le site GDW  (oui/non")
 
-    heb_charge_fk = sqlalchemy.Column('heb_charge_fk', sqlalchemy.Integer,
+    heb_charge_fk = sqlalchemy.Column('heb_charge_fk',
+                                      sqlalchemy.Integer,
                                       sqlalchemy.ForeignKey('charge.cha_pk'),
                                       doc=u"Type de charge")
 
-    heb_com_fk = sqlalchemy.Column('heb_com_fk', sqlalchemy.Integer,
+    heb_com_fk = sqlalchemy.Column('heb_com_fk',
+                                   sqlalchemy.Integer,
                                    sqlalchemy.ForeignKey('commune.com_pk'),
                                    doc=u"Commune de l'hébergement")
 
-    heb_typeheb_fk = sqlalchemy.Column('heb_typeheb_fk', sqlalchemy.Integer,
+    heb_typeheb_fk = sqlalchemy.Column('heb_typeheb_fk',
+                                       sqlalchemy.Integer,
                                        sqlalchemy.ForeignKey('type_heb.type_heb_pk'),
                                        doc=u"Type de l'hébergement")
 
-    heb_pro_fk = sqlalchemy.Column('heb_pro_fk', sqlalchemy.Integer,
+    heb_pro_fk = sqlalchemy.Column('heb_pro_fk',
+                                   sqlalchemy.Integer,
                                    sqlalchemy.ForeignKey('proprio.pro_pk'),
                                    doc=u"Propriétaire de l'hébergement")
 
-    heb_calendrier_proprio = sqlalchemy.Column('heb_calendrier_proprio', sqlalchemy.String(),
-                                                doc=u"Etat du calendrier du proprio (actif / non-actif / bloqué)")
+    heb_calendrier_proprio = sqlalchemy.Column('heb_calendrier_proprio',
+                                               sqlalchemy.String(),
+                                               doc=u"Etat du calendrier du proprio (actif / non-actif / bloqué)")
 
-    heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj', sqlalchemy.Date,
+    heb_calendrier_proprio_date_maj = sqlalchemy.Column('heb_calendrier_proprio_date_maj',
+                                                        sqlalchemy.Date,
                                                         doc=u"Date de la dernière mise à jour du calendrier par le proprio")
 
     heb_desactivation_alloch = sqlalchemy.Column('heb_desactivation_alloch',
@@ -79,10 +100,12 @@ class Hebergement(GitesMappedClassBase, Traversable):
                                                  default=False,
                                                  doc=u"Désactivation de l'application Allo Chambre Hôte (t/f)")
 
-    heb_gps_lat = sqlalchemy.Column('heb_gps_lat', sqlalchemy.Float(),
+    heb_gps_lat = sqlalchemy.Column('heb_gps_lat',
+                                    sqlalchemy.Float(),
                                     doc=u"Coordonnées GPS en latitude")
 
-    heb_gps_long = sqlalchemy.Column('heb_gps_long', sqlalchemy.Float(),
+    heb_gps_long = sqlalchemy.Column('heb_gps_long',
+                                     sqlalchemy.Float(),
                                      doc=u"Coordonnées GPS en longitude")
 
     heb_location = geoalchemy.GeometryColumn('heb_location',
@@ -90,11 +113,13 @@ class Hebergement(GitesMappedClassBase, Traversable):
                                              comparator=PGComparator,
                                              doc=u"Gélocalisation de l'hébergement")
 
-    heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk', sqlalchemy.Integer(),
+    heb_groupement_pk = sqlalchemy.Column('heb_groupement_pk',
+                                          sqlalchemy.Integer(),
                                           doc=u"Identifiant unique pour un groupement d'hébergement")
 
-    heb_tarif_charge = sqlalchemy.Column('heb_tarif_charge', sqlalchemy.String(),
-                                          doc=u"Charge de l'hébergement")
+    heb_tarif_charge = sqlalchemy.Column('heb_tarif_charge',
+                                         sqlalchemy.String(),
+                                         doc=u"Charge de l'hébergement")
 
     @property
     def REQUEST(self):
