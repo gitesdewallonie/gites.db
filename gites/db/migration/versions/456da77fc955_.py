@@ -11,7 +11,6 @@ revision = '456da77fc955'
 down_revision = '57c82bea5928'
 
 from alembic import op
-import sqlalchemy as sa
 
 
 def upgrade():
@@ -20,227 +19,227 @@ def upgrade():
         CASE heb_tenis.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tenis, 
+        END AS heb_tenis,
         CASE heb_nautisme.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_nautisme, 
+        END AS heb_nautisme,
         CASE heb_sky.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_sky, 
+        END AS heb_sky,
         CASE heb_rando.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_rando, 
+        END AS heb_rando,
         CASE heb_piscine.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_piscine, 
+        END AS heb_piscine,
         CASE heb_peche.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_peche, 
+        END AS heb_peche,
         CASE heb_equitation.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_equitation, 
+        END AS heb_equitation,
         CASE heb_velo.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_velo, 
+        END AS heb_velo,
         CASE heb_vtt.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_vtt, 
+        END AS heb_vtt,
         CASE heb_ravel.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_ravel, 
+        END AS heb_ravel,
         CASE heb_animal.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_animal, 
+        END AS heb_animal,
         CASE heb_fumeur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_fumeur, 
+        END AS heb_fumeur,
         CASE heb_confort_tv.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_tv, 
+        END AS heb_confort_tv,
         CASE heb_confort_feu_ouvert.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_feu_ouvert, 
+        END AS heb_confort_feu_ouvert,
         CASE heb_confort_lave_vaiselle.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_lave_vaiselle, 
+        END AS heb_confort_lave_vaiselle,
         CASE heb_confort_micro_onde.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_micro_onde, 
+        END AS heb_confort_micro_onde,
         CASE heb_confort_lave_linge.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_lave_linge, 
+        END AS heb_confort_lave_linge,
         CASE heb_confort_seche_linge.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_seche_linge, 
+        END AS heb_confort_seche_linge,
         CASE heb_confort_internet.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_internet, 
+        END AS heb_confort_internet,
         CASE heb_confort_terrasse.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_terrasse, 
+        END AS heb_confort_terrasse,
         CASE heb_confort_jardin.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_jardin, 
+        END AS heb_confort_jardin,
         CASE heb_confort_sauna.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_sauna, 
+        END AS heb_confort_sauna,
         CASE heb_confort_jacuzzi.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_jacuzzi, 
+        END AS heb_confort_jacuzzi,
         CASE heb_seminaire_vert.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_seminaire_vert, 
+        END AS heb_seminaire_vert,
         CASE heb_gid_bebe_tendresse.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_bebe_tendresse, 
+        END AS heb_gid_bebe_tendresse,
         CASE heb_gid_access_tous.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_access_tous, 
+        END AS heb_gid_access_tous,
         CASE heb_gid_antiallergique.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_antiallergique, 
+        END AS heb_gid_antiallergique,
         CASE heb_gid_beau_jardin.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_beau_jardin, 
+        END AS heb_gid_beau_jardin,
         CASE heb_gid_eco_gite.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_eco_gite, 
+        END AS heb_gid_eco_gite,
         CASE heb_gid_activite_nature.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_activite_nature, 
+        END AS heb_gid_activite_nature,
         CASE heb_gid_panda.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_panda, 
+        END AS heb_gid_panda,
         CASE heb_gid_theme_equestre.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_theme_equestre, 
+        END AS heb_gid_theme_equestre,
         CASE heb_gid_peche.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_peche, 
+        END AS heb_gid_peche,
         CASE heb_gid_patrimoine.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_patrimoine, 
+        END AS heb_gid_patrimoine,
         CASE heb_confort_congelateur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_congelateur, 
+        END AS heb_confort_congelateur,
         CASE heb_commerce.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_commerce, 
+        END AS heb_commerce,
         CASE heb_restaurant.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_restaurant, 
+        END AS heb_restaurant,
         CASE heb_gare.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gare, 
+        END AS heb_gare,
         CASE heb_confort_projecteur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_projecteur, 
+        END AS heb_confort_projecteur,
         CASE heb_confort_flipchart.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_flipchart, 
+        END AS heb_confort_flipchart,
         CASE heb_confort_ecran.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_ecran, 
+        END AS heb_confort_ecran,
         CASE heb_tabhot_gourmand.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_gourmand, 
+        END AS heb_tabhot_gourmand,
         CASE heb_tabhot_repas_familial.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_repas_familial, 
+        END AS heb_tabhot_repas_familial,
         CASE heb_tabhot_gastronomique.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_gastronomique, 
+        END AS heb_tabhot_gastronomique,
         CASE heb_bienvenu_velo.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_bienvenu_velo, 
+        END AS heb_bienvenu_velo,
         CASE heb_wallonie_qualite.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_wallonie_qualite, 
+        END AS heb_wallonie_qualite,
         CASE
             WHEN heb_tarif_we_bs.max IS NULL THEN COALESCE(heb_tarif_we_bs.min::text, '0'::text)
             ELSE (heb_tarif_we_bs.min || '/'::text) || heb_tarif_we_bs.max
-        END AS heb_tarif_we_bs, 
+        END AS heb_tarif_we_bs,
         CASE
             WHEN heb_tarif_sem_bs.max IS NULL THEN COALESCE(heb_tarif_sem_bs.min::text, '0'::text)
             ELSE (heb_tarif_sem_bs.min || '/'::text) || heb_tarif_sem_bs.max
-        END AS heb_tarif_sem_bs, 
+        END AS heb_tarif_sem_bs,
         CASE
             WHEN heb_tarif_we_ms.max IS NULL THEN COALESCE(heb_tarif_we_ms.min::text, '0'::text)
             ELSE (heb_tarif_we_ms.min || '/'::text) || heb_tarif_we_ms.max
-        END AS heb_tarif_we_ms, 
+        END AS heb_tarif_we_ms,
         CASE
             WHEN heb_tarif_sem_ms.max IS NULL THEN COALESCE(heb_tarif_sem_ms.min::text, '0'::text)
             ELSE (heb_tarif_sem_ms.min || '/'::text) || heb_tarif_sem_ms.max
-        END AS heb_tarif_sem_ms, 
+        END AS heb_tarif_sem_ms,
         CASE
             WHEN heb_tarif_we_hs.max IS NULL THEN COALESCE(heb_tarif_we_hs.min::text, '0'::text)
             ELSE (heb_tarif_we_hs.min || '/'::text) || heb_tarif_we_hs.max
-        END AS heb_tarif_we_hs, 
+        END AS heb_tarif_we_hs,
         CASE
             WHEN heb_tarif_sem_hs.max IS NULL THEN COALESCE(heb_tarif_sem_hs.min::text, '0'::text)
             ELSE (heb_tarif_sem_hs.min || '/'::text) || heb_tarif_sem_hs.max
-        END AS heb_tarif_sem_hs, 
+        END AS heb_tarif_sem_hs,
         CASE
             WHEN heb_tarif_we_3n.max IS NULL THEN COALESCE(heb_tarif_we_3n.min::text, '0'::text)
             ELSE (heb_tarif_we_3n.min || '/'::text) || heb_tarif_we_3n.max
-        END AS heb_tarif_we_3n, 
+        END AS heb_tarif_we_3n,
         CASE
             WHEN heb_tarif_we_4n.max IS NULL THEN COALESCE(heb_tarif_we_4n.min::text, '0'::text)
             ELSE (heb_tarif_we_4n.min || '/'::text) || heb_tarif_we_4n.max
-        END AS heb_tarif_we_4n, 
+        END AS heb_tarif_we_4n,
         CASE
             WHEN heb_tarif_semaine_fin_annee.max IS NULL THEN COALESCE(heb_tarif_semaine_fin_annee.min::text, '0'::text)
             ELSE (heb_tarif_semaine_fin_annee.min || '/'::text) || heb_tarif_semaine_fin_annee.max
-        END AS heb_tarif_semaine_fin_annee, COALESCE(heb_tarif_garantie.min, 0::double precision) AS heb_tarif_garantie, 
+        END AS heb_tarif_semaine_fin_annee, COALESCE(heb_tarif_garantie.min, 0::double precision) AS heb_tarif_garantie,
         CASE
             WHEN heb_taxe_montant.min IS NULL THEN ''::text
             ELSE (heb_taxe_montant.min || ' '::text) || heb_taxe_montant.cmt::text
-        END AS heb_taxe_montant, heb_tarif_divers.cmt AS heb_tarif_divers, COALESCE(heb_tarif_chmbr_avec_dej_1p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_1p, COALESCE(heb_tarif_chmbr_avec_dej_2p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_2p, 
+        END AS heb_taxe_montant, heb_tarif_divers.cmt AS heb_tarif_divers, COALESCE(heb_tarif_chmbr_avec_dej_1p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_1p, COALESCE(heb_tarif_chmbr_avec_dej_2p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_2p,
         CASE
             WHEN heb_tarif_chmbr_avec_dej_2p.min IS NOT NULL AND heb_tarif_chmbr_pers_sup.min IS NOT NULL THEN heb_tarif_chmbr_avec_dej_2p.min + heb_tarif_chmbr_pers_sup.min
             ELSE 0::double precision
@@ -320,227 +319,227 @@ def downgrade():
         CASE heb_tenis.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tenis, 
+        END AS heb_tenis,
         CASE heb_nautisme.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_nautisme, 
+        END AS heb_nautisme,
         CASE heb_sky.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_sky, 
+        END AS heb_sky,
         CASE heb_rando.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_rando, 
+        END AS heb_rando,
         CASE heb_piscine.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_piscine, 
+        END AS heb_piscine,
         CASE heb_peche.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_peche, 
+        END AS heb_peche,
         CASE heb_equitation.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_equitation, 
+        END AS heb_equitation,
         CASE heb_velo.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_velo, 
+        END AS heb_velo,
         CASE heb_vtt.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_vtt, 
+        END AS heb_vtt,
         CASE heb_ravel.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_ravel, 
+        END AS heb_ravel,
         CASE heb_animal.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_animal, 
+        END AS heb_animal,
         CASE heb_fumeur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_fumeur, 
+        END AS heb_fumeur,
         CASE heb_confort_tv.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_tv, 
+        END AS heb_confort_tv,
         CASE heb_confort_feu_ouvert.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_feu_ouvert, 
+        END AS heb_confort_feu_ouvert,
         CASE heb_confort_lave_vaiselle.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_lave_vaiselle, 
+        END AS heb_confort_lave_vaiselle,
         CASE heb_confort_micro_onde.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_micro_onde, 
+        END AS heb_confort_micro_onde,
         CASE heb_confort_lave_linge.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_lave_linge, 
+        END AS heb_confort_lave_linge,
         CASE heb_confort_seche_linge.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_seche_linge, 
+        END AS heb_confort_seche_linge,
         CASE heb_confort_internet.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_internet, 
+        END AS heb_confort_internet,
         CASE heb_confort_terrasse.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_terrasse, 
+        END AS heb_confort_terrasse,
         CASE heb_confort_jardin.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_jardin, 
+        END AS heb_confort_jardin,
         CASE heb_confort_sauna.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_sauna, 
+        END AS heb_confort_sauna,
         CASE heb_confort_jacuzzi.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_jacuzzi, 
+        END AS heb_confort_jacuzzi,
         CASE heb_seminaire_vert.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_seminaire_vert, 
+        END AS heb_seminaire_vert,
         CASE heb_gid_bebe_tendresse.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_bebe_tendresse, 
+        END AS heb_gid_bebe_tendresse,
         CASE heb_gid_access_tous.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_access_tous, 
+        END AS heb_gid_access_tous,
         CASE heb_gid_antiallergique.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_antiallergique, 
+        END AS heb_gid_antiallergique,
         CASE heb_gid_beau_jardin.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_beau_jardin, 
+        END AS heb_gid_beau_jardin,
         CASE heb_gid_eco_gite.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_eco_gite, 
+        END AS heb_gid_eco_gite,
         CASE heb_gid_activite_nature.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_activite_nature, 
+        END AS heb_gid_activite_nature,
         CASE heb_gid_panda.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_panda, 
+        END AS heb_gid_panda,
         CASE heb_gid_theme_equestre.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_theme_equestre, 
+        END AS heb_gid_theme_equestre,
         CASE heb_gid_peche.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_peche, 
+        END AS heb_gid_peche,
         CASE heb_gid_patrimoine.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gid_patrimoine, 
+        END AS heb_gid_patrimoine,
         CASE heb_confort_congelateur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_congelateur, 
+        END AS heb_confort_congelateur,
         CASE heb_commerce.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_commerce, 
+        END AS heb_commerce,
         CASE heb_restaurant.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_restaurant, 
+        END AS heb_restaurant,
         CASE heb_gare.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_gare, 
+        END AS heb_gare,
         CASE heb_confort_projecteur.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_projecteur, 
+        END AS heb_confort_projecteur,
         CASE heb_confort_flipchart.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_flipchart, 
+        END AS heb_confort_flipchart,
         CASE heb_confort_ecran.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_confort_ecran, 
+        END AS heb_confort_ecran,
         CASE heb_tabhot_gourmand.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_gourmand, 
+        END AS heb_tabhot_gourmand,
         CASE heb_tabhot_repas_familial.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_repas_familial, 
+        END AS heb_tabhot_repas_familial,
         CASE heb_tabhot_gastronomique.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_tabhot_gastronomique, 
+        END AS heb_tabhot_gastronomique,
         CASE heb_bienvenu_velo.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_bienvenu_velo, 
+        END AS heb_bienvenu_velo,
         CASE heb_wallonie_qualite.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
-        END AS heb_wallonie_qualite, 
+        END AS heb_wallonie_qualite,
         CASE
             WHEN heb_tarif_we_bs.max IS NULL THEN COALESCE(heb_tarif_we_bs.min::text, '0'::text)
             ELSE (heb_tarif_we_bs.min || '/'::text) || heb_tarif_we_bs.max
-        END AS heb_tarif_we_bs, 
+        END AS heb_tarif_we_bs,
         CASE
             WHEN heb_tarif_sem_bs.max IS NULL THEN COALESCE(heb_tarif_sem_bs.min::text, '0'::text)
             ELSE (heb_tarif_sem_bs.min || '/'::text) || heb_tarif_sem_bs.max
-        END AS heb_tarif_sem_bs, 
+        END AS heb_tarif_sem_bs,
         CASE
             WHEN heb_tarif_we_ms.max IS NULL THEN COALESCE(heb_tarif_we_ms.min::text, '0'::text)
             ELSE (heb_tarif_we_ms.min || '/'::text) || heb_tarif_we_ms.max
-        END AS heb_tarif_we_ms, 
+        END AS heb_tarif_we_ms,
         CASE
             WHEN heb_tarif_sem_ms.max IS NULL THEN COALESCE(heb_tarif_sem_ms.min::text, '0'::text)
             ELSE (heb_tarif_sem_ms.min || '/'::text) || heb_tarif_sem_ms.max
-        END AS heb_tarif_sem_ms, 
+        END AS heb_tarif_sem_ms,
         CASE
             WHEN heb_tarif_we_hs.max IS NULL THEN COALESCE(heb_tarif_we_hs.min::text, '0'::text)
             ELSE (heb_tarif_we_hs.min || '/'::text) || heb_tarif_we_hs.max
-        END AS heb_tarif_we_hs, 
+        END AS heb_tarif_we_hs,
         CASE
             WHEN heb_tarif_sem_hs.max IS NULL THEN COALESCE(heb_tarif_sem_hs.min::text, '0'::text)
             ELSE (heb_tarif_sem_hs.min || '/'::text) || heb_tarif_sem_hs.max
-        END AS heb_tarif_sem_hs, 
+        END AS heb_tarif_sem_hs,
         CASE
             WHEN heb_tarif_we_3n.max IS NULL THEN COALESCE(heb_tarif_we_3n.min::text, '0'::text)
             ELSE (heb_tarif_we_3n.min || '/'::text) || heb_tarif_we_3n.max
-        END AS heb_tarif_we_3n, 
+        END AS heb_tarif_we_3n,
         CASE
             WHEN heb_tarif_we_4n.max IS NULL THEN COALESCE(heb_tarif_we_4n.min::text, '0'::text)
             ELSE (heb_tarif_we_4n.min || '/'::text) || heb_tarif_we_4n.max
-        END AS heb_tarif_we_4n, 
+        END AS heb_tarif_we_4n,
         CASE
             WHEN heb_tarif_semaine_fin_annee.max IS NULL THEN COALESCE(heb_tarif_semaine_fin_annee.min::text, '0'::text)
             ELSE (heb_tarif_semaine_fin_annee.min || '/'::text) || heb_tarif_semaine_fin_annee.max
-        END AS heb_tarif_semaine_fin_annee, COALESCE(heb_tarif_garantie.min, 0::double precision) AS heb_tarif_garantie, 
+        END AS heb_tarif_semaine_fin_annee, COALESCE(heb_tarif_garantie.min, 0::double precision) AS heb_tarif_garantie,
         CASE
             WHEN heb_taxe_montant.min IS NULL THEN ''::text
             ELSE (heb_taxe_montant.min || ' '::text) || heb_taxe_montant.cmt::text
-        END AS heb_taxe_montant, heb_tarif_divers.cmt AS heb_tarif_divers, COALESCE(heb_tarif_chmbr_avec_dej_1p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_1p, COALESCE(heb_tarif_chmbr_avec_dej_2p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_2p, 
+        END AS heb_taxe_montant, heb_tarif_divers.cmt AS heb_tarif_divers, COALESCE(heb_tarif_chmbr_avec_dej_1p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_1p, COALESCE(heb_tarif_chmbr_avec_dej_2p.min, 0::double precision) AS heb_tarif_chmbr_avec_dej_2p,
         CASE
             WHEN heb_tarif_chmbr_avec_dej_2p.min IS NOT NULL AND heb_tarif_chmbr_pers_sup.min IS NOT NULL THEN heb_tarif_chmbr_avec_dej_2p.min + heb_tarif_chmbr_pers_sup.min
             ELSE 0::double precision
