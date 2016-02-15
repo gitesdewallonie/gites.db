@@ -17,7 +17,7 @@ def upgrade():
     op.execute('DROP VIEW hebergement_view')
     op.execute('''
         CREATE VIEW hebergement_view AS
-        SELECT hebergement.*
+        SELECT hebergement.*,
         CASE heb_tenis.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
@@ -319,7 +319,7 @@ def downgrade():
     op.execute('DROP VIEW hebergement_view')
     op.execute('''
         CREATE VIEW hebergement_view AS
-        SELECT hebergement.*
+        SELECT hebergement.*,
         CASE heb_tenis.link_met_value
             WHEN true THEN 'oui'::text
             ELSE 'non'::text
