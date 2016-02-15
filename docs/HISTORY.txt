@@ -4,7 +4,8 @@ Changelog
 0.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add a migration for the creation of hebergement_view
+  [laulaz]
 
 
 0.5 (2015-12-04)
