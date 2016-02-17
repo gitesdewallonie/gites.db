@@ -39,13 +39,13 @@ class Hebergement(GitesMappedClassBase, Traversable):
                                 sqlalchemy.String(),
                                 doc=u"Nom de l'hébergement")
 
-    heb_commercialiation_actif = sqlalchemy.Column('heb_commercialisation_actif',
-                                                   sqlalchemy.Boolean(),
-                                                   doc=u"Hébergement en mode commercialisation")
+    heb_commercialisation_actif = sqlalchemy.Column('heb_commercialisation_actif',
+                                                    sqlalchemy.Boolean(),
+                                                    doc=u"Hébergement en mode commercialisation")
 
-    heb_commercialiation_id = sqlalchemy.Column('heb_commercialisation_id',
-                                                sqlalchemy.String(),
-                                                doc=u"Identifiant pour la commercialisation")
+    heb_commercialisation_id = sqlalchemy.Column('heb_commercialisation_id',
+                                                 sqlalchemy.String(),
+                                                 doc=u"Identifiant pour la commercialisation")
 
     heb_code_cgt = sqlalchemy.Column('heb_code_cgt',
                                      sqlalchemy.String(),
