@@ -49,8 +49,9 @@ def initialize(context):
     enable_log()
     if os.environ.get('ZOPETESTCASE') is None:
         pwManager = getUtility(IPasswordManager, 'pg')
-        connString = 'postgres://%s@localhost/gites_wallons' % \
-            pwManager.getLoginPassWithSeparator(':')
+        dbHostname = os.environ.get('PG_HOSTNAME', 'localhost')
+        connString = 'postgres://%s@%s/gites_wallons' % \
+            (pwManager.getLoginPassWithSeparator(':'), dbHostname)
         createSAWrapper(connString,
                         forZope=True,
                         echo=False,
