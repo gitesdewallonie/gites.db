@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import md5
+import os
 from dogpile.cache.region import make_region
 
 
@@ -14,11 +15,12 @@ def md5_key_mangler(key):
         return md5.md5(key.encode('utf-8')).hexdigest()
 
 regions = {}
+memcached_server = os.environ.get('MEMCACHE_SERVER', '127.0.0.1:11211')
 regions['gdw'] = make_region(key_mangler=md5_key_mangler).configure(
     'dogpile.cache.memcached',
     expiration_time=21600,
     arguments={
-        'url': '127.0.0.1:11211',
+        'url': memcached_server,
         'distributed_lock': True,
     }
 )
