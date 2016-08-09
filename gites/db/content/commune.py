@@ -35,7 +35,11 @@ class Commune(GitesMappedClassBase, Traversable):
                                doc=u"Code postale de la commune")
 
     com_ins = sqlalchemy.Column('com_ins', sqlalchemy.String(),
-                                doc=u"???")
+                                doc=u"""Il s'agit de l'attribution par l'Institut National de la Statistique
+                                        d'un numéro de code, en 5 chiffres, à chaque commune.
+                                            Le premier chiffre désigne la province.
+                                            Le second désigne l'arrondissement administratif de cette province.
+                                            Les trois derniers chiffres varient selon les différentes communes d'un même arrondissement.""")
 
     com_reg_fk = sqlalchemy.Column('com_reg_fk', sqlalchemy.Integer,
                                    doc=u"Numéro d'identifiant unique vers la table des régions touristiques")
