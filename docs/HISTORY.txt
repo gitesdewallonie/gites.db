@@ -4,6 +4,9 @@ Changelog
 0.5.1 (unreleased)
 ------------------
 
+- Add a migration for the creation of localite table
+  [alain]
+
 - Add a migration for the creation of hebergement_view
   [laulaz]
 

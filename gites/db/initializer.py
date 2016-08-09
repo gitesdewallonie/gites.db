@@ -6,6 +6,7 @@ from zope.interface import implements
 from gites.db.content import (BlockingHistory,
                               Charge,
                               Commune,
+                              Localite,
                               Hebergement,
                               HebergementApp,
                               HebergementBlockingHistory,
@@ -63,6 +64,10 @@ class GitesModel(object):
                   mapper_class=ReservationProprio)
         model.add('commune', table=Commune.__table__,
                   mapper_class=Commune)
+
+        model.add('localite', table=Localite.__table__,
+                  mapper_class=Localite)
+
         model.add('proprio', table=Proprio.__table__,
                   mapper_class=Proprio)
         model.add('proprio_maj', table=ProprioMaj.__table__,

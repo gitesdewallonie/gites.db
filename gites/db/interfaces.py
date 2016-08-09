@@ -22,6 +22,12 @@ class ICommune(Interface):
     """
 
 
+class ILocalite(Interface):
+    """
+    List of localités
+    """
+
+
 class ITypeHebergement(Interface):
     """
     A type of Hebergement

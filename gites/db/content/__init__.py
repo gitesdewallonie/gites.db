@@ -27,6 +27,7 @@ from .proprio.propriomaj import ProprioMaj
 from .tablehote import TableHote
 from charge import Charge
 from commune import Commune
+from localite import Localite
 from logitem import LogItem
 from maisontourisme import MaisonTourisme
 from province import Province
