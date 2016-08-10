@@ -24,34 +24,42 @@ class Commune(GitesMappedClassBase, Traversable):
     """
     __tablename__ = u'commune'
 
-    com_pk = sqlalchemy.Column('com_pk', sqlalchemy.Integer,
+    com_pk = sqlalchemy.Column('com_pk',
+                               sqlalchemy.Integer,
                                primary_key=True,
                                doc=u"Numéro d'identifiant unique")
 
-    com_nom = sqlalchemy.Column('com_nom', sqlalchemy.String(),
+    com_nom = sqlalchemy.Column('com_nom',
+                                sqlalchemy.String(),
                                 doc=u"Nom de la commune")
 
-    com_cp = sqlalchemy.Column('com_cp', sqlalchemy.String(),
+    com_cp = sqlalchemy.Column('com_cp',
+                               sqlalchemy.String(),
                                doc=u"Code postale de la commune")
 
-    com_ins = sqlalchemy.Column('com_ins', sqlalchemy.String(),
+    com_ins = sqlalchemy.Column('com_ins',
+                                sqlalchemy.String(),
                                 doc=u"""Il s'agit de l'attribution par l'Institut National de la Statistique
                                         d'un numéro de code, en 5 chiffres, à chaque commune.
                                             Le premier chiffre désigne la province.
                                             Le second désigne l'arrondissement administratif de cette province.
                                             Les trois derniers chiffres varient selon les différentes communes d'un même arrondissement.""")
 
-    com_reg_fk = sqlalchemy.Column('com_reg_fk', sqlalchemy.Integer,
+    com_reg_fk = sqlalchemy.Column('com_reg_fk',
+                                   sqlalchemy.Integer,
                                    doc=u"Numéro d'identifiant unique vers la table des régions touristiques")
 
-    com_prov_fk = sqlalchemy.Column('com_prov_fk', sqlalchemy.Integer,
+    com_prov_fk = sqlalchemy.Column('com_prov_fk',
+                                    sqlalchemy.Integer,
                                     sqlalchemy.ForeignKey('provinces.prov_pk'),
                                     doc=u"Numéro d'identifiant unique vers la table province")
 
-    com_id = sqlalchemy.Column('com_id', sqlalchemy.String(),
+    com_id = sqlalchemy.Column('com_id',
+                               sqlalchemy.String(),
                                doc=u"Identifiant de la commune")
 
-    com_mais_fk = sqlalchemy.Column('com_mais_fk', sqlalchemy.Integer,
+    com_mais_fk = sqlalchemy.Column('com_mais_fk',
+                                    sqlalchemy.Integer,
                                     sqlalchemy.ForeignKey('maison_tourisme.mais_pk'),
                                     doc=u"Numéro d'identifiant unique vers la table maison du tourisme")
 
