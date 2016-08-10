@@ -4,6 +4,9 @@ Changelog
 0.5.1 (unreleased)
 ------------------
 
+- Align parameters of the methods
+  [alain]
+
 - Add a migration for the creation of localite table
   [alain]
 
