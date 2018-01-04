@@ -121,6 +121,22 @@ class Hebergement(GitesMappedClassBase, Traversable):
                                          sqlalchemy.String(),
                                          doc=u"Charge de l'hébergement")
 
+    heb_peb_code = sqlalchemy.Column('heb_peb_code',
+                                     sqlalchemy.String(),
+                                     doc=u"Certificat PEB :: Code numérique")
+
+    heb_peb_energie_primaire = sqlalchemy.Column('heb_peb_energie_primaire',
+                                                 sqlalchemy.Float,
+                                                 doc=u"Certificat PEB :: Consommation spécifique d'énergie primaire (kWh/m².an)")
+
+    heb_peb_energie_totale = sqlalchemy.Column('heb_peb_energie_totale',
+                                               sqlalchemy.Float,
+                                               doc=u"Certificat PEB :: Consommation théorique totale d'énergie primaire (kWh/an)")
+
+    heb_peb_icone = sqlalchemy.Column('heb_peb_icone',
+                                      sqlalchemy.String(),
+                                      doc=u"Certificat PEB :: Icône .png")
+
     @property
     def REQUEST(self):
         from zope.globalrequest import getRequest
