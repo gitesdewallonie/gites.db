@@ -35,10 +35,10 @@ class InfoTouristique(GitesMappedClassBase):
                              doc=u"URL de l'information touristique")
 
     infotour_gps_long = sa.Column('infotour_gps_long', sa.Float(),
-                                  doc=u"Coorodonée logitudinale de l'information touristique")
+                                  doc=u"Coordonnée longitudinale de l'information touristique")
 
     infotour_gps_lat = sa.Column('infotour_gps_lat', sa.Float(),
-                                 doc=u"Coorodonée latitudinale de l'information touristique")
+                                 doc=u"Coordonnée latitudinale de l'information touristique")
 
     infotour_localite = sa.Column('infotour_localite', sa.String(),
                                   doc=u"Localité de l'information touristique")
@@ -49,7 +49,7 @@ class InfoTouristique(GitesMappedClassBase):
 
     infotour_type_infotour_fk = sa.Column('infotour_type_infotour_fk', sa.Integer,
                                           sa.ForeignKey('type_info_touristique.typinfotour_pk'),
-                                          doc=u"Numéro d'identifiant unique vers la table type d'inforamtion touristique")
+                                          doc=u"Numéro d'identifiant unique vers la table type d'information touristique")
 
     infotour_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
                                                                       srid=3447),

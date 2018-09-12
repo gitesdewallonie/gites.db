@@ -35,7 +35,7 @@ class Commune(GitesMappedClassBase, Traversable):
 
     com_cp = sqlalchemy.Column('com_cp',
                                sqlalchemy.String(),
-                               doc=u"Code postale de la commune")
+                               doc=u"Code postal de la commune")
 
     com_ins = sqlalchemy.Column('com_ins',
                                 sqlalchemy.String(),

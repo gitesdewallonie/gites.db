@@ -35,17 +35,17 @@ class InfoPratique(GitesMappedClassBase):
                              doc=u"URL de l'information pratique")
 
     infoprat_gps_long = sa.Column('infoprat_gps_long', sa.Float(),
-                                  doc=u"Coorodonée logitudinale de l'information pratique")
+                                  doc=u"Coordonnée longitudinale de l'information pratique")
 
     infoprat_gps_lat = sa.Column('infoprat_gps_lat', sa.Float(),
-                                 doc=u"Coorodonée latitudinale de l'information pratique")
+                                 doc=u"Coordonnée latitudinale de l'information pratique")
 
     infoprat_commune_fk = sa.Column('infoprat_commune_fk', sa.Integer,
                                     doc=u"Numéro d'identifiant unique vers la table commune")
 
     infoprat_type_infoprat_fk = sa.Column('infoprat_type_infoprat_fk', sa.Integer,
                                           sa.ForeignKey('type_info_pratique.typinfoprat_pk'),
-                                          doc=u"Numéro d'identifiant unique vers la table type d'inforamtion pratique")
+                                          doc=u"Numéro d'identifiant unique vers la table type d'information pratique")
 
     infoprat_localite = sa.Column('infoprat_localite', sa.String(),
                                   doc=u"Localité de l'information pratique")

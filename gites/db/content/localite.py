@@ -34,7 +34,7 @@ class Localite(GitesMappedClassBase, Traversable):
 
     localite_cp = sqlalchemy.Column('localite_cp',
                                     sqlalchemy.String(),
-                                    doc=u"Code postale de la localite")
+                                    doc=u"Code postal de la localite")
 
     localite_ins = sqlalchemy.Column('localite_ins',
                                      sqlalchemy.String(),

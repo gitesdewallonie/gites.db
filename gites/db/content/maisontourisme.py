@@ -27,10 +27,10 @@ class MaisonTourisme(GitesMappedClassBase):
                          doc=u"URL de la Maison du Tourisme")
 
     mais_gps_lat = sa.Column('mais_gps_lat', sa.Float(),
-                             doc=u"Coorodonée latitudinale de la Maison du Tourisme")
+                             doc=u"Coordonnée latitudinale de la Maison du Tourisme")
 
     mais_gps_long = sa.Column('mais_gps_long', sa.Float(),
-                              doc=u"Coorodonée logitudinale de la Maison du Tourisme")
+                              doc=u"Coordonnée longitudinale de la Maison du Tourisme")
 
     mais_location = geoalchemy.GeometryColumn(geoalchemy.Geometry(dimension=2,
                                                                   srid=3447),
