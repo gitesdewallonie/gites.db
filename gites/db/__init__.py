@@ -1,3 +1,4 @@
+import os
 from zope.component import getUtility
 from affinitic.pwmanager.interfaces import IPasswordManager
 from z3c.sqlalchemy import createSAWrapper
@@ -5,8 +6,10 @@ from z3c.sqlalchemy import createSAWrapper
 
 def initialize(context):
     pwManager = getUtility(IPasswordManager, 'pg')
-    connString = 'postgres://%s@localhost/gites_wallons' % \
-                        pwManager.getLoginPassWithSeparator(':')
+    dbHostname = os.environ.get('PG_HOSTNAME', 'localhost')
+    connString = 'postgres://%s@%s/gites_wallons' % \
+                        (pwManager.getLoginPassWithSeparator(':'),
+                         dbHostname)
     wr = createSAWrapper(connString,
                         forZope=True,
                         engine_options = {'convert_unicode': True,
